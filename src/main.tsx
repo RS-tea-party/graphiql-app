@@ -6,6 +6,7 @@ import Layout from './layouts/Layout/Layout';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { ThemeProvider } from '@material-tailwind/react';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>
