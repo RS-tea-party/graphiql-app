@@ -1,8 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+import { LocaleContext } from '../../components/LocaleContext/LocaleContext';
 
 const Welcome: FC = () => {
+  const { locales, lang } = useContext(LocaleContext);
+
   return (
-    <>Welcome Page</>
+    <>{locales[lang].welcome.greeting}</>
   );
 };
 

@@ -11,29 +11,36 @@ import GraphiQL from './pages/GraphiQL/GraphiQL';
 import NotFound from './pages/NotFound/NotFound';
 import Welcome from './pages/Welcome/Welcome';
 import { store } from './store/store';
+import App from './components/App/App';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <App />,
     children: [
       {
-        index: true,
-        element: <Welcome />,
+        path: '/',
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <Welcome />,
+          },
+          {
+            path: '/auth',
+            element: <Auth />,
+          },
+          {
+            path: '/graphiql',
+            element: <GraphiQL />,
+          },
+        ],
       },
       {
-        path: '/auth',
-        element: <Auth />,
-      },
-      {
-        path: '/graphiql',
-        element: <GraphiQL />,
+        path: '*',
+        element: <NotFound />,
       },
     ],
-  },
-  {
-    path: '*',
-    element: <NotFound />,
   },
 ]);
 

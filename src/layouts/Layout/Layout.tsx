@@ -9,7 +9,7 @@ const Layout: FC = () => {
       <header>
         <Header />
       </header>
-      <main>
+      <main className='flex flex-grow items-center justify-center'>
         <Outlet />
       </main>
       <footer>
