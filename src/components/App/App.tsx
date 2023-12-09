@@ -5,7 +5,8 @@ import { Lang, Locales } from '../../dto/types';
 import { localesObj } from '../../dto/locales';
 
 const App: FC = () => {
-  const [lang, setLang] = useState<Lang>('en');
+  const initialLang = (localStorage.getItem('lang') as Lang) || 'en';
+  const [lang, setLang] = useState<Lang>(initialLang);
   const [locales] = useState<Locales>(localesObj);
 
   return (

@@ -15,7 +15,10 @@ const LangSwitcher: FC = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const { locales, lang, setLang } = useContext(LocaleContext);
 
-  const clickHandler = (lang: Lang): void => setLang(lang);
+  const clickHandler = (lang: Lang): void => {
+    localStorage.setItem('lang', lang);
+    setLang(lang);
+  };
 
   return (
     <Menu open={openMenu} handler={setOpenMenu} allowHover>
