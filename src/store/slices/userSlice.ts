@@ -17,7 +17,7 @@ const formSlice = createSlice({
       state.isAuth = true;
     },
     logout: (state: UserState) => {
-      state.isAuth = true;
+      state.isAuth = false;
     },
   },
 });

@@ -36,7 +36,7 @@ const LangSwitcher: FC = () => {
           />
         </Button>
       </MenuHandler>
-      <MenuList className="hidden overflow-visible lg:grid">
+      <MenuList className="overflow-visible lg:grid">
         <MenuItem onClick={() => clickHandler('en')}>
           <Typography variant="h6" color="blue-gray" className="mb-1">
             {'English'}

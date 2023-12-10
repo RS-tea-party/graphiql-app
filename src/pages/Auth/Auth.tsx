@@ -7,7 +7,7 @@ const Auth: FC = () => {
   const isAuth = useAppSelector(authSelector);
 
   if (isAuth) {
-    return <Navigate to={'/'} replace />;
+    return <Navigate to={'/graphiql'} replace />;
   }
 
   return <>Auth Page</>;
