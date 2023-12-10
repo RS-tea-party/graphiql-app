@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
 
 interface UserState {
   isAuth: boolean;
@@ -23,3 +24,5 @@ const formSlice = createSlice({
 
 export const { login, logout } = formSlice.actions;
 export default formSlice;
+
+export const authSelector = (state: RootState) => state.user.isAuth;
