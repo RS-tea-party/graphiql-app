@@ -9,3 +9,7 @@ export type Locales = {
     };
   };
 };
+
+export interface PrivateRouteProps {
+  redirectPath: string;
+}

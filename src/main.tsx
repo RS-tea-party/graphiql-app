@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound/NotFound';
 import Welcome from './pages/Welcome/Welcome';
 import { store } from './store/store';
 import App from './components/App/App';
+import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,13 @@ const router = createBrowserRouter([
           },
           {
             path: '/graphiql',
-            element: <GraphiQL />,
+            element: <PrivateRoute redirectPath={'/'} />,
+            children: [
+              {
+                index:true,
+                element: <GraphiQL />,
+              },
+            ],
           },
         ],
       },
