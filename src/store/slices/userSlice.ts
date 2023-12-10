@@ -9,7 +9,7 @@ const initialState: UserState = {
   isAuth: false,
 };
 
-const formSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -22,7 +22,7 @@ const formSlice = createSlice({
   },
 });
 
-export const { login, logout } = formSlice.actions;
-export default formSlice;
+export const { login, logout } = userSlice.actions;
+export default userSlice;
 
 export const authSelector = (state: RootState) => state.user.isAuth;
