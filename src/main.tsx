@@ -36,7 +36,7 @@ const router = createBrowserRouter([
             element: <PrivateRoute redirectPath={'/'} />,
             children: [
               {
-                index:true,
+                index: true,
                 element: <GraphiQL />,
               },
             ],

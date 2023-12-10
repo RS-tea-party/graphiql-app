@@ -12,6 +12,12 @@ export const localesObj: Locales = {
     langSwitcher: {
       menuTitle: 'Язык',
     },
+    headerButton: {
+      mainPage: 'Главная страница',
+      logOut: 'Выйти',
+      signIn: 'Войти',
+      signUp: 'Зарегистрироваться',
+    },
   },
   en: {
     notFound: {
@@ -23,6 +29,12 @@ export const localesObj: Locales = {
     },
     langSwitcher: {
       menuTitle: 'Language',
+    },
+    headerButton: {
+      mainPage: 'Main Page',
+      logOut: 'Log out',
+      signIn: 'Sign in',
+      signUp: 'Sign up',
     },
   },
 };
