@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Navbar, Collapse, IconButton } from '@material-tailwind/react';
 import LangSwitcher from './LangSwitcher';
 import { Link } from 'react-router-dom';
-import logo from '../../../public/graphql-logo.svg';
+import logo from '../../assets/graphql-logo.svg';
 import { Paths } from '../../dto/constants';
 import HeaderButtons from './HeaderButtons';
 import HeaderBurgerButtons from './HeaderBurgerButtons';
@@ -10,6 +10,7 @@ import HeaderBurgerButtons from './HeaderBurgerButtons';
 const Header: FC = () => {
   const [sticky, setSticky] = useState(false);
   const [openNav, setOpenNav] = useState(false);
+  const genericHamburgerLine = `h-0.5 w-5 my-1 rounded-full bg-blue-gray-900 transition ease transform duration-300`;
 
   const handleScroll = () => {
     const windowScrollTop = window.scrollY;
@@ -49,40 +50,29 @@ const Header: FC = () => {
             </div>
             <IconButton
               variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={false}
+              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               onClick={() => setOpenNav(!openNav)}
             >
-              {openNav ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  className="h-6 w-6"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
+              <div
+                className={`${genericHamburgerLine} ${
+                  openNav
+                    ? 'rotate-45 translate-y-1.5 group-hover:opacity-100'
+                    : 'group-hover:opacity-100'
+                }`}
+              />
+              <div
+                className={`${genericHamburgerLine} ${
+                  openNav ? 'opacity-0' : 'group-hover:opacity-100'
+                }`}
+              />
+              <div
+                className={`${genericHamburgerLine} ${
+                  openNav
+                    ? '-rotate-45 -translate-y-1.5 group-hover:opacity-100'
+                    : 'group-hover:opacity-100'
+                }`}
+              />
             </IconButton>
           </div>
         </div>
