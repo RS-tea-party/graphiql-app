@@ -13,14 +13,15 @@ import Welcome from './pages/Welcome/Welcome';
 import { store } from './store/store';
 import App from './components/App/App';
 import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
+import { Paths } from './dto/constants';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: Paths.WELCOME,
     element: <App />,
     children: [
       {
-        path: '/',
+        path: Paths.WELCOME,
         element: <Layout />,
         children: [
           {
@@ -28,12 +29,12 @@ const router = createBrowserRouter([
             element: <Welcome />,
           },
           {
-            path: '/auth',
+            path: Paths.AUTH,
             element: <Auth />,
           },
           {
-            path: '/graphiql',
-            element: <PrivateRoute redirectPath={'/'} />,
+            path: Paths.MAIN,
+            element: <PrivateRoute redirectPath={Paths.WELCOME} />,
             children: [
               {
                 index: true,
