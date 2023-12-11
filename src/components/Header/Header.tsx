@@ -1,33 +1,19 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import { Navbar, Collapse, Button, IconButton } from '@material-tailwind/react';
+import { FC, useEffect, useState } from 'react';
+import { Navbar, Collapse, IconButton } from '@material-tailwind/react';
 import LangSwitcher from './LangSwitcher';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../../../public/graphql-logo.svg';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { authSelector } from '../../store/slices/userSlice';
-import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { Paths } from '../../dto/constants';
+import HeaderButtons from './HeaderButtons';
+import HeaderBurgerButtons from './HeaderBurgerButtons';
 
 const Header: FC = () => {
   const [sticky, setSticky] = useState(false);
   const [openNav, setOpenNav] = useState(false);
-  const isAuth = useAppSelector(authSelector);
-  const { locales, lang } = useContext(LocaleContext);
-  const navigate = useNavigate();
-  const isWelcomePage = location.pathname === Paths.WELCOME;
 
   const handleScroll = () => {
     const windowScrollTop = window.scrollY;
     windowScrollTop > 10 ? setSticky(true) : setSticky(false);
-  };
-  const onLogout = () => {
-    //signOut();
-  };
-  const onSignIn = () => {
-    navigate(Paths.AUTH);
-  };
-  const onSignUp = () => {
-    navigate(Paths.AUTH);
   };
   useEffect(() => {
     window.addEventListener(
@@ -40,106 +26,6 @@ const Header: FC = () => {
     };
   }, []);
 
-  const getHeaderButtons = (): JSX.Element | null => {
-    if (isAuth) {
-      const isWelcomePage = location.pathname === '/';
-      return (
-        <>
-          {isWelcomePage && (
-            <a href="/graphiql">
-              <Button
-                variant="text"
-                size="md"
-                className="hidden lg:inline-block text-base"
-              >
-                <span>{`${locales[lang].headerButton.mainPage} `}</span>
-              </Button>
-            </a>
-          )}
-          <Button
-            variant="text"
-            size="md"
-            className="hidden lg:inline-block text-base"
-            onClick={onLogout}
-          >
-            <span>{`${locales[lang].headerButton.logOut} `}</span>
-          </Button>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <a href="/auth">
-            <Button
-              variant="text"
-              size="md"
-              className="hidden lg:inline-block text-base"
-            >
-              <span>{`${locales[lang].headerButton.signIn} `}</span>
-            </Button>
-          </a>
-          <a href="/auth">
-            <Button
-              variant="text"
-              size="md"
-              className="hidden lg:inline-block text-base"
-            >
-              <span>{`${locales[lang].headerButton.signUp} `}</span>
-            </Button>
-          </a>
-        </>
-      );
-    }
-  };
-
-  const getBurgerButtons = (): JSX.Element | null => {
-    if (isAuth) {
-      return (
-        <>
-          {isWelcomePage && (
-            <a href="/graphiql">
-              <Button fullWidth variant="outlined" size="sm" className="">
-                <span>{`${locales[lang].headerButton.mainPage} `}</span>
-              </Button>
-            </a>
-          )}
-          <Button
-            fullWidth
-            variant="outlined"
-            size="sm"
-            className=""
-            onClick={onLogout}
-          >
-            <span>{`${locales[lang].headerButton.logOut} `}</span>
-          </Button>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Button
-            fullWidth
-            variant="outlined"
-            size="sm"
-            className=""
-            onClick={onSignIn}
-          >
-            <span>{`${locales[lang].headerButton.signIn} `}</span>
-          </Button>
-          <Button
-            fullWidth
-            variant="outlined"
-            size="sm"
-            className=""
-            onClick={onSignUp}
-          >
-            <span>{`${locales[lang].headerButton.signUp} `}</span>
-          </Button>
-        </>
-      );
-    }
-  };
-
   return (
     <div className="h-22 w-full flex dark:bg-blue-gray-900">
       <Navbar
@@ -151,7 +37,7 @@ const Header: FC = () => {
         onScroll={handleScroll}
       >
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Link to="/">
+          <Link to={Paths.WELCOME}>
             <img className="block pt-2" src={logo} alt="logoGraphQl" />
           </Link>
           <div className="flex items-center gap-4">
@@ -159,7 +45,7 @@ const Header: FC = () => {
               <LangSwitcher />
             </div>
             <div className="flex items-center gap-x-1">
-              {getHeaderButtons()}
+              <HeaderButtons />
             </div>
             <IconButton
               variant="text"
@@ -201,7 +87,9 @@ const Header: FC = () => {
           </div>
         </div>
         <Collapse open={openNav}>
-          <div className="flex items-center gap-x-1">{getBurgerButtons()}</div>
+          <div className="flex items-center gap-x-1">
+            <HeaderBurgerButtons />
+          </div>
           <div className="flex items-center gap-x-1 justify-center">
             <LangSwitcher />
           </div>
