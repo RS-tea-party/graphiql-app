@@ -25,7 +25,7 @@ export const localesObj: Locales = {
       button: 'To main page',
     },
     welcome: {
-      greeting: 'Welcome!',
+      greeting: 'Welcome',
     },
     langSwitcher: {
       menuTitle: 'Language',

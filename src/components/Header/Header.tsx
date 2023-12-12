@@ -6,6 +6,8 @@ import logo from '../../assets/graphql-logo.svg';
 import { Paths } from '../../dto/constants';
 import HeaderButtons from './HeaderButtons';
 import HeaderBurgerButtons from './HeaderBurgerButtons';
+import WelcomeButton from './WelcomeButton';
+import WelcomeBurgerButton from './WelcomeBurgerButton';
 
 const Header: FC = () => {
   const [sticky, setSticky] = useState(false);
@@ -38,9 +40,12 @@ const Header: FC = () => {
         onScroll={handleScroll}
       >
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Link to={Paths.WELCOME}>
-            <img className="block pt-2" src={logo} alt="logoGraphQl" />
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link to={Paths.WELCOME}>
+              <img className="block pt-2" src={logo} alt="logoGraphQl" />
+            </Link>
+            <WelcomeButton />
+          </div>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">
               <LangSwitcher />
@@ -77,7 +82,8 @@ const Header: FC = () => {
           </div>
         </div>
         <Collapse open={openNav}>
-          <div className="flex items-center gap-x-1">
+          <div className="flex items-center flex-col gap-1">
+            <WelcomeBurgerButton />
             <HeaderBurgerButtons />
           </div>
           <div className="flex items-center gap-x-1 justify-center">

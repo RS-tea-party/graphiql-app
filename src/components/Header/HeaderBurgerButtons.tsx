@@ -57,19 +57,17 @@ const HeaderBurgerButtons: FC = () => {
     buttons = (
       <>
         <Button
-          fullWidth
           variant="outlined"
           size="sm"
-          className=""
+          className="w-1/2"
           onClick={onSignIn}
         >
           <span>{`${locales[lang].headerButton.signIn} `}</span>
         </Button>
         <Button
-          fullWidth
           variant="outlined"
           size="sm"
-          className=""
+          className="w-1/2"
           onClick={onSignUp}
         >
           <span>{`${locales[lang].headerButton.signUp} `}</span>
