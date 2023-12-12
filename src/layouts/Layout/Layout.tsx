@@ -6,7 +6,7 @@ import Footer from '../../components/Footer/Footer';
 const Layout: FC = () => {
   return (
     <>
-      <header className="sticky top-0">
+      <header className="sticky top-0 z-50">
         <Header />
       </header>
       <main className="flex flex-grow items-center justify-center">
