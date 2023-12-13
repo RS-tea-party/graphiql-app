@@ -33,20 +33,18 @@ const HeaderBurgerButtons: FC = () => {
       <>
         {isWelcomePage && (
           <Button
-            fullWidth
             variant="outlined"
             size="sm"
-            className=""
+            className="w-1/2"
             onClick={() => navigate(Paths.MAIN)}
           >
             <span>{`${locales[lang].headerButton.mainPage} `}</span>
           </Button>
         )}
         <Button
-          fullWidth
           variant="outlined"
           size="sm"
-          className=""
+          className="w-1/2"
           onClick={onLogout}
         >
           <span>{`${locales[lang].headerButton.logOut} `}</span>

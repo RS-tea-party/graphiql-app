@@ -42,7 +42,7 @@ const Header: FC = () => {
         <div className="flex items-center justify-between text-blue-gray-900">
           <div className="flex items-center gap-4">
             <Link to={Paths.WELCOME}>
-              <img className="block pt-2" src={logo} alt="logoGraphQl" />
+              <img className="block" src={logo} alt="logoGraphQl" />
             </Link>
             <WelcomeButton />
           </div>
