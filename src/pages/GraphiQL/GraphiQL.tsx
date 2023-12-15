@@ -37,9 +37,9 @@ export const myTheme = createTheme({
 
 const GraphiQL: FC = () => {
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full md:h-full">
       <ControlPanel />
-      <div className="flex justify-around justify-items-center w-full h-[calc(100%-60px)]">
+      <div className="flex flex-col md:flex-row justify-center md:justify-around items-center w-full md:h-[calc(100%-60px)] md:overflow-auto">
         <EditorsSection />
         <ResultsSection />
       </div>
