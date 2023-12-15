@@ -18,7 +18,9 @@ const ControlPanel = () => {
         />
       </div>
 
-      <ButtonThemed>{locales[lang].graphiQL.docs}</ButtonThemed>
+      <ButtonThemed className="ml-auto">
+        {locales[lang].graphiQL.docs}
+      </ButtonThemed>
     </div>
   );
 };
