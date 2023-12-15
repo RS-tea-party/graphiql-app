@@ -23,6 +23,9 @@ module.exports = withMT({
       translate: {
         '200%': '200%',
       },
+      screens: {
+        maxmd: { max: '960px' },
+      },
     },
   },
   plugins: [],

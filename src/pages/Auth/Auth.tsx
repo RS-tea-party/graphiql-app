@@ -24,7 +24,7 @@ const Auth: FC = () => {
     <Card
       color="transparent"
       shadow={true}
-      className="mt-6 w-896 truncate h-560 mx-auto my-0 bg-peachFuzz-200"
+      className="mt-6 w-896 truncate h-560 mx-auto my-0 bg-peachFuzz-200 maxmd:items-center"
     >
       <div
         className={`sign_in ease-in-out duration-1000 flex flex-col items-center relative w-640 py-12 px-8 ${
@@ -46,7 +46,7 @@ const Auth: FC = () => {
               size="lg"
               crossOrigin=""
               placeholder="name@mail.com"
-              className=" !border-gray-500 focus:!border-t-gray-900"
+              className=" !border-gray-500 focus:!border-gray-900"
               labelProps={{
                 className: 'before:content-none after:content-none',
               }}
@@ -59,7 +59,7 @@ const Auth: FC = () => {
               size="lg"
               crossOrigin=""
               placeholder="********"
-              className=" !border-gray-500 focus:!border-t-gray-900"
+              className=" !border-gray-500 focus:!border-gray-900"
               labelProps={{
                 className: 'before:content-none after:content-none',
               }}
@@ -75,12 +75,12 @@ const Auth: FC = () => {
         </form>
       </div>
       <div
-        className={`sub_content truncate absolute top-0 left-640 pl-260px ease-in-out duration-1000 w-896 h-full ${
+        className={`sub_content truncate absolute top-0 left-640 lg:pl-260px ease-in-out duration-1000 w-896 h-full ${
           isLoginPath ? '' : '-translate-x-640'
         }`}
       >
         <div
-          className="side truncate absolute left-0 top-0 w-260 z-10 pt-350px 
+          className="side truncate absolute left-0 top-0 w-260 z-10 pt-350px hidden lg:block
         before:absolute before:top-0 before:right-0 before:w-full before:h-full
         after:absolute after:top-0 after:right-0 after:w-full after:h-full after:bg-gray-400 opacity-90"
         >
@@ -105,7 +105,7 @@ const Auth: FC = () => {
           <div className="side_btn truncate relative z-10 mb-14">
             <Button
               className={`mx-16 my-5 w-1/2 duration-1000 ease-in-out text-gray-900 ${
-                isLoginPath ? '' : '-translate-y-40'
+                isLoginPath ? '' : 'translate-x-200%'
               }`}
               variant="outlined"
               onClick={() => dispatch(regPath())}
@@ -114,7 +114,7 @@ const Auth: FC = () => {
             </Button>
             <Button
               className={`mx-16 my-5 w-1/2 duration-1000 ease-in-out block text-gray-900 ${
-                isLoginPath ? '-translate-y-40' : '-translate-y-20'
+                isLoginPath ? '-translate-x-200%' : 'translate-x-0'
               }`}
               variant="outlined"
               onClick={() => dispatch(loginPath())}
@@ -123,7 +123,6 @@ const Auth: FC = () => {
             </Button>
           </div>
         </div>
-
         <div
           className={`sign_up ease-in-out duration-1000 flex flex-col items-center relative w-640 py-12 px-8 ${
             isLoginPath ? '-translate-x-200%' : 'translate-x-0'
@@ -144,7 +143,7 @@ const Auth: FC = () => {
                 size="lg"
                 crossOrigin=""
                 placeholder="name@mail.com"
-                className=" !border-gray-500 focus:!border-t-gray-900"
+                className=" !border-gray-500 focus:!border-gray-900"
                 labelProps={{
                   className: 'before:content-none after:content-none',
                 }}
@@ -156,7 +155,7 @@ const Auth: FC = () => {
                 size="lg"
                 crossOrigin=""
                 placeholder="name@mail.com"
-                className=" !border-gray-500 focus:!border-t-gray-900"
+                className=" !border-gray-500 focus:!border-gray-900"
                 labelProps={{
                   className: 'before:content-none after:content-none',
                 }}
@@ -169,7 +168,7 @@ const Auth: FC = () => {
                 size="lg"
                 crossOrigin=""
                 placeholder="********"
-                className=" !border-gray-500 focus:!border-t-gray-900"
+                className=" !border-gray-500 focus:!border-gray-900"
                 labelProps={{
                   className: 'before:content-none after:content-none',
                 }}
