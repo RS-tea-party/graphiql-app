@@ -1,23 +1,18 @@
-import { Button, Input } from '@material-tailwind/react';
+import { Input } from '@material-tailwind/react';
+import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
 
 const ControlPanel = () => {
   return (
     <div className="flex gap-1 w-full p-2 items-center">
-      <Button size="sm" variant="outlined">
-        Send
-      </Button>
-      <Button size="sm" variant="outlined">
-        Apply
-      </Button>
+      <ButtonThemed>Send</ButtonThemed>
+      <ButtonThemed>Apply</ButtonThemed>
       <Input
         crossOrigin=""
         variant="standard"
         label="Endpoint"
         value="https://countries.trevorblades.com/"
       />
-      <Button size="sm" variant="outlined" className="ml-auto">
-        Docs
-      </Button>
+      <ButtonThemed>Docs</ButtonThemed>
     </div>
   );
 };

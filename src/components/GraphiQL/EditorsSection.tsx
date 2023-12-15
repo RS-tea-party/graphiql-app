@@ -4,12 +4,12 @@ import SecondaryEditor from './SecondaryEditor';
 
 const EditorsSection = () => {
   return (
-    <div className="flex flex-col max-h-full w-1/2 h-full pr-2">
+    <div className="flex flex-col max-h-full w-1/2 h-full px-[20px] border-2 mr-[5px]">
       <div className="overflow-auto">
         <CodeMirror
           theme={myTheme}
           className="text-sm"
-          value={`a`.repeat(200) + `a\n`.repeat(200)}
+          value={`a`.repeat(45) + `a\n`.repeat(45)}
         />
       </div>
       <div className="flex w-full">

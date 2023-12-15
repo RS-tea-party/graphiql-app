@@ -39,7 +39,7 @@ const GraphiQL: FC = () => {
   return (
     <div className="flex flex-col w-full h-full">
       <ControlPanel />
-      <div className="flex justify-center justify-items-center w-full h-[calc(100%-60px)]">
+      <div className="flex justify-around justify-items-center w-full h-[calc(100%-60px)]">
         <EditorsSection />
         <ResultsSection />
       </div>
