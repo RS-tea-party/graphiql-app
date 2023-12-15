@@ -3,7 +3,7 @@ import { resultsTheme } from '../../themes/codemirror';
 
 const ResultsSection = () => {
   return (
-    <div className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 ml-[5px]">
+    <div className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 md:ml-[5px]">
       <CodeMirror
         theme={resultsTheme}
         className="text-sm"
