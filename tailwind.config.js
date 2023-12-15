@@ -10,9 +10,14 @@ module.exports = withMT({
           100: '#ffe9dc',
           200: '#ffdecb',
           500: '#ffbe98',
+          DEFAULT: '#ffbe98',
         },
+        crazy: '#fff4ed',
       },
     },
+  },
+  future: {
+    hoverOnlyWhenSupported: true,
   },
   plugins: [],
 });
