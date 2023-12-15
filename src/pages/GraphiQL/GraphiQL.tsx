@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
-import { Button, Input } from '@material-tailwind/react';
-import SecondaryEditor from '../../components/GraphiQL/SecondaryEditor';
 import { createTheme } from '@uiw/codemirror-themes';
 import { tags as t } from '@lezer/highlight';
+import ControlPanel from '../../components/GraphiQL/ControlPanel';
+import EditorsSection from '../../components/GraphiQL/EditorsSection';
+import ResultsSection from '../../components/GraphiQL/ResultsSection';
 
 export const myTheme = createTheme({
   theme: 'light',
@@ -38,51 +38,10 @@ export const myTheme = createTheme({
 const GraphiQL: FC = () => {
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="flex gap-1 w-full p-2 items-center">
-        <Button size="sm" variant="outlined">
-          Send
-        </Button>
-        <Button size="sm" variant="outlined">
-          Apply
-        </Button>
-        <Input
-          crossOrigin=""
-          variant="standard"
-          label="Endpoint"
-          value="https://countries.trevorblades.com/"
-        />
-        <Button size="sm" variant="outlined" className="ml-auto">
-          Docs
-        </Button>
-      </div>
-
+      <ControlPanel />
       <div className="flex justify-center justify-items-center w-full h-[calc(100%-60px)]">
-        <div className="flex flex-col max-h-full w-1/2 h-full pr-2">
-          <div className="overflow-auto">
-            <CodeMirror
-              theme={myTheme}
-              className="text-sm"
-              value={`a`.repeat(200) + `a\n`.repeat(200)}
-            />
-          </div>
-          <div className="flex w-full">
-            <SecondaryEditor />
-          </div>
-        </div>
-
-        <div className="w-1/2 h-full  pl-2 overflow-auto">
-          <CodeMirror
-            theme={myTheme}
-            className="text-sm"
-            value={`a`.repeat(200) + `a\n`.repeat(200)}
-            basicSetup={{
-              lineNumbers: false,
-              foldGutter: false,
-            }}
-            readOnly={true}
-            editable={false}
-          />
-        </div>
+        <EditorsSection />
+        <ResultsSection />
       </div>
     </div>
   );
