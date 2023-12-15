@@ -64,7 +64,9 @@ const SecondaryEditor: FC = () => {
                 if (!open) handleOpen(true);
               }}
               className={`transition hover:bg-peachFuzz-200 ${
-                activeTab === 'variables' ? 'text-gray-900 w-36' : 'w-36'
+                activeTab === 'variables'
+                  ? 'text-gray-900 w-30 md:w-36'
+                  : 'w-30 md:w-36'
               }`}
             >
               {'Header'}
