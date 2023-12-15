@@ -35,7 +35,7 @@ const HeaderBurgerButtons: FC = () => {
           <Button
             variant="outlined"
             size="sm"
-            className="w-1/2"
+            className="min-w-[50%] focus:ring-peachFuzz-200"
             onClick={() => navigate(Paths.MAIN)}
           >
             <span>{`${locales[lang].headerButton.mainPage} `}</span>
@@ -44,7 +44,7 @@ const HeaderBurgerButtons: FC = () => {
         <Button
           variant="outlined"
           size="sm"
-          className="w-1/2"
+          className="min-w-[50%] focus:ring-peachFuzz-200"
           onClick={onLogout}
         >
           <span>{`${locales[lang].headerButton.logOut} `}</span>
@@ -57,7 +57,7 @@ const HeaderBurgerButtons: FC = () => {
         <Button
           variant="outlined"
           size="sm"
-          className="w-1/2"
+          className="min-w-[50%] focus:ring-peachFuzz-200"
           onClick={onSignIn}
         >
           <span>{`${locales[lang].headerButton.signIn} `}</span>
@@ -65,7 +65,7 @@ const HeaderBurgerButtons: FC = () => {
         <Button
           variant="outlined"
           size="sm"
-          className="w-1/2"
+          className="min-w-[50%] focus:ring-peachFuzz-200"
           onClick={onSignUp}
         >
           <span>{`${locales[lang].headerButton.signUp} `}</span>

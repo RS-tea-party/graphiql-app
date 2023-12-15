@@ -11,7 +11,7 @@ const WelcomeBurgerButton: FC = () => {
     <Button
       variant="outlined"
       size="sm"
-      className="w-1/2"
+      className="min-w-[50%] focus:ring-peachFuzz-200"
       onClick={() => navigate(Paths.WELCOME)}
     >
       <span>{`${locales[lang].welcome.greeting} `}</span>
