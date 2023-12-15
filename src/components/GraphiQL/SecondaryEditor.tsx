@@ -14,7 +14,7 @@ import {
   AccordionBody,
 } from '@material-tailwind/react';
 import ChevronDownIcon from '@heroicons/react/24/outline/ChevronDownIcon';
-import { myTheme } from '../../pages/GraphiQL/GraphiQL';
+import { editorTheme } from '../../themes/codemirror';
 
 const SecondaryEditor: FC = () => {
   const [activeTab, setActiveTab] = React.useState('variables');
@@ -80,7 +80,7 @@ const SecondaryEditor: FC = () => {
               value={'variables'}
             >
               <CodeMirror
-                theme={myTheme}
+                theme={editorTheme}
                 className="text-sm"
                 value={`a`.repeat(10) + `a\n`.repeat(5)}
               />
@@ -90,7 +90,7 @@ const SecondaryEditor: FC = () => {
               value={'header'}
             >
               <CodeMirror
-                theme={myTheme}
+                theme={editorTheme}
                 className="text-sm"
                 value={`b`.repeat(10) + `b\n`.repeat(5)}
               />
