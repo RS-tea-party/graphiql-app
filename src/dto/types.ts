@@ -4,7 +4,8 @@ export type ComponentList =
   | 'notFound'
   | 'welcome'
   | 'langSwitcher'
-  | 'headerButton';
+  | 'headerButton'
+  | 'forms';
 
 export type Locales = {
   [lang in Lang]: {
