@@ -13,7 +13,7 @@ module.exports = withMT({
       spacing: {
         896: '56rem',
         640: '40rem',
-        560: '35rem',
+        600: '37.5rem',
         260: '16.25rem',
       },
       padding: {

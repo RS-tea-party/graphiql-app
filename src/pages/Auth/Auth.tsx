@@ -24,18 +24,18 @@ const Auth: FC = () => {
     <Card
       color="transparent"
       shadow={true}
-      className="mt-6 w-896 truncate h-560 mx-auto my-0 bg-peachFuzz-200 maxmd:items-center"
+      className="mt-6 w-896 truncate h-600 mx-auto my-0 bg-peachFuzz-200 maxmd:items-center"
     >
       <div
         className={`sign_in ease-in-out duration-1000 flex flex-col items-center relative w-640 py-12 px-8 ${
-          isLoginPath ? '' : 'translate-x-200%'
+          isLoginPath ? '' : 'translate-x-200% maxmd:h-0 maxmd:py-0 maxmd:px-0'
         } `}
       >
         <Typography variant="h4" color="blue-gray">
           Sign In
         </Typography>
         <Typography color="gray" className="mt-1 font-normal">
-          Nice to meet you! Enter your details to login.
+          Enter your details to login.
         </Typography>
         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
           <div className="mb-16 flex flex-col gap-6">
@@ -72,11 +72,23 @@ const Auth: FC = () => {
           >
             sign in
           </Button>
+          <Typography
+            color="gray"
+            className="mt-4 text-center font-normal hidden maxmd:block"
+          >
+            Have not an account yet?{' '}
+            <span
+              className="font-medium text-gray-900"
+              onClick={() => dispatch(regPath())}
+            >
+              Sign Up
+            </span>
+          </Typography>
         </form>
       </div>
       <div
-        className={`sub_content truncate absolute top-0 left-640 lg:pl-260px ease-in-out duration-1000 w-896 h-full ${
-          isLoginPath ? '' : '-translate-x-640'
+        className={`sub_content truncate absolute top-0 left-640 lg:pl-260px ease-in-out duration-1000 lg:w-896 h-full ${
+          isLoginPath ? '' : 'maxmd:relative -translate-x-640'
         }`}
       >
         <div
@@ -102,7 +114,7 @@ const Auth: FC = () => {
               If you already has an account, <br></br> just Sign in.
             </Typography>
           </div>
-          <div className="side_btn truncate relative z-10 mb-14">
+          <div className="side_btn truncate relative z-10 mb-[5.5rem]">
             <Button
               className={`mx-16 my-5 w-1/2 duration-1000 ease-in-out text-gray-900 ${
                 isLoginPath ? '' : 'translate-x-200%'
@@ -132,7 +144,7 @@ const Auth: FC = () => {
             Sign Up
           </Typography>
           <Typography color="gray" className="mt-1 font-normal">
-            Nice to meet you! Enter your details to register.
+            Enter your details to register.
           </Typography>
           <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
             <div className="mb-1 flex flex-col gap-6">
@@ -181,6 +193,18 @@ const Auth: FC = () => {
             >
               sign up
             </Button>
+            <Typography
+              color="gray"
+              className="mt-4 text-center font-normal hidden maxmd:block"
+            >
+              Already have an account?{' '}
+              <span
+                className="font-medium text-gray-900"
+                onClick={() => dispatch(loginPath())}
+              >
+                Sign In
+              </span>
+            </Typography>
           </form>
         </div>
       </div>
