@@ -4,7 +4,7 @@ import { FC, PropsWithChildren } from 'react';
 
 interface CodeEditorProps extends PropsWithChildren {
   mode: 'editor' | 'viewer';
-  value?: string;
+  defaultValue?: string;
 }
 
 const CodeEditor: FC<CodeEditorProps> = ({ children, ...props }) => {
@@ -17,7 +17,7 @@ const CodeEditor: FC<CodeEditorProps> = ({ children, ...props }) => {
       )}
 
       <CodeMirror
-        value={props.value}
+        value={props.defaultValue}
         theme={props.mode === 'editor' ? editorTheme : resultsTheme}
         className="text-sm"
         basicSetup={{

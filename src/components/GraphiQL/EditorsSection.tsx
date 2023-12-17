@@ -5,7 +5,10 @@ import { Button, Tooltip } from '@material-tailwind/react';
 const EditorsSection = () => {
   return (
     <section className="flex flex-col w-full md:max-h-full md:w-1/2 md:h-full px-[20px] my-2 md:my-0 border-2 md:mr-[5px]">
-      <CodeEditor mode="editor" value={`a`.repeat(15) + `a\n`.repeat(15)}>
+      <CodeEditor
+        mode="editor"
+        defaultValue={`a`.repeat(15) + `a\n`.repeat(15)}
+      >
         <Tooltip
           content="Prettify"
           placement="bottom"

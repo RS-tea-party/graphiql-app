@@ -4,7 +4,7 @@ import CodeEditor from './CodeEditor';
 const ResultsSection = () => {
   return (
     <section className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 md:ml-[5px]">
-      <CodeEditor mode="viewer" value={`a`.repeat(15) + `a\n`.repeat(15)}>
+      <CodeEditor mode="viewer">
         <Tooltip
           content="Documentation"
           placement="bottom"
