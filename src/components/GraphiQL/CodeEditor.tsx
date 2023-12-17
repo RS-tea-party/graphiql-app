@@ -9,7 +9,7 @@ interface CodeEditorProps extends PropsWithChildren {
 
 const CodeEditor: FC<CodeEditorProps> = ({ children, ...props }) => {
   return (
-    <div className="relative max-w-full overflow-auto md:h-full">
+    <div className="relative max-w-full overflow-auto md:h-full min-h-[100px]">
       {children && (
         <div className="sticky top-[5px] right-0 z-10">
           <div className="absolute top-0 right-0">{children}</div>
