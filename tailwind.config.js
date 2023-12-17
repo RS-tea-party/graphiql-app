@@ -12,7 +12,6 @@ module.exports = withMT({
           500: '#ffbe98',
           DEFAULT: '#ffbe98',
         },
-        crazy: '#fff4ed',
       },
     },
   },
