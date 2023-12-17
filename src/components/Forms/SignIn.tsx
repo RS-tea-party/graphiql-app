@@ -1,23 +1,57 @@
 import { FC, useContext } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { Navigate } from 'react-router-dom';
-import { authSelector } from '../../store/slices/userSlice';
-import { Paths } from '../../dto/constants';
+import { useForm } from 'react-hook-form';
+// import { Link, Navigate } from 'react-router-dom';
+// import { authSelector } from '../../store/slices/userSlice';
+// import { Paths, PatternInputForm } from '../../dto/constants';
 import { Card, Input, Button, Typography } from '@material-tailwind/react';
 import { authPathSelector, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import SubSide from './SubSide';
+import { object, string } from 'yup';
+import { SignInForm } from '../../dto/types';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const SignIn: FC = () => {
   //const isAuth = useAppSelector(authSelector);
   const isLoginPath = useAppSelector(authPathSelector);
   const dispatch = useAppDispatch();
   const { locales, lang } = useContext(LocaleContext);
+  const schemaLogin = object({
+    email: string()
+      .required(`${locales[lang].forms.requiredError}`)
+      .email(`${locales[lang].forms.emailError}`),
+    password: string()
+      .required(`${locales[lang].forms.requiredError}`)
+      .matches(/^(?=.*[0-9])/, `${locales[lang].forms.passwordErrorDigit}`)
+      .matches(/^(?=.*[A-Za-z])/, `${locales[lang].forms.passwordErrorLetter}`)
+      .matches(
+        /^(?=.*[!@#%&$^*()?><|+=])/,
+        `${locales[lang].forms.passwordErrorChar}`
+      )
+      .matches(
+        /^[\w\Wa-zA-Z0-9!@#%&$^*()?><|+=]{8,}$/,
+        `${locales[lang].forms.passwordErrorCount}`
+      ),
+  });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<SignInForm>({
+    mode: 'onSubmit',
+    resolver: yupResolver(schemaLogin),
+    reValidateMode: 'onSubmit',
+  });
 
   // if (isAuth) {
   //   return <Navigate to={Paths.MAIN} replace />;
   // }
+
+  const onSubmit = async (data: SignInForm) => {};
 
   return (
     <Card
@@ -36,12 +70,16 @@ const SignIn: FC = () => {
         <Typography color="gray" className="mt-1 font-normal">
           {`${locales[lang].forms.signInText}`}
         </Typography>
-        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-          <div className="mb-16 flex flex-col gap-6">
+        <form
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="mb-16 flex flex-col gap-3">
             <Typography variant="h6" color="blue-gray" className="-mb-3">
               {`${locales[lang].forms.email}`}
             </Typography>
             <Input
+              {...register('email')}
               size="lg"
               crossOrigin=""
               placeholder="name@mail.com"
@@ -50,10 +88,14 @@ const SignIn: FC = () => {
                 className: 'before:content-none after:content-none',
               }}
             />
+            <span className="form__error text-red-500">
+              {errors.email?.message ? errors.email?.message : ''}
+            </span>
             <Typography variant="h6" color="blue-gray" className="-mb-3">
               {`${locales[lang].forms.password}`}
             </Typography>
             <Input
+              {...register('password')}
               type="password"
               size="lg"
               crossOrigin=""
@@ -63,11 +105,15 @@ const SignIn: FC = () => {
                 className: 'before:content-none after:content-none',
               }}
             />
+            <span className="form__error text-red-500">
+              {errors.password?.message ? errors.password?.message : ''}
+            </span>
           </div>
           <Button
             className="mt-6 bg-peachFuzz-500 text-gray-900"
             variant="filled"
             fullWidth
+            type="submit"
           >
             {`${locales[lang].headerButton.signIn}`}
           </Button>
