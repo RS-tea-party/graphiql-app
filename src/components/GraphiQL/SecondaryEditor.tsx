@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import React from 'react';
 import {
   Tabs,
@@ -14,10 +14,12 @@ import {
 } from '@material-tailwind/react';
 import ChevronDownIcon from '@heroicons/react/24/outline/ChevronDownIcon';
 import CodeEditor from './CodeEditor';
+import { LocaleContext } from '../LocaleContext/LocaleContext';
 
 const SecondaryEditor: FC = () => {
   const [activeTab, setActiveTab] = React.useState('variables');
   const [open, setOpen] = React.useState(false);
+  const { locales, lang } = useContext(LocaleContext);
 
   const handleOpen = (value: boolean): void =>
     setOpen(open === value ? false : true);
@@ -54,7 +56,7 @@ const SecondaryEditor: FC = () => {
                 activeTab === 'variables' ? 'text-gray-900 w-36' : 'w-36'
               }`}
             >
-              {'Variables'}
+              {locales[lang].graphiQL.variables}
             </Tab>
             <Tab
               value={'header'}
@@ -68,7 +70,7 @@ const SecondaryEditor: FC = () => {
                   : 'w-30 md:w-36'
               }`}
             >
-              {'Header'}
+              {locales[lang].graphiQL.headers}
             </Tab>
           </TabsHeader>
         </AccordionHeader>
