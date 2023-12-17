@@ -19,9 +19,7 @@ export const localesObj: Locales = {
       signUp: 'Зарегистрироваться',
     },
     graphiQL: {
-      send: 'Отправить',
-      apply: 'Применить',
-      docs: 'Док',
+      change: 'Изменить',
     },
   },
   en: {
@@ -42,9 +40,7 @@ export const localesObj: Locales = {
       signUp: 'Sign up',
     },
     graphiQL: {
-      send: 'Send',
-      apply: 'Apply',
-      docs: 'Docs',
+      change: 'Change',
     },
   },
 };
