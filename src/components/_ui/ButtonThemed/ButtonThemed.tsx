@@ -3,6 +3,7 @@ import { FC, PropsWithChildren } from 'react';
 
 interface ButtonThemedProps extends PropsWithChildren {
   className?: string;
+  disabled?: boolean;
 }
 
 const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
