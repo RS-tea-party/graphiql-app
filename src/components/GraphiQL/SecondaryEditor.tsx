@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import React from 'react';
-import CodeMirror from '@uiw/react-codemirror';
 import {
   Tabs,
   TabsHeader,
@@ -14,7 +13,7 @@ import {
   AccordionBody,
 } from '@material-tailwind/react';
 import ChevronDownIcon from '@heroicons/react/24/outline/ChevronDownIcon';
-import { editorTheme } from '../../themes/codemirror';
+import CodeEditor from './CodeEditor';
 
 const SecondaryEditor: FC = () => {
   const [activeTab, setActiveTab] = React.useState('variables');
@@ -79,21 +78,13 @@ const SecondaryEditor: FC = () => {
               className="p-0 h-full overflow-auto h-[150px]"
               value={'variables'}
             >
-              <CodeMirror
-                theme={editorTheme}
-                className="text-sm"
-                value={`a`.repeat(10) + `a\n`.repeat(5)}
-              />
+              <CodeEditor mode="editor" />
             </TabPanel>
             <TabPanel
               className="p-0 h-full overflow-auto h-[150px]"
               value={'header'}
             >
-              <CodeMirror
-                theme={editorTheme}
-                className="text-sm"
-                value={`b`.repeat(10) + `b\n`.repeat(5)}
-              />
+              <CodeEditor mode="editor" />
             </TabPanel>
           </TabsBody>
         </AccordionBody>
