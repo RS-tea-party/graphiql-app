@@ -6,7 +6,7 @@ import { LocaleContext } from '../LocaleContext/LocaleContext';
 const ControlPanel = () => {
   const { locales, lang } = useContext(LocaleContext);
   return (
-    <div className="flex flex-wrap sticky top-0 flex gap-1 w-full p-2.5 items-center">
+    <div className="flex flex-wrap sticky top-[78px] flex gap-1 w-full p-2.5 items-center z-20 bg-white">
       <ButtonThemed>{locales[lang].graphiQL.change}</ButtonThemed>
 
       <div className="order-first md:order-none w-full md:w-auto md:grow">
