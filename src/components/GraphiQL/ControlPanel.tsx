@@ -10,12 +10,7 @@ const ControlPanel = () => {
       <ButtonThemed>{locales[lang].graphiQL.change}</ButtonThemed>
 
       <div className="order-first md:order-none w-full md:w-auto md:grow">
-        <Input
-          crossOrigin=""
-          variant="standard"
-          label="Endpoint"
-          value="https://countries.trevorblades.com/"
-        />
+        <Input crossOrigin="" variant="standard" label="Endpoint" />
       </div>
       <ButtonThemed className="p-1 rounded-full ml-auto">
         <svg
