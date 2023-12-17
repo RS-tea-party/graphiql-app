@@ -8,10 +8,7 @@ const EditorsSection = () => {
   const { locales, lang } = useContext(LocaleContext);
   return (
     <section className="flex flex-col w-full md:max-h-full md:w-1/2 md:h-full px-[20px] my-2 md:my-0 border-2 md:mr-[5px]">
-      <CodeEditor
-        mode="editor"
-        defaultValue={`a`.repeat(15) + `a\n`.repeat(15)}
-      >
+      <CodeEditor mode="editor" defaultValue={`{` + `\n`.repeat(2) + `}`}>
         <Tooltip
           content={locales[lang].graphiQL.prettify}
           placement="left"
