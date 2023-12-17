@@ -4,6 +4,7 @@ import { FC, PropsWithChildren } from 'react';
 interface ButtonThemedProps extends PropsWithChildren {
   className?: string;
   disabled?: boolean;
+  variant?: 'filled' | 'outlined' | 'gradient' | 'text';
 }
 
 const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
@@ -11,7 +12,7 @@ const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
     <Button
       {...props}
       size="sm"
-      variant="outlined"
+      variant={props.variant || 'outlined'}
       className={`${
         props.className && props.className
       } border-peachFuzz bg-peachFuzz`}
