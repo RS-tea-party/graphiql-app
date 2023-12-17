@@ -1,19 +1,22 @@
 import { Button, Tooltip } from '@material-tailwind/react';
 import CodeEditor from './CodeEditor';
+import { useContext } from 'react';
+import { LocaleContext } from '../LocaleContext/LocaleContext';
 
 const ResultsSection = () => {
+  const { locales, lang } = useContext(LocaleContext);
   return (
     <section className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 md:ml-[5px]">
       <CodeEditor mode="viewer">
         <Tooltip
-          content="Documentation"
-          placement="bottom"
+          content={locales[lang].graphiQL.docs}
+          placement="left"
           className="border-peachFuzz bg-peachFuzz text-black"
         >
           <Button
-            className="opacity-50 rounded-xl px-3 py-2 hover:bg-peachFuzz"
+            className="opacity-50 rounded-xl p-2 border-peachFuzz hover:bg-peachFuzz"
             size="sm"
-            variant="text"
+            variant="outlined"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

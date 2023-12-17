@@ -1,8 +1,11 @@
 import SecondaryEditor from './SecondaryEditor';
 import CodeEditor from './CodeEditor';
 import { Button, Tooltip } from '@material-tailwind/react';
+import { useContext } from 'react';
+import { LocaleContext } from '../LocaleContext/LocaleContext';
 
 const EditorsSection = () => {
+  const { locales, lang } = useContext(LocaleContext);
   return (
     <section className="flex flex-col w-full md:max-h-full md:w-1/2 md:h-full px-[20px] my-2 md:my-0 border-2 md:mr-[5px]">
       <CodeEditor
@@ -10,14 +13,14 @@ const EditorsSection = () => {
         defaultValue={`a`.repeat(15) + `a\n`.repeat(15)}
       >
         <Tooltip
-          content="Prettify"
-          placement="bottom"
+          content={locales[lang].graphiQL.prettify}
+          placement="left"
           className="border-peachFuzz bg-peachFuzz text-black"
         >
           <Button
-            className="opacity-50 rounded-xl px-3 py-2 hover:bg-peachFuzz"
+            className="opacity-50 rounded-xl p-2 border-peachFuzz hover:bg-peachFuzz"
             size="sm"
-            variant="text"
+            variant="outlined"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

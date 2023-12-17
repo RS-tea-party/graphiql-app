@@ -20,6 +20,10 @@ export const localesObj: Locales = {
     },
     graphiQL: {
       change: 'Изменить',
+      docs: 'Документация',
+      prettify: 'Преттифай',
+      headers: 'Заголовки',
+      variables: 'Переменные',
     },
   },
   en: {
@@ -41,6 +45,10 @@ export const localesObj: Locales = {
     },
     graphiQL: {
       change: 'Change',
+      docs: 'Documentation',
+      prettify: 'Prettify',
+      headers: 'Headers',
+      variables: 'Variables',
     },
   },
 };
