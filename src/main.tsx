@@ -14,6 +14,7 @@ import { store } from './store/store';
 import App from './components/App/App';
 import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 import { Paths } from './dto/constants';
+import './helpers/firebase';
 
 const router = createBrowserRouter([
   {
