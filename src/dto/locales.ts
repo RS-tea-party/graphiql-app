@@ -18,6 +18,14 @@ export const localesObj: Locales = {
       signIn: 'Войти',
       signUp: 'Зарегистрироваться',
     },
+    graphiQL: {
+      change: 'Изменить',
+      docs: 'Документация',
+      send: 'Отправить',
+      prettify: 'Преттифай',
+      headers: 'Заголовки',
+      variables: 'Переменные',
+    },
   },
   en: {
     notFound: {
@@ -35,6 +43,14 @@ export const localesObj: Locales = {
       logOut: 'Log out',
       signIn: 'Sign in',
       signUp: 'Sign up',
+    },
+    graphiQL: {
+      change: 'Change',
+      docs: 'Documentation',
+      send: 'Send',
+      prettify: 'Prettify',
+      headers: 'Headers',
+      variables: 'Variables',
     },
   },
 };
