@@ -37,6 +37,14 @@ export const localesObj: Locales = {
       passwordErrorChar: 'Должен быть минимум один специальный символ',
       errorFirebase: 'Ошибка',
     },
+    graphiQL: {
+      change: 'Изменить',
+      docs: 'Документация',
+      send: 'Отправить',
+      prettify: 'Преттифай',
+      headers: 'Заголовки',
+      variables: 'Переменные',
+    },
   },
   en: {
     notFound: {
@@ -73,6 +81,14 @@ export const localesObj: Locales = {
       passwordErrorDigit: 'Must be at least one digit',
       passwordErrorChar: 'Must be at least one special character',
       errorFirebase: 'Error',
+    },
+    graphiQL: {
+      change: 'Change',
+      docs: 'Documentation',
+      send: 'Send',
+      prettify: 'Prettify',
+      headers: 'Headers',
+      variables: 'Variables',
     },
   },
 };

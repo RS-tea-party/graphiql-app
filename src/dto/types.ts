@@ -5,7 +5,9 @@ export type ComponentList =
   | 'welcome'
   | 'langSwitcher'
   | 'headerButton'
+  | 'graphiQL'
   | 'forms';
+
 
 export type Locales = {
   [lang in Lang]: {

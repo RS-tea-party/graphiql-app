@@ -6,8 +6,11 @@ module.exports = withMT({
     extend: {
       colors: {
         peachFuzz: {
+          50: '#fff4ed',
+          100: '#ffe9dc',
           200: '#ffdecb',
           500: '#ffbe98',
+          DEFAULT: '#ffbe98',
         },
       },
       spacing: {
@@ -27,6 +30,9 @@ module.exports = withMT({
         maxmd: { max: '960px' },
       },
     },
+  },
+  future: {
+    hoverOnlyWhenSupported: true,
   },
   plugins: [],
 });
