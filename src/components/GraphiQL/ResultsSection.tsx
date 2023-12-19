@@ -3,9 +3,13 @@ import CodeEditor from './CodeEditor';
 import { useContext } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { isValidSelector } from '../../store/slices/endpointSlice';
 
 const ResultsSection = () => {
   const { locales, lang } = useContext(LocaleContext);
+  const isValid = useAppSelector(isValidSelector);
+
   return (
     <section className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 md:ml-[5px]">
       <CodeEditor mode="viewer">
@@ -17,6 +21,7 @@ const ResultsSection = () => {
           <ButtonThemed
             className="opacity-50 rounded-full p-2 hover:bg-peachFuzz"
             variant="outlined"
+            disabled={isValid ? false : true}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

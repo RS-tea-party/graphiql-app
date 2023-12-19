@@ -4,9 +4,13 @@ import { Tooltip } from '@material-tailwind/react';
 import { useContext } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
+import { isValidSelector } from '../../store/slices/endpointSlice';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const EditorsSection = () => {
   const { locales, lang } = useContext(LocaleContext);
+  const isValid = useAppSelector(isValidSelector);
+
   return (
     <section className="flex flex-col w-full md:max-h-full md:w-1/2 md:h-full px-[20px] my-2 md:my-0 border-2 md:mr-[5px]">
       <CodeEditor
@@ -21,6 +25,7 @@ const EditorsSection = () => {
           <ButtonThemed
             className="opacity-50 rounded-full p-2 border-peachFuzz hover:bg-peachFuzz"
             variant="outlined"
+            disabled={isValid ? false : true}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
