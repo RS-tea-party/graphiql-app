@@ -13,7 +13,7 @@ import { LocaleContext } from '../LocaleContext/LocaleContext';
 
 const LangSwitcher: FC = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const { locales, lang, setLang } = useContext(LocaleContext);
+  const { setLang, spellingList } = useContext(LocaleContext);
 
   const clickHandler = (lang: Lang): void => {
     localStorage.setItem('lang', lang);
@@ -27,7 +27,7 @@ const LangSwitcher: FC = () => {
           variant="text"
           className="flex items-center gap-3 text-base font-normal capitalize tracking-normal"
         >
-          {`${locales[lang].langSwitcher.menuTitle} `}
+          {`${spellingList.langSwitcher.menuTitle} `}
           <ChevronDownIcon
             strokeWidth={2.5}
             className={`h-3.5 w-3.5 transition-transform ${
