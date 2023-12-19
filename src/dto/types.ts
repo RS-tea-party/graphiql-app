@@ -8,12 +8,14 @@ export type ComponentList =
   | 'graphiQL'
   | 'forms';
 
-export type Locales = {
-  [lang in Lang]: {
-    [component in ComponentList]: {
-      [element: string]: string;
-    };
+export type SpellingList = {
+  [component in ComponentList]: {
+    [element: string]: string;
   };
+};
+
+export type Locales = {
+  [lang in Lang]: SpellingList;
 };
 
 export interface PrivateRouteProps {
