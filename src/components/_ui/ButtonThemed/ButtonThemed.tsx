@@ -15,7 +15,7 @@ const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
       variant={props.variant || 'outlined'}
       className={`${
         props.className && props.className
-      } border-peachFuzz bg-peachFuzz`}
+      } border-peachFuzz bg-peachFuzz disabled:bg-peachGray disabled:border-peachGray-100 disabled:text-peachGray-100`}
     >
       {children}
     </Button>
