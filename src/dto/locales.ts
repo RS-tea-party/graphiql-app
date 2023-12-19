@@ -35,6 +35,7 @@ export const localesObj: Locales = {
       passwordErrorLetter: 'Должна быть минимум одна буква',
       passwordErrorDigit: 'Должна быть минимум одна цифра',
       passwordErrorChar: 'Должен быть минимум один специальный символ',
+      errorFirebase: 'Ошибка',
     },
   },
   en: {
@@ -71,6 +72,7 @@ export const localesObj: Locales = {
       passwordErrorLetter: 'Must be at least one letter',
       passwordErrorDigit: 'Must be at least one digit',
       passwordErrorChar: 'Must be at least one special character',
+      errorFirebase: 'Error',
     },
   },
 };

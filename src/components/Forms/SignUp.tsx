@@ -8,6 +8,15 @@ import { object, string } from 'yup';
 import { SignInFormReg } from '../../dto/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
+import { Navigate } from 'react-router-dom';
+import { Paths } from '../../dto/constants';
+import { login } from '../../store/slices/userSlice';
+import { FirebaseError } from 'firebase/app';
 
 const SignUp: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
@@ -22,7 +31,7 @@ const SignUp: FC = () => {
     password: string()
       .required(`${locales[lang].forms.requiredError}`)
       .matches(/^(?=.*[0-9])/, `${locales[lang].forms.passwordErrorDigit}`)
-      .matches(/^(?=.*[A-Za-z])/, `${locales[lang].forms.passwordErrorLetter}`)
+      .matches(/^(?=.*[a-zA-Z])/, `${locales[lang].forms.passwordErrorLetter}`)
       .matches(
         /^(?=.*[!@#%&$^*()?><|+=])/,
         `${locales[lang].forms.passwordErrorChar}`
@@ -37,6 +46,7 @@ const SignUp: FC = () => {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
     reset,
   } = useForm<SignInFormReg>({
     mode: 'onSubmit',
@@ -44,7 +54,31 @@ const SignUp: FC = () => {
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit = async (data: SignInFormReg) => {};
+  const onSubmit = async (data: SignInFormReg) => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        dispatch(
+          login({ email: user.email, id: user.uid, token: user.refreshToken })
+        );
+        auth.currentUser &&
+          updateProfile(auth.currentUser, {
+            displayName: data.name,
+          })
+            .then(() => {
+              console.log(`${locales[lang].welcome.greeting} ${data.name}!`);
+            })
+            .catch(console.error);
+        <Navigate to={Paths.MAIN} replace />;
+      })
+      .catch((error) => {
+        if (error instanceof FirebaseError) {
+          setError('root.submit', { message: error.message });
+        }
+      });
+    reset();
+  };
 
   return (
     <div
@@ -121,6 +155,14 @@ const SignUp: FC = () => {
         >
           {`${locales[lang].headerButton.signUp}`}
         </Button>
+        <span className="form__error text-red-500">
+          {errors?.root && (
+            <p>
+              {errors?.root?.submit.message ||
+                `${locales[lang].forms.errorFirebase}`}
+            </p>
+          )}
+        </span>
         <Typography
           color="gray"
           className="mt-4 text-center font-normal hidden maxmd:block"

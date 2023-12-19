@@ -2,11 +2,12 @@ import { FC, useContext } from 'react';
 import { Button } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { authSelector } from '../../store/slices/userSlice';
+import { authSelector, logout } from '../../store/slices/userSlice';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { Paths } from '../../dto/constants';
 import { loginPath, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { getAuth, signOut } from 'firebase/auth';
 
 const HeaderBurgerButtons: FC = () => {
   let buttons: JSX.Element;
@@ -17,7 +18,9 @@ const HeaderBurgerButtons: FC = () => {
   const isWelcomePage = location.pathname === Paths.WELCOME;
 
   const onLogout = () => {
-    //signOut();
+    const auth = getAuth();
+    dispatch(logout());
+    signOut(auth);
   };
   const onSignIn = () => {
     dispatch(loginPath());
