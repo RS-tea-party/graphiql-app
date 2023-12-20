@@ -1,3 +1,5 @@
+import { User } from '@firebase/auth';
+
 export type Lang = 'en' | 'ru';
 
 export type ComponentList =
@@ -7,7 +9,6 @@ export type ComponentList =
   | 'headerButton'
   | 'graphiQL'
   | 'forms';
-
 
 export type Locales = {
   [lang in Lang]: {
@@ -30,4 +31,12 @@ export interface SignInFormReg {
   name: string;
   email: string;
   password: string;
+}
+
+export interface DecodeToken {
+  exp: number;
+}
+
+export interface UserWithAccessToken extends User {
+  accessToken: string;
 }

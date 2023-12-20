@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import SubSide from './SubSide';
 import { object, string } from 'yup';
-import { SignInForm } from '../../dto/types';
+import { SignInForm, UserWithAccessToken } from '../../dto/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { login } from '../../store/slices/userSlice';
@@ -54,9 +54,13 @@ const SignIn: FC = () => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const { user } = userCredential;
+        const { accessToken } = user as UserWithAccessToken;
         dispatch(
-          login({ email: user.email, id: user.uid, token: user.refreshToken })
+          login({ email: user.email, id: user.uid, token: accessToken })
         );
+        localStorage.setItem('id_token', `${accessToken}`);
+        console.log(accessToken);
+        console.log(user.refreshToken);
         <Navigate to={Paths.MAIN} replace />;
       })
       .catch((error) => {

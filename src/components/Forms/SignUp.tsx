@@ -5,7 +5,7 @@ import { authPathSelector, loginPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { object, string } from 'yup';
-import { SignInFormReg } from '../../dto/types';
+import { SignInFormReg, UserWithAccessToken } from '../../dto/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import {
@@ -59,17 +59,20 @@ const SignUp: FC = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const { user } = userCredential;
+        const { accessToken } = user as UserWithAccessToken;
         dispatch(
-          login({ email: user.email, id: user.uid, token: user.refreshToken })
+          login({ email: user.email, id: user.uid, token: accessToken })
         );
         auth.currentUser &&
           updateProfile(auth.currentUser, {
             displayName: data.name,
           })
-            .then(() => {
-              console.log(`${locales[lang].welcome.greeting} ${data.name}!`);
-            })
-            .catch(console.error);
+            .then(() => {})
+            .catch((error) => {
+              if (error instanceof FirebaseError) {
+                setError('root.submit', { message: error.message });
+              }
+            });
         <Navigate to={Paths.MAIN} replace />;
       })
       .catch((error) => {

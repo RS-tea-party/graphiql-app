@@ -8,6 +8,7 @@ import { Paths } from '../../dto/constants';
 import { loginPath, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getAuth, signOut } from 'firebase/auth';
+import useTokenExpiration from '../../hooks/useTokenExpiration';
 
 const HeaderBurgerButtons: FC = () => {
   let buttons: JSX.Element;
@@ -16,6 +17,7 @@ const HeaderBurgerButtons: FC = () => {
   const { locales, lang } = useContext(LocaleContext);
   const navigate = useNavigate();
   const isWelcomePage = location.pathname === Paths.WELCOME;
+  const isTokenExpired = useTokenExpiration();
 
   const onLogout = () => {
     const auth = getAuth();
@@ -31,7 +33,7 @@ const HeaderBurgerButtons: FC = () => {
     navigate(Paths.AUTH);
   };
 
-  if (isAuth) {
+  if (isTokenExpired) {
     buttons = (
       <>
         {isWelcomePage && (
