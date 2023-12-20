@@ -7,13 +7,14 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import SubSide from './SubSide';
 import { object, string } from 'yup';
-import { SignInForm, UserWithAccessToken } from '../../dto/types';
+import { SignInForm } from '../../dto/types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { login } from '../../store/slices/userSlice';
 import { Navigate } from 'react-router-dom';
 import { Paths } from '../../dto/constants';
 import { FirebaseError } from 'firebase/app';
+import { auth } from '../../helpers/firebase';
 
 const SignIn: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
@@ -50,17 +51,9 @@ const SignIn: FC = () => {
   });
 
   const onSubmit = async (data: SignInForm) => {
-    const auth = getAuth();
     signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        const { accessToken } = user as UserWithAccessToken;
-        dispatch(
-          login({ email: user.email, id: user.uid, token: accessToken })
-        );
-        localStorage.setItem('id_token', `${accessToken}`);
-        console.log(accessToken);
-        console.log(user.refreshToken);
+      .then(() => {
+        dispatch(login());
         <Navigate to={Paths.MAIN} replace />;
       })
       .catch((error) => {

@@ -5,18 +5,15 @@ import { authPathSelector, loginPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { object, string } from 'yup';
-import { SignInFormReg, UserWithAccessToken } from '../../dto/types';
+import { SignInFormReg } from '../../dto/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Navigate } from 'react-router-dom';
 import { Paths } from '../../dto/constants';
 import { login } from '../../store/slices/userSlice';
 import { FirebaseError } from 'firebase/app';
+import { auth } from '../../helpers/firebase';
 
 const SignUp: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
@@ -55,14 +52,9 @@ const SignUp: FC = () => {
   });
 
   const onSubmit = async (data: SignInFormReg) => {
-    const auth = getAuth();
     createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        const { accessToken } = user as UserWithAccessToken;
-        dispatch(
-          login({ email: user.email, id: user.uid, token: accessToken })
-        );
+      .then(() => {
+        dispatch(login());
         auth.currentUser &&
           updateProfile(auth.currentUser, {
             displayName: data.name,
