@@ -1,13 +1,14 @@
 import SecondaryEditor from './SecondaryEditor';
 import CodeEditor from './CodeEditor';
 import { Tooltip } from '@material-tailwind/react';
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
 import { isValidSelector, urlSelector } from '../../store/slices/endpointSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { changeResult } from '../../store/slices/resultSlice';
+import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 
 const EditorsSection = () => {
   const { spellingList } = useContext(LocaleContext);
@@ -17,9 +18,12 @@ const EditorsSection = () => {
 
   const url = useAppSelector(urlSelector);
 
+  const editorRef = useRef<ReactCodeMirrorRef>(null);
+
   const sendHandler = () => {
-    if (url && 'query') {
-      dispatch(changeResult({ url, query: 'query' }));
+    const query = editorRef.current?.editor?.textContent?.split('›')[1] || '';
+    if (url) {
+      dispatch(changeResult({ url, query }));
     }
   };
 
@@ -28,6 +32,7 @@ const EditorsSection = () => {
       <CodeEditor
         mode="editor"
         defaultValue={`{` + `\n`.repeat(2) + `}` + `\n`}
+        ref={editorRef}
       >
         <Tooltip
           content={spellingList.graphiQL.send}

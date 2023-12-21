@@ -17,17 +17,25 @@ const ResultsSection = () => {
 
   const url = useAppSelector(resultUrlSelector);
   const query = useAppSelector(resultQuerySelector);
+  const resultUrl = useAppSelector(resultUrlSelector);
 
-  const { data } = useGetGraphQLDataQuery({
+  const { data, error } = useGetGraphQLDataQuery({
     url,
     query,
-    operationName: 'query',
+    operationName: null,
     variables: {},
   });
 
+  const result = error && 'data' in error ? error.data : data ? data : null;
+
   return (
     <section className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 md:ml-[5px]">
-      <CodeEditor mode="viewer" defaultValue={data}>
+      <CodeEditor
+        mode="viewer"
+        defaultValue={
+          isValid && resultUrl && result ? JSON.stringify(result, null, 2) : ''
+        }
+      >
         <Tooltip
           content={spellingList.graphiQL.docs}
           placement="left"
