@@ -7,18 +7,18 @@ import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { Paths } from '../../dto/constants';
 import { loginPath, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getAuth, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../helpers/firebase';
 
 const HeaderBurgerButtons: FC = () => {
   let buttons: JSX.Element;
   const isAuth = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
   const navigate = useNavigate();
   const isWelcomePage = location.pathname === Paths.WELCOME;
 
   const onLogout = () => {
-    const auth = getAuth();
     dispatch(logout());
     signOut(auth);
   };
@@ -41,7 +41,7 @@ const HeaderBurgerButtons: FC = () => {
             className="min-w-[50%] focus:ring-peachFuzz-200"
             onClick={() => navigate(Paths.MAIN)}
           >
-            <span>{`${locales[lang].headerButton.mainPage} `}</span>
+            <span>{`${spellingList.headerButton.mainPage} `}</span>
           </Button>
         )}
         <Button
@@ -50,7 +50,7 @@ const HeaderBurgerButtons: FC = () => {
           className="min-w-[50%] focus:ring-peachFuzz-200"
           onClick={onLogout}
         >
-          <span>{`${locales[lang].headerButton.logOut} `}</span>
+          <span>{`${spellingList.headerButton.logOut} `}</span>
         </Button>
       </>
     );
@@ -63,7 +63,7 @@ const HeaderBurgerButtons: FC = () => {
           className="min-w-[50%] focus:ring-peachFuzz-200"
           onClick={onSignIn}
         >
-          <span>{`${locales[lang].headerButton.signIn} `}</span>
+          <span>{`${spellingList.headerButton.signIn} `}</span>
         </Button>
         <Button
           variant="outlined"
@@ -71,7 +71,7 @@ const HeaderBurgerButtons: FC = () => {
           className="min-w-[50%] focus:ring-peachFuzz-200"
           onClick={onSignUp}
         >
-          <span>{`${locales[lang].headerButton.signUp} `}</span>
+          <span>{`${spellingList.headerButton.signUp} `}</span>
         </Button>
       </>
     );

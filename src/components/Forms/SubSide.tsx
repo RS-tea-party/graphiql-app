@@ -13,7 +13,7 @@ import SignUp from './SignUp';
 const SubSide: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
   const dispatch = useAppDispatch();
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
 
   return (
     <div
@@ -32,9 +32,9 @@ const SubSide: FC = () => {
           }`}
         >
           <Typography variant="h6" color="blue-gray">
-            {`${locales[lang].forms.notAccount}`} <br></br>{' '}
-            {`${locales[lang].forms.please}`} <br></br>{' '}
-            {`${locales[lang].forms.pleaseSignUp}`}
+            {`${spellingList.forms.notAccount}`} <br></br>{' '}
+            {`${spellingList.forms.please}`} <br></br>{' '}
+            {`${spellingList.forms.pleaseSignUp}`}
           </Typography>
         </div>
         <div
@@ -43,8 +43,8 @@ const SubSide: FC = () => {
           }`}
         >
           <Typography variant="h6" color="blue-gray">
-            {`${locales[lang].forms.hasAccount}`} <br></br>{' '}
-            {`${locales[lang].forms.justSignIn}`}
+            {`${spellingList.forms.hasAccount}`} <br></br>{' '}
+            {`${spellingList.forms.justSignIn}`}
           </Typography>
         </div>
         <div className="side_btn truncate relative z-10 mb-[5.5rem]">
@@ -55,7 +55,7 @@ const SubSide: FC = () => {
             variant="outlined"
             onClick={() => dispatch(regPath())}
           >
-            {`${locales[lang].headerButton.signUp}`}
+            {`${spellingList.headerButton.signUp}`}
           </Button>
           <Button
             className={`mx-16 my-5 w-1/2 duration-1000 ease-in-out block text-gray-900 ${
@@ -64,7 +64,7 @@ const SubSide: FC = () => {
             variant="outlined"
             onClick={() => dispatch(loginPath())}
           >
-            {`${locales[lang].headerButton.signIn}`}
+            {`${spellingList.headerButton.signIn}`}
           </Button>
         </div>
       </div>

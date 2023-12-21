@@ -5,7 +5,7 @@ import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { Paths } from '../../dto/constants';
 
 const WelcomeBurgerButton: FC = () => {
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
   const navigate = useNavigate();
   return (
     <Button
@@ -14,7 +14,7 @@ const WelcomeBurgerButton: FC = () => {
       className="min-w-[50%] focus:ring-peachFuzz-200"
       onClick={() => navigate(Paths.WELCOME)}
     >
-      <span>{`${locales[lang].welcome.greeting} `}</span>
+      <span>{`${spellingList.welcome.greeting} `}</span>
     </Button>
   );
 };

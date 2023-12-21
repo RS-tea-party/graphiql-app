@@ -6,10 +6,11 @@ import { localesObj } from '../../dto/locales';
 import { auth } from '../../helpers/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { login } from '../../store/slices/userSlice';
+import { login, logout } from '../../store/slices/userSlice';
+import Loader from '../Loader/Loader';
 
 const App: FC = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const dispatch = useAppDispatch();
 
   const initialLang = (localStorage.getItem('lang') || 'en') as Lang;
@@ -20,10 +21,12 @@ const App: FC = () => {
   );
 
   useEffect(() => {
-    if (user) dispatch(login());
+    user ? dispatch(login()) : dispatch(logout());
   }, [dispatch, user]);
 
   useEffect(() => setSpellingList(localesObj[lang]), [lang]);
+
+  if (loading) return <Loader />;
 
   return (
     <LocaleContext.Provider value={{ locales, lang, setLang, spellingList }}>

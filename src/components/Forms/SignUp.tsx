@@ -18,24 +18,24 @@ import { auth } from '../../helpers/firebase';
 const SignUp: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
   const dispatch = useAppDispatch();
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
 
   const schemaReg = object({
-    name: string().required(`${locales[lang].forms.requiredError}`),
+    name: string().required(`${spellingList.forms.requiredError}`),
     email: string()
-      .required(`${locales[lang].forms.requiredError}`)
-      .email(`${locales[lang].forms.emailError}`),
+      .required(`${spellingList.forms.requiredError}`)
+      .email(`${spellingList.forms.emailError}`),
     password: string()
-      .required(`${locales[lang].forms.requiredError}`)
-      .matches(/^(?=.*[0-9])/, `${locales[lang].forms.passwordErrorDigit}`)
-      .matches(/^(?=.*[a-zA-Z])/, `${locales[lang].forms.passwordErrorLetter}`)
+      .required(`${spellingList.forms.requiredError}`)
+      .matches(/^(?=.*[0-9])/, `${spellingList.forms.passwordErrorDigit}`)
+      .matches(/^(?=.*[a-zA-Z])/, `${spellingList.forms.passwordErrorLetter}`)
       .matches(
         /^(?=.*[!@#%&$^*()?><|+=])/,
-        `${locales[lang].forms.passwordErrorChar}`
+        `${spellingList.forms.passwordErrorChar}`
       )
       .matches(
         /^[\w\Wa-zA-Z0-9!@#%&$^*()?><|+=]{8,}$/,
-        `${locales[lang].forms.passwordErrorCount}`
+        `${spellingList.forms.passwordErrorCount}`
       ),
   });
 
@@ -82,10 +82,10 @@ const SignUp: FC = () => {
       }`}
     >
       <Typography variant="h4" color="blue-gray">
-        {`${locales[lang].headerButton.signUp}`}
+        {`${spellingList.headerButton.signUp}`}
       </Typography>
       <Typography color="gray" className="mt-1 font-normal">
-        {`${locales[lang].forms.signUpText}`}
+        {`${spellingList.forms.signUpText}`}
       </Typography>
       <form
         className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -93,7 +93,7 @@ const SignUp: FC = () => {
       >
         <div className="mb-1 flex flex-col gap-3">
           <Typography variant="h6" color="blue-gray" className="-mb-3">
-            {`${locales[lang].forms.name}`}
+            {`${spellingList.forms.name}`}
           </Typography>
           <Input
             {...register('name')}
@@ -109,7 +109,7 @@ const SignUp: FC = () => {
             {errors.name?.message ? errors.name?.message : ''}
           </span>
           <Typography variant="h6" color="blue-gray" className="-mb-3">
-            {`${locales[lang].forms.email}`}
+            {`${spellingList.forms.email}`}
           </Typography>
           <Input
             {...register('email')}
@@ -125,7 +125,7 @@ const SignUp: FC = () => {
             {errors.email?.message ? errors.email?.message : ''}
           </span>
           <Typography variant="h6" color="blue-gray" className="-mb-3">
-            {`${locales[lang].forms.password}`}
+            {`${spellingList.forms.password}`}
           </Typography>
           <Input
             {...register('password')}
@@ -148,13 +148,13 @@ const SignUp: FC = () => {
           variant="filled"
           fullWidth
         >
-          {`${locales[lang].headerButton.signUp}`}
+          {`${spellingList.headerButton.signUp}`}
         </Button>
         <span className="form__error text-red-500">
           {errors?.root && (
             <p>
               {errors?.root?.submit.message ||
-                `${locales[lang].forms.errorFirebase}`}
+                `${spellingList.forms.errorFirebase}`}
             </p>
           )}
         </span>
@@ -162,12 +162,12 @@ const SignUp: FC = () => {
           color="gray"
           className="mt-4 text-center font-normal hidden maxmd:block"
         >
-          {`${locales[lang].forms.hasAccount}`}{' '}
+          {`${spellingList.forms.hasAccount}`}{' '}
           <span
             className="font-medium text-gray-900"
             onClick={() => dispatch(loginPath())}
           >
-            {`${locales[lang].headerButton.signIn}`}
+            {`${spellingList.headerButton.signIn}`}
           </span>
         </Typography>
       </form>

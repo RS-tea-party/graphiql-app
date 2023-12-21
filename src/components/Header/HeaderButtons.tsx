@@ -7,21 +7,20 @@ import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { Paths } from '../../dto/constants';
 import { loginPath, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { getAuth, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../helpers/firebase';
 
 const HeaderButtons: FC = () => {
   let buttons: JSX.Element;
   const isAuth = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
   const navigate = useNavigate();
   const isWelcomePage = location.pathname === Paths.WELCOME;
 
   const onLogout = () => {
-    const auth = getAuth();
     dispatch(logout());
     signOut(auth);
-    localStorage.removeItem('id_token');
   };
   const onSignIn = () => {
     dispatch(loginPath());
@@ -42,7 +41,7 @@ const HeaderButtons: FC = () => {
             className="hidden lg:inline-block text-base"
             onClick={() => navigate(Paths.MAIN)}
           >
-            <span>{`${locales[lang].headerButton.mainPage} `}</span>
+            <span>{`${spellingList.headerButton.mainPage} `}</span>
           </Button>
         )}
         <Button
@@ -51,7 +50,7 @@ const HeaderButtons: FC = () => {
           className="hidden lg:inline-block text-base"
           onClick={onLogout}
         >
-          <span>{`${locales[lang].headerButton.logOut} `}</span>
+          <span>{`${spellingList.headerButton.logOut} `}</span>
         </Button>
       </>
     );
@@ -64,7 +63,7 @@ const HeaderButtons: FC = () => {
           className="hidden lg:inline-block text-base"
           onClick={onSignIn}
         >
-          <span>{`${locales[lang].headerButton.signIn} `}</span>
+          <span>{`${spellingList.headerButton.signIn} `}</span>
         </Button>
         <Button
           variant="text"
@@ -72,7 +71,7 @@ const HeaderButtons: FC = () => {
           className="hidden lg:inline-block text-base"
           onClick={onSignUp}
         >
-          <span>{`${locales[lang].headerButton.signUp} `}</span>
+          <span>{`${spellingList.headerButton.signUp} `}</span>
         </Button>
       </>
     );
