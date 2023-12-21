@@ -1,10 +1,11 @@
 import CodeMirror from '@uiw/react-codemirror';
 import { editorTheme, resultsTheme } from '../../themes/codemirror';
-import { FC, PropsWithChildren } from 'react';
+import { ChangeEventHandler, FC, PropsWithChildren } from 'react';
 
 interface CodeEditorProps extends PropsWithChildren {
   mode: 'editor' | 'viewer';
   defaultValue?: string;
+  onChange?: ChangeEventHandler;
 }
 
 const CodeEditor: FC<CodeEditorProps> = ({ children, ...props }) => {
