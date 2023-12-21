@@ -5,16 +5,31 @@ import { LocaleContext } from '../LocaleContext/LocaleContext';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { isValidSelector } from '../../store/slices/endpointSlice';
+import {
+  resultQuerySelector,
+  resultUrlSelector,
+} from '../../store/slices/resultSlice';
+import { useGetGraphQLDataQuery } from '../../services/api';
 
 const ResultsSection = () => {
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
   const isValid = useAppSelector(isValidSelector);
+
+  const url = useAppSelector(resultUrlSelector);
+  const query = useAppSelector(resultQuerySelector);
+
+  const { data } = useGetGraphQLDataQuery({
+    url,
+    query,
+    operationName: 'query',
+    variables: {},
+  });
 
   return (
     <section className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 md:ml-[5px]">
-      <CodeEditor mode="viewer">
+      <CodeEditor mode="viewer" defaultValue={data}>
         <Tooltip
-          content={locales[lang].graphiQL.docs}
+          content={spellingList.graphiQL.docs}
           placement="left"
           className="border-peachFuzz bg-peachFuzz text-black"
         >

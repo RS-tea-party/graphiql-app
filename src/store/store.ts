@@ -3,12 +3,14 @@ import userSlice from './slices/userSlice';
 import authPathSlice from './slices/authPathSlice';
 import api from '../services/api';
 import endpointSlice from './slices/endpointSlice';
+import resultSlice from './slices/resultSlice';
 
 export const store = configureStore({
   reducer: {
     [userSlice.name]: userSlice.reducer,
     [authPathSlice.name]: authPathSlice.reducer,
     [endpointSlice.name]: endpointSlice.reducer,
+    [resultSlice.name]: resultSlice.reducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
