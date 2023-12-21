@@ -2,12 +2,13 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setEndpointState } from '../store/slices/endpointSlice';
 import { DOCUMENTATION_QUERY } from '../dto/constants';
 import { resetResult } from '../store/slices/resultSlice';
+import { GetGraphQLDataQueryParams, GetSchemaQueryParams } from '../dto/types';
 
 const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery(),
   endpoints: (builder) => ({
-    getSchema: builder.query<string, { url: string }>({
+    getSchema: builder.query<string, GetSchemaQueryParams>({
       query: ({ url }) => ({
         url,
         method: 'post',
@@ -31,15 +32,7 @@ const api = createApi({
         }
       },
     }),
-    getGraphQLData: builder.query<
-      string,
-      {
-        url: string;
-        operationName: string | null;
-        query: string;
-        variables: { [key: string]: string };
-      }
-    >({
+    getGraphQLData: builder.query<string, GetGraphQLDataQueryParams>({
       query: ({ url, operationName, query, variables }) => ({
         url,
         method: 'post',

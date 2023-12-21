@@ -20,3 +20,14 @@ export type Locales = {
 export interface PrivateRouteProps {
   redirectPath: string;
 }
+
+export interface GetSchemaQueryParams {
+  url: string;
+}
+
+export interface GetGraphQLDataQueryParams {
+  url: string;
+  operationName: string | null;
+  query: string;
+  variables: { [key: string]: string };
+}
