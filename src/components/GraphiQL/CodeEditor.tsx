@@ -1,20 +1,23 @@
-import CodeMirror from '@uiw/react-codemirror';
+import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { editorTheme, resultsTheme } from '../../themes/codemirror';
-import { ChangeEventHandler, FC, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 
-interface CodeEditorProps extends PropsWithChildren {
+interface CodeEditorProps {
   mode: 'editor' | 'viewer';
   defaultValue?: string;
-  onChange?: ChangeEventHandler;
 }
 
-const CodeEditor: FC<CodeEditorProps> = ({ children, ...props }) => {
+const CodeEditor = forwardRef<
+  ReactCodeMirrorRef,
+  PropsWithChildren<CodeEditorProps>
+>((props, ref) => {
   return (
     <div className="relative max-w-full overflow-auto md:h-full min-h-[100px]">
-      {children && (
+      {props.children && (
         <div className="sticky top-[5px] right-0 z-10">
           <div className="absolute top-0 right-0 flex flex-col justify-center items-center gap-y-1">
-            {children}
+            {props.children}
           </div>
         </div>
       )}
@@ -29,9 +32,10 @@ const CodeEditor: FC<CodeEditorProps> = ({ children, ...props }) => {
         }}
         readOnly={props.mode !== 'editor'}
         editable={props.mode === 'editor'}
+        ref={ref}
       />
     </div>
   );
-};
+});
 
 export default CodeEditor;
