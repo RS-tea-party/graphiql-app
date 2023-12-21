@@ -16,12 +16,15 @@ const resultSlice = createSlice({
   initialState,
   reducers: {
     changeResult: (state, payload: PayloadAction<ResultState>) => {
-      Object.assign(state, payload);
+      Object.assign(state, payload.payload);
+    },
+    resetResult: (state) => {
+      Object.assign(state, { url: '', query: '' });
     },
   },
 });
 
-export const { changeResult } = resultSlice.actions;
+export const { changeResult, resetResult } = resultSlice.actions;
 export default resultSlice;
 
 export const resultUrlSelector = (state: RootState) => state.result.url;
