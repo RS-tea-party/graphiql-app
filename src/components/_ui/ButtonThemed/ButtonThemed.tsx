@@ -1,10 +1,11 @@
 import { Button } from '@material-tailwind/react';
-import { FC, PropsWithChildren } from 'react';
+import { FC, MouseEventHandler, PropsWithChildren } from 'react';
 
 interface ButtonThemedProps extends PropsWithChildren {
   className?: string;
   disabled?: boolean;
   variant?: 'filled' | 'outlined' | 'gradient' | 'text';
+  onClick?: MouseEventHandler;
 }
 
 const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
