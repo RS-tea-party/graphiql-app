@@ -2,6 +2,7 @@ import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { editorTheme, resultsTheme } from '../../themes/codemirror';
 import { PropsWithChildren } from 'react';
 import { forwardRef } from 'react';
+import { EditorView } from '@uiw/react-codemirror';
 
 interface CodeEditorProps {
   mode: 'editor' | 'viewer';
@@ -33,6 +34,7 @@ const CodeEditor = forwardRef<
         readOnly={props.mode !== 'editor'}
         editable={props.mode === 'editor'}
         ref={ref}
+        extensions={[EditorView.lineWrapping]}
       />
     </div>
   );
