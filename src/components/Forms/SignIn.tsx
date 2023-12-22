@@ -15,11 +15,13 @@ import { Navigate } from 'react-router-dom';
 import { Paths } from '../../dto/constants';
 import { FirebaseError } from 'firebase/app';
 import { auth } from '../../helpers/firebase';
+import { toast } from 'react-toastify';
 
 const SignIn: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
   const dispatch = useAppDispatch();
   const { spellingList } = useContext(LocaleContext);
+  let errorCode: string;
   const schemaLogin = object({
     email: string()
       .required(`${spellingList.forms.requiredError}`)
@@ -27,7 +29,10 @@ const SignIn: FC = () => {
     password: string()
       .required(`${spellingList.forms.requiredError}`)
       .matches(/^(?=.*[0-9])/, `${spellingList.forms.passwordErrorDigit}`)
-      .matches(/^(?=.*[A-Za-z])/, `${spellingList.forms.passwordErrorLetter}`)
+      .matches(
+        /^(?=.*[A-Za-zА-Яа-я])/,
+        `${spellingList.forms.passwordErrorLetter}`
+      )
       .matches(
         /^(?=.*[!@#%&$^*()?><|+=])/,
         `${spellingList.forms.passwordErrorChar}`
@@ -42,7 +47,6 @@ const SignIn: FC = () => {
     register,
     formState: { errors },
     handleSubmit,
-    setError,
     reset,
   } = useForm<SignInForm>({
     mode: 'onSubmit',
@@ -54,11 +58,25 @@ const SignIn: FC = () => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         dispatch(login());
+        toast.success(`${spellingList.forms.success}`, { draggable: true });
         <Navigate to={Paths.MAIN} replace />;
       })
       .catch((error) => {
         if (error instanceof FirebaseError) {
-          setError('root.submit', { message: error.message });
+          switch (error.code) {
+            case 'auth/internal-error':
+              errorCode = `${spellingList.forms.firebaseErrorInternal}`;
+              break;
+            case 'auth/invalid-credential':
+              errorCode = `${spellingList.forms.firebaseErrorInvalidCredential}`;
+              break;
+            case 'auth/too-many-requests':
+              errorCode = `${spellingList.forms.firebaseErrorMany}`;
+              break;
+            default:
+              errorCode = error.code;
+          }
+          toast.error(`${errorCode}`, { draggable: false });
         }
       });
     reset();
@@ -128,14 +146,6 @@ const SignIn: FC = () => {
           >
             {`${spellingList.headerButton.signIn}`}
           </Button>
-          <span className="form__error text-red-500">
-            {errors?.root && (
-              <p>
-                {errors?.root?.submit.message ||
-                  `${spellingList.forms.errorFirebase}`}
-              </p>
-            )}
-          </span>
           <Typography
             color="gray"
             className="mt-4 text-center font-normal hidden maxmd:block"

@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import './global.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import Layout from './layouts/Layout/Layout';
 import Auth from './pages/Auth/Auth';
 import GraphiQL from './pages/GraphiQL/GraphiQL';
@@ -59,6 +61,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Provider store={store}>
         <ThemeProvider>
           <RouterProvider router={router} />
+          <ToastContainer />
         </ThemeProvider>
       </Provider>
     </ErrorBoundary>

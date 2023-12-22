@@ -14,12 +14,13 @@ import { Paths } from '../../dto/constants';
 import { login } from '../../store/slices/userSlice';
 import { FirebaseError } from 'firebase/app';
 import { auth } from '../../helpers/firebase';
+import { toast } from 'react-toastify';
 
 const SignUp: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
   const dispatch = useAppDispatch();
   const { spellingList } = useContext(LocaleContext);
-
+  let errorCode: string;
   const schemaReg = object({
     name: string().required(`${spellingList.forms.requiredError}`),
     email: string()
@@ -28,7 +29,10 @@ const SignUp: FC = () => {
     password: string()
       .required(`${spellingList.forms.requiredError}`)
       .matches(/^(?=.*[0-9])/, `${spellingList.forms.passwordErrorDigit}`)
-      .matches(/^(?=.*[a-zA-Z])/, `${spellingList.forms.passwordErrorLetter}`)
+      .matches(
+        /^(?=.*[a-zA-Zа-яА-Я])/,
+        `${spellingList.forms.passwordErrorLetter}`
+      )
       .matches(
         /^(?=.*[!@#%&$^*()?><|+=])/,
         `${spellingList.forms.passwordErrorChar}`
@@ -43,7 +47,6 @@ const SignUp: FC = () => {
     register,
     formState: { errors },
     handleSubmit,
-    setError,
     reset,
   } = useForm<SignInFormReg>({
     mode: 'onSubmit',
@@ -62,14 +65,29 @@ const SignUp: FC = () => {
             .then(() => {})
             .catch((error) => {
               if (error instanceof FirebaseError) {
-                setError('root.submit', { message: error.message });
+                errorCode = `${spellingList.forms.firebaseErrorInternal}`;
+                toast.error(`${errorCode}`, { draggable: false });
               }
             });
+        toast.success(`${spellingList.forms.success}`, { draggable: false });
         <Navigate to={Paths.MAIN} replace />;
       })
       .catch((error) => {
         if (error instanceof FirebaseError) {
-          setError('root.submit', { message: error.message });
+          switch (error.code) {
+            case 'auth/internal-error':
+              errorCode = `${spellingList.forms.firebaseErrorInternal}`;
+              break;
+            case 'auth/email-already-in-use':
+              errorCode = `${spellingList.forms.firebaseErrorEmail}`;
+              break;
+            case 'auth/too-many-requests':
+              errorCode = `${spellingList.forms.firebaseErrorMany}`;
+              break;
+            default:
+              errorCode = error.code;
+          }
+          toast.error(`${errorCode}`, { draggable: false });
         }
       });
     reset();
@@ -150,14 +168,6 @@ const SignUp: FC = () => {
         >
           {`${spellingList.headerButton.signUp}`}
         </Button>
-        <span className="form__error text-red-500">
-          {errors?.root && (
-            <p>
-              {errors?.root?.submit.message ||
-                `${spellingList.forms.errorFirebase}`}
-            </p>
-          )}
-        </span>
         <Typography
           color="gray"
           className="mt-4 text-center font-normal hidden maxmd:block"

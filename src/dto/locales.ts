@@ -35,7 +35,13 @@ export const localesObj: Locales = {
       passwordErrorLetter: 'Должна быть минимум одна буква',
       passwordErrorDigit: 'Должна быть минимум одна цифра',
       passwordErrorChar: 'Должен быть минимум один специальный символ',
-      errorFirebase: 'Ошибка',
+      success: 'Вы вошли в аккаунт',
+      firebaseErrorEmail:
+        'Адрес электронной почты уже используется существующим пользователем',
+      firebaseErrorInternal: 'Обнаружена непредвиденная ошибка',
+      firebaseErrorInvalidCredential:
+        'Неверный адрес электронной почты или пароль',
+      firebaseErrorMany: 'Количество запросов превышает максимально допустимое',
     },
     graphiQL: {
       change: 'Изменить',
@@ -80,7 +86,11 @@ export const localesObj: Locales = {
       passwordErrorLetter: 'Must be at least one letter',
       passwordErrorDigit: 'Must be at least one digit',
       passwordErrorChar: 'Must be at least one special character',
-      errorFirebase: 'Error',
+      success: 'Success sign in',
+      firebaseErrorEmail: 'Email already exists',
+      firebaseErrorInternal: 'Encountered an unexpected error',
+      firebaseErrorInvalidCredential: 'Invalid email address or password',
+      firebaseErrorMany: 'Too many requests',
     },
     graphiQL: {
       change: 'Change',
