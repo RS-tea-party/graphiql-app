@@ -5,7 +5,7 @@ import { authPathSelector, loginPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { object, string } from 'yup';
-import { SignInFormReg } from '../../dto/types';
+import { SignUpForm } from '../../dto/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
@@ -48,13 +48,13 @@ const SignUp: FC = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<SignInFormReg>({
+  } = useForm<SignUpForm>({
     mode: 'onSubmit',
     resolver: yupResolver(schemaReg),
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit = async (data: SignInFormReg) => {
+  const onSubmit = async (data: SignUpForm) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         dispatch(login());

@@ -27,7 +27,7 @@ export interface SignInForm {
   password: string;
 }
 
-export interface SignInFormReg {
+export interface SignUpForm {
   name: string;
   email: string;
   password: string;
