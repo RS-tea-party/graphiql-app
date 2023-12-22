@@ -1,5 +1,4 @@
 import { FC, useContext } from 'react';
-import { Button } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { authSelector, logout } from '../../store/slices/userSlice';
@@ -9,6 +8,7 @@ import { loginPath, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../helpers/firebase';
+import ButtonHeaderBurger from '../_ui/ButtonHeader/ButtonHeaderBurger';
 
 const HeaderBurgerButtons: FC = () => {
   let buttons: JSX.Element;
@@ -35,44 +35,24 @@ const HeaderBurgerButtons: FC = () => {
     buttons = (
       <>
         {isWelcomePage && (
-          <Button
-            variant="outlined"
-            size="sm"
-            className="min-w-[50%] focus:ring-peachFuzz-200"
-            onClick={() => navigate(Paths.MAIN)}
-          >
+          <ButtonHeaderBurger onClick={() => navigate(Paths.MAIN)}>
             <span>{`${spellingList.headerButton.mainPage} `}</span>
-          </Button>
+          </ButtonHeaderBurger>
         )}
-        <Button
-          variant="outlined"
-          size="sm"
-          className="min-w-[50%] focus:ring-peachFuzz-200"
-          onClick={onLogout}
-        >
+        <ButtonHeaderBurger onClick={onLogout}>
           <span>{`${spellingList.headerButton.logOut} `}</span>
-        </Button>
+        </ButtonHeaderBurger>
       </>
     );
   } else {
     buttons = (
       <>
-        <Button
-          variant="outlined"
-          size="sm"
-          className="min-w-[50%] focus:ring-peachFuzz-200"
-          onClick={onSignIn}
-        >
+        <ButtonHeaderBurger onClick={onSignIn}>
           <span>{`${spellingList.headerButton.signIn} `}</span>
-        </Button>
-        <Button
-          variant="outlined"
-          size="sm"
-          className="min-w-[50%] focus:ring-peachFuzz-200"
-          onClick={onSignUp}
-        >
+        </ButtonHeaderBurger>
+        <ButtonHeaderBurger onClick={onSignUp}>
           <span>{`${spellingList.headerButton.signUp} `}</span>
-        </Button>
+        </ButtonHeaderBurger>
       </>
     );
   }

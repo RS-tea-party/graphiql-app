@@ -1,5 +1,4 @@
 import { FC, useContext } from 'react';
-import { Button } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { authSelector, logout } from '../../store/slices/userSlice';
@@ -9,6 +8,7 @@ import { loginPath, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../helpers/firebase';
+import ButtonHeader from '../_ui/ButtonHeader/ButtonHeader';
 
 const HeaderButtons: FC = () => {
   let buttons: JSX.Element;
@@ -35,44 +35,36 @@ const HeaderButtons: FC = () => {
     buttons = (
       <>
         {isWelcomePage && (
-          <Button
-            variant="text"
-            size="md"
+          <ButtonHeader
             className="hidden lg:inline-block text-base"
             onClick={() => navigate(Paths.MAIN)}
           >
             <span>{`${spellingList.headerButton.mainPage} `}</span>
-          </Button>
+          </ButtonHeader>
         )}
-        <Button
-          variant="text"
-          size="md"
+        <ButtonHeader
           className="hidden lg:inline-block text-base"
           onClick={onLogout}
         >
           <span>{`${spellingList.headerButton.logOut} `}</span>
-        </Button>
+        </ButtonHeader>
       </>
     );
   } else {
     buttons = (
       <>
-        <Button
-          variant="text"
-          size="md"
+        <ButtonHeader
           className="hidden lg:inline-block text-base"
           onClick={onSignIn}
         >
           <span>{`${spellingList.headerButton.signIn} `}</span>
-        </Button>
-        <Button
-          variant="text"
-          size="md"
+        </ButtonHeader>
+        <ButtonHeader
           className="hidden lg:inline-block text-base"
           onClick={onSignUp}
         >
           <span>{`${spellingList.headerButton.signUp} `}</span>
-        </Button>
+        </ButtonHeader>
       </>
     );
   }
