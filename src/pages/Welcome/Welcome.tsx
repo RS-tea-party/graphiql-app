@@ -33,12 +33,12 @@ const Welcome: FC = () => {
       <div className="flex flex-col items-center w-full">
         <div className="flex gap-8 w-full justify-center p-8 bg-peachFuzz-50 flex-wrap">
           <DeveloperCard
-            name={'Dmitry Novik'}
-            descr={'Bachelor of Economics, junior Front-End Developer.'}
-            avatarUrl={'https://avatars.githubusercontent.com/u/58699696?v=4'}
-            position={'Team Leader'}
-            githubName={'rebel228'}
-            githubLink={'https://github.com/rebel228/'}
+            name={'Inga Moshkareva'}
+            descr={'Belarus, junior Front-End Developer.'}
+            avatarUrl={'https://avatars.githubusercontent.com/u/76948119?v=4'}
+            position={'Developer'}
+            githubName={'ingamuse'}
+            githubLink={'https://github.com/ingamuse'}
           />
           <DeveloperCard
             name={'Dmitry Novik'}
@@ -49,12 +49,12 @@ const Welcome: FC = () => {
             githubLink={'https://github.com/rebel228/'}
           />
           <DeveloperCard
-            name={'Dmitry Novik'}
-            descr={'Bachelor of Economics, junior Front-End Developer.'}
-            avatarUrl={'https://avatars.githubusercontent.com/u/58699696?v=4'}
-            position={'Team Leader'}
-            githubName={'rebel228'}
-            githubLink={'https://github.com/rebel228/'}
+            name={'Maksim Sinelnikau'}
+            descr={'Belarus, junior Front-End Developer.'}
+            avatarUrl={'https://avatars.githubusercontent.com/u/96006023?v=4'}
+            position={'Developer'}
+            githubName={'maxsimusprime'}
+            githubLink={'https://github.com/maxsimusprime'}
           />
         </div>
 

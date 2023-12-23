@@ -30,7 +30,7 @@ const DeveloperCard = (props: DeveloperCardProps) => {
           {props.descr}
         </Typography>
       </CardBody>
-      <CardFooter className="flex w-full gap-7 pt-2">
+      <CardFooter className="flex w-full gap-7 pt-2 mt-auto">
         <Link className="w-full" to={props.githubLink}>
           <div className="w-full transition rounded-lg hover:bg-peachFuzz-200">
             <Typography
