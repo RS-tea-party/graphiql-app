@@ -59,4 +59,9 @@ const api = createApi({
 });
 
 export default api;
-export const { useGetSchemaQuery, useGetGraphQLDataQuery } = api;
+export const {
+  useGetSchemaQuery,
+  useGetGraphQLDataQuery,
+  useLazyGetSchemaQuery,
+  useLazyGetGraphQLDataQuery,
+} = api;

@@ -6,10 +6,9 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import {
   isValidSelector,
   setEndpointUrl,
-  urlSelector,
 } from '../../store/slices/endpointSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useGetSchemaQuery } from '../../services/api';
+import { useLazyGetSchemaQuery } from '../../services/api';
 
 const ControlPanel = () => {
   const { spellingList } = useContext(LocaleContext);
@@ -19,9 +18,14 @@ const ControlPanel = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [editMode, setEditMode] = useState<boolean>(true);
+
+  const [trigger] = useLazyGetSchemaQuery();
+
   const applyHandler = () => {
     if (inputRef.current?.value) {
       dispatch(setEndpointUrl(inputRef.current.value));
+      trigger({ url: inputRef.current.value });
       setEditMode(false);
     }
   };
@@ -31,11 +35,6 @@ const ControlPanel = () => {
       setEditMode(true);
     }
   };
-
-  const endpointUrl = useAppSelector(urlSelector);
-  useGetSchemaQuery({ url: endpointUrl });
-
-  const [editMode, setEditMode] = useState<boolean>(true);
 
   return (
     <div className="flex flex-wrap sticky top-[78px] gap-1 w-full p-2.5 items-center z-20 bg-white gap-x-3">

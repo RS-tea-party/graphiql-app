@@ -18,12 +18,15 @@ const ResultsSection = () => {
   const query = useAppSelector(resultQuerySelector);
   const resultUrl = useAppSelector(resultUrlSelector);
 
-  const { data, error } = useGetGraphQLDataQuery({
-    url,
-    query,
-    operationName: null,
-    variables: {},
-  });
+  const { data, error } = useGetGraphQLDataQuery(
+    {
+      url,
+      query,
+      operationName: null,
+      variables: {},
+    },
+    { skip: !isValid || !resultUrl }
+  );
 
   const result = error && 'data' in error ? error.data : data ? data : null;
 
