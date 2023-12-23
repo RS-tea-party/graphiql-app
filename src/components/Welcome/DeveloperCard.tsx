@@ -19,7 +19,7 @@ interface DeveloperCardProps {
 const DeveloperCard = (props: DeveloperCardProps) => {
   return (
     <Card className="w-72 md:w-52 lg:w-64 xl:w-72">
-      <CardBody className="text-center">
+      <CardBody className="text-center md:px-2 lg:px-6">
         <Typography variant="h4" color="blue-gray" className="mb-2">
           {props.name}
         </Typography>
@@ -30,18 +30,17 @@ const DeveloperCard = (props: DeveloperCardProps) => {
           {props.descr}
         </Typography>
       </CardBody>
-      <CardFooter className="flex w-full gap-7 pt-2 mt-auto">
+      <CardFooter className="flex w-full gap-7 pt-2 mt-auto md:px-2 lg:px-6">
         <Link className="w-full" to={props.githubLink}>
           <div className="w-full transition rounded-lg hover:bg-peachFuzz-200">
             <Typography
-              as="a"
               variant="lead"
               color="blue"
               textGradient
-              className="flex items-center gap-5"
+              className="flex items-center gap-5 md:gap-1 lg:gap-5"
             >
               <Avatar src={props.avatarUrl} alt="avatar" size="md" />
-              <p>{props.githubName}</p>
+              {props.githubName}
             </Typography>
           </div>
         </Link>
