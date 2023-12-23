@@ -12,6 +12,10 @@ module.exports = withMT({
           500: '#ffbe98',
           DEFAULT: '#ffbe98',
         },
+        peachGray: {
+          100: '#b29f93',
+          DEFAULT: '#d8cfc9',
+        },
       },
       spacing: {
         896: '56rem',

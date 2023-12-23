@@ -32,3 +32,14 @@ export interface SignUpForm {
   email: string;
   password: string;
 }
+
+export interface GetSchemaQueryParams {
+  url: string;
+}
+
+export interface GetGraphQLDataQueryParams {
+  url: string;
+  operationName: string | null;
+  query: string;
+  variables: { [key: string]: string };
+}

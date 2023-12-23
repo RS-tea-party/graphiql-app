@@ -45,6 +45,7 @@ export const localesObj: Locales = {
     },
     graphiQL: {
       change: 'Изменить',
+      apply: 'Применить',
       docs: 'Документация',
       send: 'Отправить',
       prettify: 'Преттифай',
@@ -94,6 +95,7 @@ export const localesObj: Locales = {
     },
     graphiQL: {
       change: 'Change',
+      apply: 'Apply',
       docs: 'Documentation',
       send: 'Send',
       prettify: 'Prettify',
