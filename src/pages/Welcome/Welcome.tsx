@@ -61,25 +61,17 @@ const Welcome: FC = () => {
         <div className="p-6">
           <Typography variant="h3">About the project</Typography>
           <Typography variant="paragraph" className="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Учебный проект, направленный на воссоздание базовой функциональности
+            библиотеки GraphiQL. Использован стэк технологий: react,
+            redux-toolkit, RTK Querry, material-tailwind react.
           </Typography>
         </div>
         <div className="p-6 bg-peachFuzz-50">
           <Typography variant="h3">About the course</Typography>
           <Typography variant="paragraph" className="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Курс RS-School: React это бесплатный онлайн курс, сделаный на
+            принципах открытости. Записаться на курс может любой, вне
+            зависимости от возраста, опыта или места жительства.
           </Typography>
         </div>
       </div>
