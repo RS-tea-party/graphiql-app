@@ -39,9 +39,6 @@ const ControlPanel = () => {
 
   return (
     <div className="flex flex-wrap sticky top-[78px] gap-1 w-full p-2.5 items-center z-20 bg-white gap-x-3">
-<<<<<<< HEAD
-      <ButtonThemed>{locales[lang].graphiQL.change}</ButtonThemed>
-=======
       {!isValid || editMode ? (
         <ButtonThemed onClick={applyHandler}>
           {spellingList.graphiQL.apply}
@@ -51,7 +48,6 @@ const ControlPanel = () => {
           {spellingList.graphiQL.change}
         </ButtonThemed>
       )}
->>>>>>> develop
       <div className="w-auto grow">
         <Input
           disabled={!editMode && isValid}

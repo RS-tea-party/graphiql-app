@@ -10,12 +10,8 @@ import { login, logout } from '../../store/slices/userSlice';
 import Loader from '../Loader/Loader';
 
 const App: FC = () => {
-<<<<<<< HEAD
   const [user, loading] = useAuthState(auth);
   const dispatch = useAppDispatch();
-
-=======
->>>>>>> develop
   const initialLang = (localStorage.getItem('lang') || 'en') as Lang;
   const [lang, setLang] = useState<Lang>(initialLang);
   const [locales] = useState<Locales>(localesObj);
@@ -23,17 +19,12 @@ const App: FC = () => {
     localesObj[initialLang]
   );
 
-<<<<<<< HEAD
   useEffect(() => {
     user ? dispatch(login()) : dispatch(logout());
-  }, [dispatch, user]);
-
-  useEffect(() => setSpellingList(localesObj[lang]), [lang]);
+    setSpellingList(localesObj[lang]);
+  }, [dispatch, user, lang]);
 
   if (loading) return <Loader />;
-=======
-  useEffect(() => setSpellingList(localesObj[lang]), [lang]);
->>>>>>> develop
 
   return (
     <LocaleContext.Provider value={{ locales, lang, setLang, spellingList }}>
