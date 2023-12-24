@@ -11,7 +11,7 @@ interface DeveloperCardProps {
   name: string;
   descr: string;
   avatarUrl: string;
-  position: 'Team Leader' | 'Developer';
+  position: string;
   githubName: string;
   githubLink: string;
 }

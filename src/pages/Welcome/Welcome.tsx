@@ -9,7 +9,7 @@ import DeveloperCard from '../../components/Welcome/DeveloperCard';
 import { Typography } from '@material-tailwind/react';
 
 const Welcome: FC = () => {
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
   const isAuth = useAppSelector(authSelector);
 
   return (
@@ -17,15 +17,15 @@ const Welcome: FC = () => {
       <div className="flex w-full justify-end end gap-2 p-6">
         {isAuth ? (
           <Link to={Paths.MAIN}>
-            <ButtonThemed>{locales[lang].headerButton.mainPage}</ButtonThemed>
+            <ButtonThemed>{spellingList.headerButton.mainPage}</ButtonThemed>
           </Link>
         ) : (
           <>
             <Link to={Paths.AUTH}>
-              <ButtonThemed>{locales[lang].headerButton.signIn}</ButtonThemed>
+              <ButtonThemed>{spellingList.headerButton.signIn}</ButtonThemed>
             </Link>
             <Link to={Paths.AUTH}>
-              <ButtonThemed>{locales[lang].headerButton.signUp}</ButtonThemed>
+              <ButtonThemed>{spellingList.headerButton.signUp}</ButtonThemed>
             </Link>
           </>
         )}
@@ -34,44 +34,44 @@ const Welcome: FC = () => {
         <div className="flex gap-8 w-full justify-center p-8 bg-peachFuzz-50 flex-wrap">
           <DeveloperCard
             name={'Inga Moshkareva'}
-            descr={'Belarus, junior Front-End Developer.'}
+            descr={spellingList.welcome.ingamuseDescr}
             avatarUrl={'https://avatars.githubusercontent.com/u/76948119?v=4'}
-            position={'Developer'}
+            position={spellingList.welcome.developer}
             githubName={'ingamuse'}
             githubLink={'https://github.com/ingamuse'}
           />
           <DeveloperCard
             name={'Dmitry Novik'}
-            descr={'Bachelor of Economics, junior Front-End Developer.'}
+            descr={spellingList.welcome.rebelDescr}
             avatarUrl={'https://avatars.githubusercontent.com/u/58699696?v=4'}
-            position={'Team Leader'}
+            position={spellingList.welcome.teamLead}
             githubName={'rebel228'}
             githubLink={'https://github.com/rebel228/'}
           />
           <DeveloperCard
             name={'Maksim Sinelnikau'}
-            descr={'Belarus, junior Front-End Developer.'}
+            descr={spellingList.welcome.maximusDescr}
             avatarUrl={'https://avatars.githubusercontent.com/u/96006023?v=4'}
-            position={'Developer'}
+            position={spellingList.welcome.developer}
             githubName={'maxsimusprime'}
             githubLink={'https://github.com/maxsimusprime'}
           />
         </div>
 
-        <div className="p-6">
-          <Typography variant="h3">About the project</Typography>
+        <div className="w-full p-6">
+          <Typography variant="h3">
+            {spellingList.welcome.aboutProjectTitle}
+          </Typography>
           <Typography variant="paragraph" className="text-justify">
-            Учебный проект, направленный на воссоздание базовой функциональности
-            библиотеки GraphiQL. Использован стэк технологий: react,
-            redux-toolkit, RTK Querry, material-tailwind react.
+            {spellingList.welcome.aboutProject}
           </Typography>
         </div>
-        <div className="p-6 bg-peachFuzz-50">
-          <Typography variant="h3">About the course</Typography>
+        <div className="w-full p-6 bg-peachFuzz-50">
+          <Typography variant="h3">
+            {spellingList.welcome.aboutCourseTitle}
+          </Typography>
           <Typography variant="paragraph" className="text-justify">
-            Курс RS-School: React это бесплатный онлайн курс, сделаный на
-            принципах открытости. Записаться на курс может любой, вне
-            зависимости от возраста, опыта или места жительства.
+            {spellingList.welcome.aboutCourse}
           </Typography>
         </div>
       </div>
