@@ -9,11 +9,14 @@ import {
   resultUrlSelector,
 } from '../../store/slices/resultSlice';
 import { useGetGraphQLDataQuery } from '../../services/api';
+import { openDocs } from '../../store/slices/docsSlice';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const ResultsSection = () => {
   const { spellingList } = useContext(LocaleContext);
-  const isValid = useAppSelector(isValidSelector);
+  const dispatch = useAppDispatch();
 
+  const isValid = useAppSelector(isValidSelector);
   const url = useAppSelector(resultUrlSelector);
   const query = useAppSelector(resultQuerySelector);
   const resultUrl = useAppSelector(resultUrlSelector);
@@ -27,6 +30,10 @@ const ResultsSection = () => {
 
   const result = error && 'data' in error ? error.data : data ? data : null;
 
+  const handleOpenDocs = () => {
+    dispatch(openDocs());
+  };
+
   return (
     <section className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 md:ml-[5px]">
       <CodeEditor
@@ -36,6 +43,7 @@ const ResultsSection = () => {
         }
       >
         <ButtonThemed
+          onClick={handleOpenDocs}
           className="opacity-50 rounded-full p-2 hover:bg-peachFuzz"
           variant="outlined"
           disabled={isValid ? false : true}
