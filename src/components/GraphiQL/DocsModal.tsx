@@ -18,8 +18,8 @@ const DocsModal: FC = () => {
   };
 
   return (
-    <div className="border-2 rounded-lg absolute z-20 w-[85%] max-h-[calc(100vh-169.6px)] overflow-scroll">
-      <CodeEditor mode="viewer" defaultValue={prettify(docs)}>
+    <div className="flex border-4 border-white rounded-lg absolute z-20 w-[85%] max-h-[calc(100vh-169.6px)]">
+      <CodeEditor mode="docs" defaultValue={prettify(docs)}>
         <ButtonThemed
           className="opacity-50 rounded-full p-2 hover:bg-peachFuzz"
           variant="outlined"

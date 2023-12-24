@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 import { EditorView } from '@uiw/react-codemirror';
 
 interface CodeEditorProps {
-  mode: 'editor' | 'viewer';
+  mode: 'editor' | 'viewer' | 'docs';
   defaultValue?: string;
 }
 
@@ -14,7 +14,11 @@ const CodeEditor = forwardRef<
   PropsWithChildren<CodeEditorProps>
 >((props, ref) => {
   return (
-    <div className="relative max-w-full overflow-auto md:h-full min-h-[100px]">
+    <div
+      className={`relative w-full max-w-full overflow-auto min-h-[100px]${
+        props.mode !== 'docs' && ' md:h-full'
+      }`}
+    >
       {props.children && (
         <div className="sticky top-[5px] right-0 z-10">
           <div className="absolute top-0 right-0 flex flex-col justify-center items-center gap-y-1">
