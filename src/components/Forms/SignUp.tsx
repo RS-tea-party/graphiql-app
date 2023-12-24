@@ -117,7 +117,7 @@ const SignUp: FC = () => {
             {...register('name')}
             size="lg"
             crossOrigin=""
-            placeholder="name"
+            placeholder={spellingList.forms.namePlaceholder}
             className=" !border-gray-500 focus:!border-gray-900"
             labelProps={{
               className: 'before:content-none after:content-none',
