@@ -54,8 +54,8 @@ const SecondaryEditor: FC = () => {
               }}
               className={`transition hover:bg-peachFuzz-200 ${
                 activeTab === 'variables'
-                  ? 'text-gray-900 w-28 md:w-32 lg:w-36'
-                  : 'w-28 md:w-32 lg:w-36'
+                  ? 'text-gray-900 w-26 md:w-32 lg:w-36'
+                  : 'w-26 md:w-32 lg:w-36'
               }`}
             >
               {locales[lang].graphiQL.variables}
@@ -68,8 +68,8 @@ const SecondaryEditor: FC = () => {
               }}
               className={`transition hover:bg-peachFuzz-200 ${
                 activeTab === 'variables'
-                  ? 'text-gray-900 w-28 md:w-32 lg:w-36'
-                  : 'w-28 md:w-32 lg:w-36'
+                  ? 'text-gray-900 w-26 md:w-32 lg:w-36'
+                  : 'w-26 md:w-32 lg:w-36'
               }`}
             >
               {locales[lang].graphiQL.headers}
