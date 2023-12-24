@@ -5,8 +5,10 @@ import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { isValidSelector } from '../../store/slices/endpointSlice';
 import {
+  resultHeadersSelector,
   resultQuerySelector,
   resultUrlSelector,
+  resultVariablesSelector,
 } from '../../store/slices/resultSlice';
 import { useGetGraphQLDataQuery } from '../../services/api';
 
@@ -16,16 +18,18 @@ const ResultsSection = () => {
 
   const url = useAppSelector(resultUrlSelector);
   const query = useAppSelector(resultQuerySelector);
-  const resultUrl = useAppSelector(resultUrlSelector);
+  const variables = useAppSelector(resultVariablesSelector);
+  const headers = useAppSelector(resultHeadersSelector);
 
   const { data, error } = useGetGraphQLDataQuery(
     {
+      operationName: null,
       url,
       query,
-      operationName: null,
-      variables: {},
+      variables,
+      headers,
     },
-    { skip: !isValid || !resultUrl }
+    { skip: !isValid || !url }
   );
 
   const result = error && 'data' in error ? error.data : data ? data : null;
@@ -35,7 +39,7 @@ const ResultsSection = () => {
       <CodeEditor
         mode="viewer"
         defaultValue={
-          isValid && resultUrl && result ? JSON.stringify(result, null, 2) : ''
+          isValid && url && result ? JSON.stringify(result, null, 2) : ''
         }
       >
         <ButtonThemed

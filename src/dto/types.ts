@@ -30,4 +30,5 @@ export interface GetGraphQLDataQueryParams {
   operationName: string | null;
   query: string;
   variables: { [key: string]: string };
+  headers: { [key: string]: string };
 }
