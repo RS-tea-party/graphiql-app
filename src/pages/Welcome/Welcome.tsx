@@ -2,9 +2,11 @@ import { FC, useContext } from 'react';
 import { LocaleContext } from '../../components/LocaleContext/LocaleContext';
 
 const Welcome: FC = () => {
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
 
-  return <>{locales[lang].welcome.greeting}</>;
+  return (
+    <div data-testid={'welcome-page'}>{spellingList.welcome.greeting}</div>
+  );
 };
 
 export default Welcome;
