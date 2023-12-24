@@ -25,7 +25,7 @@ const GraphiQL: FC = () => {
       </div>
       {isDocsShown && (
         <div
-          className="absolute bg-black opacity-20 w-full h-full max-h-full md:max-h-[calc(100vh-117.6px)] lg:max-h-[calc(100vh-149.6px)] z-20"
+          className="absolute bg-black opacity-20 cursor-pointer w-full h-full max-h-full md:max-h-[calc(100vh-117.6px)] lg:max-h-[calc(100vh-149.6px)] z-20"
           onClick={handleCloseDocs}
         />
       )}
