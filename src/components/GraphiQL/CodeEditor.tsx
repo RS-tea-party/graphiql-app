@@ -21,7 +21,7 @@ const CodeEditor = forwardRef<
     >
       {props.children && (
         <div className="sticky top-[5px] right-0 z-10">
-          <div className="absolute top-0 right-0 flex flex-col justify-center items-center gap-y-1">
+          <div className="absolute top-0 right-[5px] flex flex-col justify-center items-center gap-y-1">
             {props.children}
           </div>
         </div>
