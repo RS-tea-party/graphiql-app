@@ -25,6 +25,7 @@ const DocsModal: FC = () => {
           variant="outlined"
           tooltip={{ text: spellingList.graphiQL.close, position: 'left' }}
           onClick={handleCloseDocs}
+          zindex="z-20"
         >
           <div
             className={`${genericHamburgerLine} ${'rotate-45 translate-y-1.5 group-hover:opacity-100'}`}
