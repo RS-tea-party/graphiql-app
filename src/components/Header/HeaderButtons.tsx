@@ -7,7 +7,7 @@ import { Paths } from '../../dto/constants';
 import { loginPath, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../helpers/firebase';
+import { auth } from '../../services/firebase';
 import ButtonHeader from '../_ui/ButtonHeader/ButtonHeader';
 
 const HeaderButtons: FC = () => {

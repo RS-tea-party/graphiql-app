@@ -14,7 +14,7 @@ import { login } from '../../store/slices/userSlice';
 import { Navigate } from 'react-router-dom';
 import { Paths } from '../../dto/constants';
 import { FirebaseError } from 'firebase/app';
-import { auth } from '../../helpers/firebase';
+import { auth } from '../../services/firebase';
 import { toast } from 'react-toastify';
 
 const SignIn: FC = () => {
@@ -69,6 +69,9 @@ const SignIn: FC = () => {
               break;
             case 'auth/invalid-credential':
               errorCode = `${spellingList.forms.firebaseErrorInvalidCredential}`;
+              break;
+            case 'auth/network-request-failed':
+              errorCode = `${spellingList.forms.firebaseErrorNetwork}`;
               break;
             case 'auth/too-many-requests':
               errorCode = `${spellingList.forms.firebaseErrorMany}`;
@@ -152,7 +155,7 @@ const SignIn: FC = () => {
           >
             {`${spellingList.forms.notAccount}`}{' '}
             <span
-              className="font-medium text-gray-900"
+              className="font-medium text-gray-900 hover:text-gray-700"
               onClick={() => dispatch(regPath())}
             >
               {`${spellingList.headerButton.signUp}`}

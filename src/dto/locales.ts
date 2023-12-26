@@ -42,6 +42,7 @@ export const localesObj: Locales = {
       firebaseErrorInternal: 'Обнаружена непредвиденная ошибка',
       firebaseErrorInvalidCredential:
         'Неверный адрес электронной почты или пароль',
+      firebaseErrorNetwork: 'Ошибка сети',
       firebaseErrorMany: 'Количество запросов превышает максимально допустимое',
     },
     graphiQL: {
@@ -89,10 +90,11 @@ export const localesObj: Locales = {
       passwordErrorLetter: 'Must be at least one letter',
       passwordErrorDigit: 'Must be at least one digit',
       passwordErrorChar: 'Must be at least one special character',
-      success: 'Success sign in',
+      success: 'Successful sign in',
       firebaseErrorEmail: 'Email already exists',
       firebaseErrorInternal: 'Encountered an unexpected error',
       firebaseErrorInvalidCredential: 'Invalid email address or password',
+      firebaseErrorNetwork: 'Network request failed',
       firebaseErrorMany: 'Too many requests',
     },
     graphiQL: {

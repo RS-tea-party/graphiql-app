@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { Lang, Locales, SpellingList } from '../../dto/types';
 import { localesObj } from '../../dto/locales';
-import { auth } from '../../helpers/firebase';
+import { auth } from '../../services/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { login, logout } from '../../store/slices/userSlice';

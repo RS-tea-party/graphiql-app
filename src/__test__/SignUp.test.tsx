@@ -4,10 +4,6 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import WrapperWithLocaleContext from './helpers/WrapperWithLocaleContext';
 import WrapperWithStore from './helpers/WrapperWithStore';
 import SignUp from '../components/Forms/SignUp';
-import MemoryRouterProvider from './helpers/MemoryRouterProvider';
-import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { store } from '../store/store';
-import { regPath } from '../store/slices/authPathSlice';
 
 describe('SignUp component', () => {
   it('renders correctly', () => {
