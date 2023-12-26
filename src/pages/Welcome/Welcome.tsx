@@ -4,29 +4,45 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { authSelector } from '../../store/slices/userSlice';
 import ButtonThemed from '../../components/_ui/ButtonThemed/ButtonThemed';
 import { Paths } from '../../dto/constants';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import DeveloperCard from '../../components/Welcome/DeveloperCard';
 import { Typography } from '@material-tailwind/react';
+import { loginPath, regPath } from '../../store/slices/authPathSlice';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const Welcome: FC = () => {
   const { spellingList } = useContext(LocaleContext);
   const isAuth = useAppSelector(authSelector);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onSignIn = () => {
+    dispatch(loginPath());
+    navigate(Paths.AUTH);
+  };
+  const onSignUp = () => {
+    dispatch(regPath());
+    navigate(Paths.AUTH);
+  };
+  const onMainPage = () => {
+    navigate(Paths.MAIN);
+  };
 
   return (
     <div className="flex flex-col w-full">
       <div className="flex w-full justify-end end gap-2 p-6">
         {isAuth ? (
-          <Link to={Paths.MAIN}>
-            <ButtonThemed>{spellingList.headerButton.mainPage}</ButtonThemed>
-          </Link>
+          <ButtonThemed onClick={onMainPage}>
+            {spellingList.headerButton.mainPage}
+          </ButtonThemed>
         ) : (
           <>
-            <Link to={Paths.AUTH}>
-              <ButtonThemed>{spellingList.headerButton.signIn}</ButtonThemed>
-            </Link>
-            <Link to={Paths.AUTH}>
-              <ButtonThemed>{spellingList.headerButton.signUp}</ButtonThemed>
-            </Link>
+            <ButtonThemed onClick={onSignIn}>
+              {spellingList.headerButton.signIn}
+            </ButtonThemed>
+            <ButtonThemed onClick={onSignUp}>
+              {spellingList.headerButton.signUp}
+            </ButtonThemed>
           </>
         )}
       </div>
