@@ -30,7 +30,7 @@ const Welcome: FC = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="flex w-full justify-end end gap-2 p-6">
+      <section className="flex w-full justify-end end gap-2 p-6">
         {isAuth ? (
           <ButtonThemed onClick={onMainPage}>
             {spellingList.headerButton.mainPage}
@@ -45,9 +45,9 @@ const Welcome: FC = () => {
             </ButtonThemed>
           </>
         )}
-      </div>
-      <div className="flex flex-col items-center w-full">
-        <div className="flex gap-8 w-full justify-center p-8 bg-peachFuzz-50 flex-wrap">
+      </section>
+      <section className="flex flex-col items-center w-full">
+        <article className="flex gap-8 w-full justify-center p-8 bg-peachFuzz-50 flex-wrap">
           <DeveloperCard
             name={'Inga Moshkareva'}
             descr={spellingList.welcome.ingamuseDescr}
@@ -72,25 +72,25 @@ const Welcome: FC = () => {
             githubName={'maxsimusprime'}
             githubLink={'https://github.com/maxsimusprime'}
           />
-        </div>
+        </article>
 
-        <div className="w-full p-6">
+        <article className="w-full p-6">
           <Typography variant="h3">
             {spellingList.welcome.aboutProjectTitle}
           </Typography>
           <Typography variant="paragraph" className="text-justify">
             {spellingList.welcome.aboutProject}
           </Typography>
-        </div>
-        <div className="w-full p-6 bg-peachFuzz-50">
+        </article>
+        <article className="w-full p-6 bg-peachFuzz-50">
           <Typography variant="h3">
             {spellingList.welcome.aboutCourseTitle}
           </Typography>
           <Typography variant="paragraph" className="text-justify">
             {spellingList.welcome.aboutCourse}
           </Typography>
-        </div>
-      </div>
+        </article>
+      </section>
     </div>
   );
 };
