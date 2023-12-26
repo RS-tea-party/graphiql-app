@@ -89,13 +89,21 @@ const SecondaryEditor: FC<SecondaryEditorProps> = ({
               className="p-0 h-full overflow-auto h-[150px]"
               value={'variables'}
             >
-              <CodeEditor mode="editor" ref={variablesRef} />
+              <CodeEditor
+                mode="editor"
+                ref={variablesRef}
+                defaultValue={'{\n\n}\n'}
+              />
             </TabPanel>
             <TabPanel
               className="p-0 h-full overflow-auto h-[150px]"
               value={'header'}
             >
-              <CodeEditor mode="editor" ref={headersRef} />
+              <CodeEditor
+                mode="editor"
+                ref={headersRef}
+                defaultValue={'{\n\n}\n'}
+              />
             </TabPanel>
           </TabsBody>
         </AccordionBody>

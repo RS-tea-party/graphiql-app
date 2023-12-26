@@ -50,11 +50,7 @@ const EditorsSection = () => {
 
   return (
     <section className="flex flex-col w-full md:max-h-full md:w-1/2 md:h-full px-[20px] my-2 md:my-0 border-2 md:mr-[5px]">
-      <CodeEditor
-        mode="editor"
-        defaultValue={`{` + `\n`.repeat(2) + `}` + `\n`}
-        ref={editorRef}
-      >
+      <CodeEditor mode="editor" defaultValue={'{\n\n}\n'} ref={editorRef}>
         <ButtonThemed
           className="opacity-50 rounded-full p-2 border-peachFuzz hover:bg-peachFuzz"
           variant="outlined"
