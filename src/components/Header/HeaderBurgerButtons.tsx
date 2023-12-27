@@ -1,23 +1,26 @@
 import { FC, useContext } from 'react';
-import { Button } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { authSelector } from '../../store/slices/userSlice';
+import { authSelector, logout } from '../../store/slices/userSlice';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { Paths } from '../../dto/constants';
 import { loginPath, regPath } from '../../store/slices/authPathSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../services/firebase';
+import ButtonHeaderBurger from '../_ui/ButtonHeader/ButtonHeaderBurger';
 
 const HeaderBurgerButtons: FC = () => {
   let buttons: JSX.Element;
   const isAuth = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
   const navigate = useNavigate();
   const isWelcomePage = location.pathname === Paths.WELCOME;
 
   const onLogout = () => {
-    //signOut();
+    dispatch(logout());
+    signOut(auth);
   };
   const onSignIn = () => {
     dispatch(loginPath());
@@ -32,44 +35,24 @@ const HeaderBurgerButtons: FC = () => {
     buttons = (
       <>
         {isWelcomePage && (
-          <Button
-            variant="outlined"
-            size="sm"
-            className="w-1/2"
-            onClick={() => navigate(Paths.MAIN)}
-          >
-            <span>{`${locales[lang].headerButton.mainPage} `}</span>
-          </Button>
+          <ButtonHeaderBurger onClick={() => navigate(Paths.MAIN)}>
+            <span>{`${spellingList.headerButton.mainPage} `}</span>
+          </ButtonHeaderBurger>
         )}
-        <Button
-          variant="outlined"
-          size="sm"
-          className="w-1/2"
-          onClick={onLogout}
-        >
-          <span>{`${locales[lang].headerButton.logOut} `}</span>
-        </Button>
+        <ButtonHeaderBurger onClick={onLogout}>
+          <span>{`${spellingList.headerButton.logOut} `}</span>
+        </ButtonHeaderBurger>
       </>
     );
   } else {
     buttons = (
       <>
-        <Button
-          variant="outlined"
-          size="sm"
-          className="w-1/2"
-          onClick={onSignIn}
-        >
-          <span>{`${locales[lang].headerButton.signIn} `}</span>
-        </Button>
-        <Button
-          variant="outlined"
-          size="sm"
-          className="w-1/2"
-          onClick={onSignUp}
-        >
-          <span>{`${locales[lang].headerButton.signUp} `}</span>
-        </Button>
+        <ButtonHeaderBurger onClick={onSignIn}>
+          <span>{`${spellingList.headerButton.signIn} `}</span>
+        </ButtonHeaderBurger>
+        <ButtonHeaderBurger onClick={onSignUp}>
+          <span>{`${spellingList.headerButton.signUp} `}</span>
+        </ButtonHeaderBurger>
       </>
     );
   }

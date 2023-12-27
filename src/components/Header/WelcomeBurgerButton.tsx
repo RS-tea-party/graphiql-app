@@ -1,21 +1,16 @@
 import { FC, useContext } from 'react';
-import { Button } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { Paths } from '../../dto/constants';
+import ButtonHeaderBurger from '../_ui/ButtonHeader/ButtonHeaderBurger';
 
 const WelcomeBurgerButton: FC = () => {
-  const { locales, lang } = useContext(LocaleContext);
+  const { spellingList } = useContext(LocaleContext);
   const navigate = useNavigate();
   return (
-    <Button
-      variant="outlined"
-      size="sm"
-      className="w-1/2"
-      onClick={() => navigate(Paths.WELCOME)}
-    >
-      <span>{`${locales[lang].welcome.greeting} `}</span>
-    </Button>
+    <ButtonHeaderBurger onClick={() => navigate(Paths.WELCOME)}>
+      <span>{`${spellingList.welcome.greeting} `}</span>
+    </ButtonHeaderBurger>
   );
 };
 
