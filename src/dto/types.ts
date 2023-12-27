@@ -5,7 +5,8 @@ export type ComponentList =
   | 'welcome'
   | 'langSwitcher'
   | 'headerButton'
-  | 'graphiQL';
+  | 'graphiQL'
+  | 'forms';
 
 export type SpellingList = {
   [component in ComponentList]: {
@@ -19,6 +20,17 @@ export type Locales = {
 
 export interface PrivateRouteProps {
   redirectPath: string;
+}
+
+export interface SignInForm {
+  email: string;
+  password: string;
+}
+
+export interface SignUpForm {
+  name: string;
+  email: string;
+  password: string;
 }
 
 export interface GetSchemaQueryParams {

@@ -6,7 +6,7 @@ import ResultsSection from '../../components/GraphiQL/ResultsSection';
 const GraphiQL: FC = () => {
   return (
     <div
-      className="flex flex-col w-full md:h-full"
+      className="flex flex-col w-full h-full md:max-h-[calc(100vh-149.6px)]"
       data-testid={'graphql-page'}
     >
       <ControlPanel />

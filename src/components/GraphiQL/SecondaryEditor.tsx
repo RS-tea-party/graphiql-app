@@ -62,7 +62,9 @@ const SecondaryEditor: FC<SecondaryEditorProps> = ({
                 if (!open) handleOpen(true);
               }}
               className={`transition hover:bg-peachFuzz-200 ${
-                activeTab === 'variables' ? 'text-gray-900 w-36' : 'w-36'
+                activeTab === 'variables'
+                  ? 'text-gray-900 w-26 md:w-32 lg:w-36'
+                  : 'w-26 md:w-32 lg:w-36'
               }`}
             >
               {locales[lang].graphiQL.variables}
@@ -75,8 +77,8 @@ const SecondaryEditor: FC<SecondaryEditorProps> = ({
               }}
               className={`transition hover:bg-peachFuzz-200 ${
                 activeTab === 'variables'
-                  ? 'text-gray-900 w-30 md:w-36'
-                  : 'w-30 md:w-36'
+                  ? 'text-gray-900 w-26 md:w-32 lg:w-36'
+                  : 'w-26 md:w-32 lg:w-36'
               }`}
             >
               {locales[lang].graphiQL.headers}

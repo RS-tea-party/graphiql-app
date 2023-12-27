@@ -3,15 +3,18 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { Navigate } from 'react-router-dom';
 import { authSelector } from '../../store/slices/userSlice';
 import { Paths } from '../../dto/constants';
+import SignIn from '../../components/Forms/SignIn';
 
 const Auth: FC = () => {
   const isAuth = useAppSelector(authSelector);
-
   if (isAuth) {
     return <Navigate to={Paths.MAIN} replace />;
   }
-
-  return <>Auth Page</>;
+  return (
+    <section className="flex flex-grow items-center justify-center truncate">
+      <SignIn />
+    </section>
+  );
 };
 
 export default Auth;
