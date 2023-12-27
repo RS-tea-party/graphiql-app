@@ -177,7 +177,8 @@ const SignUp: FC = () => {
         >
           {`${spellingList.forms.hasAccount}`}{' '}
           <span
-            className="font-medium text-gray-900 hover:text-gray-700"
+            role="button"
+            className="font-medium text-gray-900 hover:text-gray-700 cursor-pointer"
             onClick={() => dispatch(loginPath())}
           >
             {`${spellingList.headerButton.signIn}`}

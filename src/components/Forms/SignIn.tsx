@@ -155,7 +155,8 @@ const SignIn: FC = () => {
           >
             {`${spellingList.forms.notAccount}`}{' '}
             <span
-              className="font-medium text-gray-900 hover:text-gray-700"
+              role="button"
+              className="font-medium text-gray-900 hover:text-gray-700 cursor-pointer"
               onClick={() => dispatch(regPath())}
             >
               {`${spellingList.headerButton.signUp}`}

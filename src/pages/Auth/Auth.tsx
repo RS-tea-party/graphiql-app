@@ -10,7 +10,11 @@ const Auth: FC = () => {
   if (isAuth) {
     return <Navigate to={Paths.MAIN} replace />;
   }
-  return <SignIn />;
+  return (
+    <section className="flex flex-grow items-center justify-center truncate">
+      <SignIn />
+    </section>
+  );
 };
 
 export default Auth;
