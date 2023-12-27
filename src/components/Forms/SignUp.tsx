@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { Input, Button, Typography } from '@material-tailwind/react';
 import { authPathSelector, loginPath } from '../../store/slices/authPathSlice';
@@ -15,6 +15,7 @@ import { login } from '../../store/slices/userSlice';
 import { FirebaseError } from 'firebase/app';
 import { auth } from '../../services/firebase';
 import { toast } from 'react-toastify';
+import Loader from '../Loader/Loader';
 
 const SignUp: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
@@ -54,16 +55,24 @@ const SignUp: FC = () => {
     reValidateMode: 'onSubmit',
   });
 
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = async (data: SignUpForm) => {
+    setLoading(true);
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
+        setLoading(false);
         dispatch(login());
+        setLoading(true);
         auth.currentUser &&
           updateProfile(auth.currentUser, {
             displayName: data.name,
           })
-            .then(() => {})
+            .then(() => {
+              setLoading(false);
+            })
             .catch((error) => {
+              setLoading(false);
               if (error instanceof FirebaseError) {
                 errorCode = `${spellingList.forms.firebaseErrorInternal}`;
                 toast.error(`${errorCode}`, { draggable: false });
@@ -73,6 +82,7 @@ const SignUp: FC = () => {
         <Navigate to={Paths.MAIN} replace />;
       })
       .catch((error) => {
+        setLoading(false);
         if (error instanceof FirebaseError) {
           switch (error.code) {
             case 'auth/internal-error':
@@ -96,7 +106,9 @@ const SignUp: FC = () => {
     reset();
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div
       className={`sign_up ease-in-out duration-1000 flex flex-col items-center relative w-640 py-12 px-8 ${
         isLoginPath ? '-translate-x-200%' : 'translate-x-0'

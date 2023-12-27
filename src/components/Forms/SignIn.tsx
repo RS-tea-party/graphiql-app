@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useForm } from 'react-hook-form';
 import { Card, Input, Button, Typography } from '@material-tailwind/react';
@@ -16,6 +16,7 @@ import { Paths } from '../../dto/constants';
 import { FirebaseError } from 'firebase/app';
 import { auth } from '../../services/firebase';
 import { toast } from 'react-toastify';
+import Loader from '../Loader/Loader';
 
 const SignIn: FC = () => {
   const isLoginPath = useAppSelector(authPathSelector);
@@ -54,14 +55,19 @@ const SignIn: FC = () => {
     reValidateMode: 'onSubmit',
   });
 
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = async (data: SignInForm) => {
+    setLoading(true);
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
+        setLoading(false);
         dispatch(login());
         toast.success(`${spellingList.forms.success}`, { draggable: true });
         <Navigate to={Paths.MAIN} replace />;
       })
       .catch((error) => {
+        setLoading(false);
         if (error instanceof FirebaseError) {
           switch (error.code) {
             case 'auth/internal-error':
@@ -85,7 +91,9 @@ const SignIn: FC = () => {
     reset();
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <Card
       color="transparent"
       shadow={true}
