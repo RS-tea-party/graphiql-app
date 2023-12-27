@@ -1,6 +1,11 @@
 import '@testing-library/jest-dom';
 import { describe, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import WrapperWithLocaleContext from './helpers/WrapperWithLocaleContext';
 import WrapperWithStore from './helpers/WrapperWithStore';
 import MemoryRouterProvider from './helpers/MemoryRouterProvider';
@@ -8,7 +13,7 @@ import { store } from '../store/store';
 import { login, logout } from '../store/slices/userSlice';
 
 describe('Welcome Page', () => {
-  it('renders correctly', () => {
+  it('renders correctly', async () => {
     render(
       <WrapperWithStore>
         <WrapperWithLocaleContext lang="en">
@@ -16,13 +21,14 @@ describe('Welcome Page', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    expect(screen.getByTestId('welcome-page')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('welcome-page')).toBeInTheDocument();
+    });
   });
 });
 
 describe('GraphQL Page', () => {
-  it('renders correctly', () => {
-    store.dispatch(login());
+  it('renders correctly', async () => {
     render(
       <WrapperWithStore>
         <WrapperWithLocaleContext lang="en">
@@ -30,9 +36,13 @@ describe('GraphQL Page', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
+    store.dispatch(login());
+    await waitForElementToBeRemoved(screen.getByTestId('loader'));
+    await waitFor(() => {
+      expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
+    });
   });
-  it('redirects to Welcome Page when user is logout', () => {
+  it('redirects to Welcome Page when user is logout', async () => {
     store.dispatch(logout());
     render(
       <WrapperWithStore>
@@ -41,6 +51,8 @@ describe('GraphQL Page', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    expect(screen.getByTestId('welcome-page')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('welcome-page')).toBeInTheDocument();
+    });
   });
 });

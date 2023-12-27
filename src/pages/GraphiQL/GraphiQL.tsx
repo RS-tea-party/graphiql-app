@@ -16,7 +16,7 @@ const GraphiQL: FC = () => {
     <Suspense fallback={<Loader />}>
       <section
         className="flex flex-col w-full h-full md:max-h-[calc(100vh-149.6px)]"
-        data-testid={'graphql-page'}
+        data-testid="graphql-page"
       >
         <LazyControlPanel />
         <div className="flex flex-col md:flex-row justify-center md:justify-around items-center w-full md:h-[calc(100%-60px)] md:overflow-auto p-2 pt-0">
