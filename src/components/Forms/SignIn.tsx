@@ -154,6 +154,7 @@ const SignIn: FC = () => {
             variant="filled"
             fullWidth
             type="submit"
+            data-testid="button-signIn"
           >
             {`${spellingList.headerButton.signIn}`}
           </Button>

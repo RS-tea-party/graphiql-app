@@ -55,8 +55,9 @@ const Header: FC = () => {
             </div>
             <IconButton
               variant="text"
+              aria-label="open menu"
               ripple={false}
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:invisible"
               onClick={() => setOpenNav(!openNav)}
             >
               <div

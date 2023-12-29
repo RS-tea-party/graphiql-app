@@ -180,6 +180,7 @@ const SignUp: FC = () => {
           className="mt-6 bg-peachFuzz-500 text-gray-900"
           variant="filled"
           fullWidth
+          data-testid="button-signUp"
         >
           {`${spellingList.headerButton.signUp}`}
         </Button>

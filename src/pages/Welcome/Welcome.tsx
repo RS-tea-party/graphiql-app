@@ -30,7 +30,10 @@ const Welcome: FC = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <section className="flex w-full justify-end end gap-2 p-6">
+      <section
+        data-testid="welcome-page"
+        className="flex w-full justify-end end gap-2 p-6"
+      >
         {isAuth ? (
           <ButtonThemed onClick={onMainPage}>
             {spellingList.headerButton.mainPage}
