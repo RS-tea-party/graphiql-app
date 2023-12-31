@@ -6,6 +6,7 @@ export type ComponentList =
   | 'langSwitcher'
   | 'headerButton'
   | 'graphiQL'
+  | 'graphiQLApiStatus'
   | 'forms';
 
 export type SpellingList = {

@@ -1,6 +1,6 @@
 import { Input } from '@material-tailwind/react';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../store/slices/endpointSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useLazyGetSchemaQuery } from '../../services/api';
+import { toast } from 'react-toastify';
 
 const ControlPanel = () => {
   const { spellingList } = useContext(LocaleContext);
@@ -20,7 +21,7 @@ const ControlPanel = () => {
 
   const [editMode, setEditMode] = useState<boolean>(true);
 
-  const [trigger] = useLazyGetSchemaQuery();
+  const [trigger, result] = useLazyGetSchemaQuery();
 
   const applyHandler = () => {
     if (inputRef.current?.value) {
@@ -35,6 +36,23 @@ const ControlPanel = () => {
       setEditMode(true);
     }
   };
+
+  const [currentRequestId, setCurrentRequestId] = useState<string>('');
+
+  useEffect(() => {
+    const { isError, isSuccess, isFetching, requestId } = result;
+    if (!isFetching && requestId !== currentRequestId) {
+      if (isSuccess)
+        toast.success(spellingList.graphiQLApiStatus.SCHEMA_FETCH_SUCCESS, {
+          draggable: true,
+        });
+      if (isError)
+        toast.error(spellingList.graphiQLApiStatus.SCHEMA_FETCH_ERROR, {
+          draggable: false,
+        });
+      setCurrentRequestId(`${requestId}`);
+    }
+  }, [currentRequestId, result, spellingList]);
 
   return (
     <div className="flex flex-wrap sticky top-[78px] w-full p-2.5 items-center z-20 bg-white gap-3">

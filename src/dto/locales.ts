@@ -65,6 +65,10 @@ export const localesObj: Locales = {
       headers: 'Заголовки',
       variables: 'Переменные',
     },
+    graphiQLApiStatus: {
+      SCHEMA_FETCH_ERROR: 'Ошибка запроса или неправильный адрес API',
+      SCHEMA_FETCH_SUCCESS: 'API найден',
+    },
   },
   en: {
     notFound: {
@@ -127,6 +131,10 @@ export const localesObj: Locales = {
       prettify: 'Prettify',
       headers: 'Headers',
       variables: 'Variables',
+    },
+    graphiQLApiStatus: {
+      SCHEMA_FETCH_ERROR: 'Fetch Error or Invalid API',
+      SCHEMA_FETCH_SUCCESS: 'API Valid',
     },
   },
 };
