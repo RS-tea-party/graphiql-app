@@ -1,3 +1,6 @@
+import type { SerializedError } from '@reduxjs/toolkit';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+
 export type Lang = 'en' | 'ru';
 
 export type ComponentList =
@@ -45,3 +48,8 @@ export interface GetGraphQLDataQueryParams {
   variables: { [key: string]: string };
   headers: { [key: string]: string };
 }
+
+export type GetGraphQLApiErrorMessageFuncType = (
+  spellingList: SpellingList,
+  error: FetchBaseQueryError | SerializedError
+) => string;

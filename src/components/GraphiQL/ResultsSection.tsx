@@ -1,5 +1,5 @@
 import CodeEditor from './CodeEditor';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -11,6 +11,8 @@ import {
   resultVariablesSelector,
 } from '../../store/slices/resultSlice';
 import { useGetGraphQLDataQuery } from '../../services/api';
+import { toast } from 'react-toastify';
+import { getGraphQLApiErrorMessage } from '../../helpers/getGraphQLApiErrorMessage';
 
 const ResultsSection = () => {
   const { spellingList } = useContext(LocaleContext);
@@ -21,18 +23,45 @@ const ResultsSection = () => {
   const variables = useAppSelector(resultVariablesSelector);
   const headers = useAppSelector(resultHeadersSelector);
 
-  const { data, error } = useGetGraphQLDataQuery(
-    {
-      operationName: null,
-      url,
-      query,
-      variables,
-      headers,
-    },
-    { skip: !isValid || !url }
-  );
+  const { data, error, isError, isFetching, isLoading, isSuccess, requestId } =
+    useGetGraphQLDataQuery(
+      {
+        operationName: null,
+        url,
+        query,
+        variables,
+        headers,
+      },
+      { skip: !isValid || !url }
+    );
 
   const result = error && 'data' in error ? error.data : data ? data : null;
+
+  const [currentRequestId, setCurrentRequestId] = useState<string>('');
+
+  useEffect(() => {
+    if (!isLoading && requestId && requestId !== currentRequestId) {
+      if (isSuccess)
+        toast.success(spellingList.graphiQLApiStatus.API_FETCH_SUCCESS, {
+          draggable: true,
+        });
+      if (isError) {
+        toast.error(getGraphQLApiErrorMessage(spellingList, error), {
+          draggable: false,
+        });
+      }
+      setCurrentRequestId(`${requestId}`);
+    }
+  }, [
+    currentRequestId,
+    error,
+    isError,
+    isFetching,
+    isLoading,
+    isSuccess,
+    requestId,
+    spellingList,
+  ]);
 
   return (
     <section className="w-full md:w-1/2 md:h-full overflow-auto px-[20px] border-2 md:ml-[5px]">
