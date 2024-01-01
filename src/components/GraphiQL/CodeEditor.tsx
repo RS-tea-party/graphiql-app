@@ -1,12 +1,13 @@
 import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { editorTheme, resultsTheme } from '../../themes/codemirror';
-import { PropsWithChildren } from 'react';
+import { Dispatch, PropsWithChildren, SetStateAction } from 'react';
 import { forwardRef } from 'react';
 import { EditorView } from '@uiw/react-codemirror';
 
 interface CodeEditorProps {
   mode: 'editor' | 'viewer';
   defaultValue?: string;
+  onchange?: Dispatch<SetStateAction<string>>;
 }
 
 const CodeEditor = forwardRef<
@@ -27,6 +28,7 @@ const CodeEditor = forwardRef<
         value={props.defaultValue}
         theme={props.mode === 'editor' ? editorTheme : resultsTheme}
         className="text-sm"
+        onChange={props.onchange}
         basicSetup={{
           lineNumbers: props.mode === 'editor',
           foldGutter: props.mode === 'editor',
