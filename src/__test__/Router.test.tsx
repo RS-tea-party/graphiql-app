@@ -27,6 +27,21 @@ describe('Welcome Page', () => {
   });
 });
 
+describe('404 Page', () => {
+  it('renders correctly', async () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="en">
+          <MemoryRouterProvider initialEntries={['/bad-route']} />
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    await waitFor(() => {
+      expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
+    });
+  });
+});
+
 describe('GraphQL Page', () => {
   it('renders correctly', async () => {
     render(
@@ -42,7 +57,7 @@ describe('GraphQL Page', () => {
       expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
     });
   });
-  it('redirects to Welcome Page when user is logout', async () => {
+  it('this route should be private', async () => {
     store.dispatch(logout());
     render(
       <WrapperWithStore>
