@@ -10,6 +10,7 @@ export type ComponentList =
   | 'headerButton'
   | 'graphiQL'
   | 'graphiQLApiStatus'
+  | 'test'
   | 'forms';
 
 export type SpellingList = {

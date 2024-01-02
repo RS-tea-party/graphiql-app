@@ -76,6 +76,9 @@ export const localesObj: Locales = {
       BAD_METHOD: 'Неправильный HTTP метод запроса',
       NOT_FOUND: 'Непредвиденный ответ сервера, попробуйте изменить запрос',
     },
+    test: {
+      text: 'Тест',
+    },
   },
   en: {
     notFound: {
@@ -149,6 +152,9 @@ export const localesObj: Locales = {
       SERVER_ERROR: 'Server internal error',
       BAD_METHOD: 'Invalid HTTP request method',
       NOT_FOUND: 'Unexpected server response, try to change request',
+    },
+    test: {
+      text: 'Test',
     },
   },
 };
