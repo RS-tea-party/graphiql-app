@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, it } from 'vitest';
 import Header from '../components/Header/Header';
 import WrapperWithLocaleContext from './helpers/WrapperWithLocaleContext';
@@ -51,6 +51,38 @@ describe('Header component', () => {
     store.dispatch(login());
     await waitFor(() => {
       expect(screen.getByTestId('button-logout')).toBeInTheDocument();
+    });
+  });
+
+  it('should be able to change the language by clicking on the toggler/select', async () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="ru">
+          <MemoryRouterProvider initialEntries={['/']}>
+            <Header />
+          </MemoryRouterProvider>
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    const langSwitchButton = screen.getAllByTestId('lang-switch-button')[0];
+    expect(langSwitchButton).toBeInTheDocument();
+
+    fireEvent.click(langSwitchButton);
+    const langSwitchToEn = screen.getAllByTestId('switch-to-en')[0];
+    const langSwitchToRu = screen.getAllByTestId('switch-to-ru')[0];
+    await waitFor(() => {
+      expect(langSwitchToEn).toBeInTheDocument();
+      expect(langSwitchToRu).toBeInTheDocument();
+    });
+
+    fireEvent.click(langSwitchToEn);
+    await waitFor(() => {
+      expect(langSwitchButton).toHaveTextContent('Language');
+    });
+
+    fireEvent.click(langSwitchToRu);
+    await waitFor(() => {
+      expect(langSwitchButton).toHaveTextContent('Язык');
     });
   });
 });

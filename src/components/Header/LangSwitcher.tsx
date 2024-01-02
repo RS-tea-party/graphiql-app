@@ -28,6 +28,7 @@ const LangSwitcher: FC = () => {
             variant="text"
             className="flex items-center gap-3 text-base font-normal capitalize tracking-normal"
             role="button"
+            data-testid="lang-switch-button"
           >
             {`${spellingList.langSwitcher.menuTitle} `}
             <ChevronDownIcon
@@ -39,12 +40,18 @@ const LangSwitcher: FC = () => {
           </Button>
         </MenuHandler>
         <MenuList className="overflow-visible lg:grid">
-          <MenuItem onClick={() => clickHandler('en')}>
+          <MenuItem
+            onClick={() => clickHandler('en')}
+            data-testid="switch-to-en"
+          >
             <Typography variant="h6" color="blue-gray" className="mb-1">
               {'English'}
             </Typography>
           </MenuItem>
-          <MenuItem onClick={() => clickHandler('ru')}>
+          <MenuItem
+            onClick={() => clickHandler('ru')}
+            data-testid="switch-to-ru"
+          >
             <Typography variant="h6" color="blue-gray" className="mb-1">
               {'Русский'}
             </Typography>
