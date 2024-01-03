@@ -6,6 +6,7 @@ interface ButtonThemedProps extends PropsWithChildren {
   disabled?: boolean;
   variant?: 'filled' | 'outlined' | 'gradient' | 'text';
   onClick?: MouseEventHandler;
+  testid?: string;
   tooltip?: {
     text: string;
     position: 'top' | 'bottom' | 'left' | 'right';
@@ -24,6 +25,7 @@ const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
       <Button
         {...props}
         size="sm"
+        data-testid={props.testid || ''}
         variant={props.variant || 'outlined'}
         className={`${
           props.className && props.className

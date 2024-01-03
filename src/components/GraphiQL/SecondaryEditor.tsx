@@ -32,6 +32,8 @@ const SecondaryEditor: FC = () => {
           <ChevronDownIcon
             onClick={() => handleOpen(true)}
             strokeWidth={2.5}
+            role="button"
+            data-testid="tabs-shevron-btn"
             className={`h-3.5 w-3.5 transition hover:bg-peachFuzz-200 ${
               open ? 'rotate-180' : ''
             }`}
@@ -77,16 +79,18 @@ const SecondaryEditor: FC = () => {
           </TabsHeader>
         </AccordionHeader>
         <AccordionBody className="py-0">
-          <TabsBody className="h-full">
+          <TabsBody className="h-full" data-testid="tabs-body">
             <TabPanel
               className="p-0 h-full overflow-auto h-[150px]"
               value={'variables'}
+              data-testid="tabpanel-variables"
             >
               <CodeEditor mode="editor" />
             </TabPanel>
             <TabPanel
               className="p-0 h-full overflow-auto h-[150px]"
               value={'header'}
+              data-testid="tabpanel-header"
             >
               <CodeEditor mode="editor" />
             </TabPanel>
