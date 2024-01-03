@@ -24,7 +24,7 @@ describe('GraphiQL component', () => {
     ).toBeTruthy;
   });
 
-  it('Button gets enabled after recieving endpoint response', async () => {
+  it('Send button gets enabled/disabled correctly', async () => {
     render(
       <WrapperWithStore>
         <WrapperWithLocaleContext lang="ru">
@@ -33,16 +33,24 @@ describe('GraphiQL component', () => {
       </WrapperWithStore>
     );
     fireEvent.click(screen.getByRole('button', { name: 'Применить' }));
-    await waitFor(() => {
+    await waitFor(async () => {
       expect(
         screen
           .getByTestId('btn-send')
           .classList.contains('disabled:pointer-events-none')
       ).toBeFalsy;
+      fireEvent.click(screen.getByRole('button', { name: 'Изменить' }));
+      await waitFor(async () => {
+        expect(
+          screen
+            .getByTestId('btn-send')
+            .classList.contains('disabled:pointer-events-none')
+        ).toBeTruthy;
+      });
     });
   });
 
-  it('Button', async () => {
+  it('Secondary editor expands correct tab when clicking on variables', async () => {
     render(
       <WrapperWithStore>
         <WrapperWithLocaleContext lang="ru">
@@ -56,7 +64,7 @@ describe('GraphiQL component', () => {
         .toBeTruthy;
     });
   });
-  it('Button', async () => {
+  it('Secondary editor expands correct tab when clicking on header', async () => {
     render(
       <WrapperWithStore>
         <WrapperWithLocaleContext lang="ru">
@@ -70,7 +78,7 @@ describe('GraphiQL component', () => {
         .toBeTruthy;
     });
   });
-  it('Button', async () => {
+  it('Secondary editor collapses correctty when clicking on shevron button', async () => {
     render(
       <WrapperWithStore>
         <WrapperWithLocaleContext lang="ru">
