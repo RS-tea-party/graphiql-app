@@ -88,6 +88,7 @@ const api = createApi({
 export const {
   useGetSchemaQuery,
   useGetGraphQLDataQuery,
+  useCheckEndpointQuery,
   useLazyGetSchemaQuery,
   useLazyGetGraphQLDataQuery,
   useLazyCheckEndpointQuery,
