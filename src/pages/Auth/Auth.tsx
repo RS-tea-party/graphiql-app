@@ -11,7 +11,10 @@ const Auth: FC = () => {
     return <Navigate to={Paths.MAIN} replace />;
   }
   return (
-    <section className="flex flex-grow items-center justify-center truncate">
+    <section
+      className="flex flex-grow items-center justify-center truncate"
+      data-testid="auth-page"
+    >
       <SignIn />
     </section>
   );
