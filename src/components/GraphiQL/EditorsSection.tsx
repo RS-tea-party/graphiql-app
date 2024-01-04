@@ -18,21 +18,39 @@ const EditorsSection = () => {
   const url = useAppSelector(urlSelector);
 
   const editorRef = useRef<ReactCodeMirrorRef>(null);
+  const variablesRef = useRef<ReactCodeMirrorRef>(null);
+  const headersRef = useRef<ReactCodeMirrorRef>(null);
 
   const sendHandler = () => {
     const query = editorRef.current?.editor?.textContent?.split('›')[1] || '';
+    let variables = {};
+    let headers = {};
+    try {
+      variables = JSON.parse(
+        variablesRef.current?.editor?.textContent?.split('›')[1] || ''
+      );
+    } catch (error) {}
+    try {
+      headers = JSON.parse(
+        headersRef.current?.editor?.textContent?.split('›')[1] || ''
+      );
+    } catch (error) {}
+
     if (url) {
-      dispatch(changeResult({ url, query }));
+      dispatch(
+        changeResult({
+          url,
+          query,
+          variables,
+          headers,
+        })
+      );
     }
   };
 
   return (
     <section className="flex flex-col w-full md:max-h-full md:w-1/2 md:h-full px-[20px] my-2 md:my-0 border-2 md:mr-[5px]">
-      <CodeEditor
-        mode="editor"
-        defaultValue={`{` + `\n`.repeat(2) + `}` + `\n`}
-        ref={editorRef}
-      >
+      <CodeEditor mode="editor" defaultValue={'{\n\n}\n'} ref={editorRef}>
         <ButtonThemed
           className="opacity-50 rounded-full p-2 border-peachFuzz hover:bg-peachFuzz"
           variant="outlined"
@@ -76,9 +94,9 @@ const EditorsSection = () => {
           </svg>
         </ButtonThemed>
       </CodeEditor>
-      <div className="flex w-full">
-        <SecondaryEditor />
-      </div>
+      <section className="flex w-full">
+        <SecondaryEditor variablesRef={variablesRef} headersRef={headersRef} />
+      </section>
     </section>
   );
 };
