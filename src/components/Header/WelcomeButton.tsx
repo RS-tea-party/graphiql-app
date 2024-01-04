@@ -9,7 +9,10 @@ const WelcomeButton: FC = () => {
   const navigate = useNavigate();
 
   return (
-    <ButtonHeader onClick={() => navigate(Paths.WELCOME)}>
+    <ButtonHeader
+      onClick={() => navigate(Paths.WELCOME)}
+      data-testid="welcome-button"
+    >
       <span>{`${spellingList.welcome.greeting} `}</span>
     </ButtonHeader>
   );

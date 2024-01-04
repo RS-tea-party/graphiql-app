@@ -71,7 +71,7 @@ const HeaderButtons: FC = () => {
       </>
     );
   }
-  return <>{buttons}</>;
+  return <nav data-testid="header-buttons">{buttons}</nav>;
 };
 
 export default HeaderButtons;

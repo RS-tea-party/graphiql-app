@@ -7,6 +7,11 @@ import WrapperWithStore from './helpers/WrapperWithStore';
 import MemoryRouterProvider from './helpers/MemoryRouterProvider';
 import { store } from '../store/store';
 import { login } from '../store/slices/userSlice';
+import HeaderButtons from '../components/Header/HeaderButtons';
+import LangSwitcher from '../components/Header/LangSwitcher';
+import HeaderBurgerButtons from '../components/Header/HeaderBurgerButtons';
+import WelcomeBurgerButton from '../components/Header/WelcomeBurgerButton';
+import WelcomeButton from '../components/Header/WelcomeButton';
 
 describe('Header component', () => {
   it('renders correctly', () => {
@@ -84,5 +89,80 @@ describe('Header component', () => {
     await waitFor(() => {
       expect(langSwitchButton).toHaveTextContent('Язык');
     });
+  });
+});
+
+describe('HeaderBurgerButtons', () => {
+  it('renders correctly', () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="ru">
+          <MemoryRouterProvider initialEntries={['/']}>
+            <HeaderBurgerButtons />
+          </MemoryRouterProvider>
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    expect(screen.getByTestId('header-burger-buttons')).toBeInTheDocument();
+  });
+});
+
+describe('HeaderButtons', () => {
+  it('renders correctly', () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="ru">
+          <MemoryRouterProvider initialEntries={['/']}>
+            <HeaderButtons />
+          </MemoryRouterProvider>
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    expect(screen.getByTestId('header-buttons')).toBeInTheDocument();
+  });
+});
+
+describe('LangSwitcher', () => {
+  it('renders correctly', () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="ru">
+          <MemoryRouterProvider initialEntries={['/']}>
+            <LangSwitcher />
+          </MemoryRouterProvider>
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    expect(screen.getByTestId('lang-switcher')).toBeInTheDocument();
+  });
+});
+
+describe('WelcomeBurgerButton', () => {
+  it('renders correctly', () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="ru">
+          <MemoryRouterProvider initialEntries={['/']}>
+            <WelcomeBurgerButton />
+          </MemoryRouterProvider>
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    expect(screen.getByTestId('welcome-burger-button')).toBeInTheDocument();
+  });
+});
+
+describe('WelcomeButton', () => {
+  it('renders correctly', () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="ru">
+          <MemoryRouterProvider initialEntries={['/']}>
+            <WelcomeButton />
+          </MemoryRouterProvider>
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    expect(screen.getByTestId('welcome-button')).toBeInTheDocument();
   });
 });
