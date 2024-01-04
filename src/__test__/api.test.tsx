@@ -1,5 +1,12 @@
 import '@testing-library/jest-dom';
-import { render, renderHook, waitFor } from '@testing-library/react';
+import {
+  render,
+  renderHook,
+  waitFor,
+  screen,
+  waitForElementToBeRemoved,
+  fireEvent,
+} from '@testing-library/react';
 import { describe, it } from 'vitest';
 import { getGraphQLApiErrorMessage } from '../helpers/getGraphQLApiErrorMessage';
 import { localesObj } from '../dto/locales';
@@ -11,6 +18,20 @@ import {
 } from '../services/api';
 import WrapperWithStore from './helpers/WrapperWithStore';
 import { schema } from './mocks/objects/graphql/schema';
+import { server } from './mocks/server';
+import { getSchemaSuccess } from './mocks/handlers/graphql/getSchemaSuccess';
+import { getSchemaError } from './mocks/handlers/graphql/getSchemaError';
+import MemoryRouterProvider from './helpers/MemoryRouterProvider';
+import WrapperWithLocaleContext from './helpers/WrapperWithLocaleContext';
+import { store } from '../store/store';
+import { login } from '../store/slices/userSlice';
+import { toast } from 'react-toastify';
+
+vitest.mock('react-toastify', () => ({
+  toast: {
+    success: vitest.fn(),
+  },
+}));
 
 describe('RTK Query api', () => {
   it('return correct checkEndpoint data', async () => {
@@ -100,7 +121,37 @@ describe('Errors from the API side', () => {
   });
 
   it('should be displayed in a user-friendly format', async () => {
-    render(<></>);
-    // ...
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="en">
+          <MemoryRouterProvider initialEntries={['/graphiql']} />
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    store.dispatch(login());
+    await waitForElementToBeRemoved(screen.getByTestId('loader'));
+    await waitFor(() => {
+      expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
+      expect(screen.getByTestId('control-panel')).toBeInTheDocument();
+    });
+
+    const applyButton = screen.getByTestId('apply-button');
+    expect(applyButton).toBeInTheDocument();
+
+    server.use(getSchemaSuccess);
+
+    fireEvent.click(applyButton);
+
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalled();
+    });
+
+    server.use(getSchemaError);
+
+    fireEvent.click(applyButton);
+
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalled();
+    });
   });
 });
