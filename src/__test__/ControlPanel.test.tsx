@@ -17,5 +17,6 @@ describe('ControlPanel component', () => {
     expect(
       screen.getByRole('button', { name: 'Применить' })
     ).toBeInTheDocument();
+    expect(screen.getByTestId('control-panel')).toBeInTheDocument();
   });
 });

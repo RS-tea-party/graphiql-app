@@ -55,9 +55,12 @@ const ControlPanel = () => {
   }, [currentRequestId, result, spellingList]);
 
   return (
-    <div className="flex flex-wrap sticky top-[78px] w-full p-2.5 items-center z-20 bg-white gap-3">
+    <div
+      className="flex flex-wrap sticky top-[78px] w-full p-2.5 items-center z-20 bg-white gap-3"
+      data-testid="control-panel"
+    >
       {!isValid || editMode ? (
-        <ButtonThemed onClick={applyHandler}>
+        <ButtonThemed onClick={applyHandler} data-testid="apply-button">
           {spellingList.graphiQL.apply}
         </ButtonThemed>
       ) : (
