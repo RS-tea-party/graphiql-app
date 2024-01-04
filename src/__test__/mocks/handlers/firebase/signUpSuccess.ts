@@ -1,0 +1,21 @@
+import { http, HttpResponse } from 'msw';
+
+const data = {
+  kind: 'identitytoolkit#VerifyPasswordResponse',
+  localId: 'RkSxTXX15FNP1IxzXtXU7M3YRnG2',
+  email: 'test@domain.com',
+  displayName: 'TestName',
+  idToken:
+    'eyJhbGciOiJSUzI1NiIsImtpZCI6IjUyNmM2YTg0YWMwNjcwMDVjZTM0Y2VmZjliM2EyZTA4ZTBkZDliY2MiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiVGVzdE5hbWUiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZ3JhcGhpcWwtYXBwLWNjNzc2IiwiYXVkIjoiZ3JhcGhpcWwtYXBwLWNjNzc2IiwiYXV0aF90aW1lIjoxNzA0Mzg5MzEyLCJ1c2VyX2lkIjoiUmtTeFRYWDE1Rk5QMUl4elh0WFU3TTNZUm5HMiIsInN1YiI6IlJrU3hUWFgxNUZOUDFJeHpYdFhVN00zWVJuRzIiLCJpYXQiOjE3MDQzODkzMTIsImV4cCI6MTcwNDM5MjkxMiwiZW1haWwiOiJ0ZXN0QGRvbWFpbi5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGVzdEBkb21haW4uY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.kBMpmwvzMrX83bFdr593LEu87N_GbMYtjxDBROB2ZRZ-F8PeAJLDhX1xcl4wq0rsIMU6jXAMTTwqjywweC4iTxywuZZjeGsZ5SCN4QNZtttK9hkMj9TFPAhSktGmcbUQ59xdbT3VDPPN0tWvxZeerUMYoQGpAYkItPwyG9JnaSQu6re5y_rj4McR2FYdxZR3lp6CwHvtbjI8ADI7H30xxwVy7IuRQtqFbOVGAaXCD6ePLf5K27lUv5cIFzHjv7HwI5rY0eqStnSQ1X7CibxpwNb5jzX8raLvLQKJJkEEQE2Q16Obwk8vItE_bPYD4IOcqP2WRPRjtkZ9HTJX_hKh0A',
+  registered: true,
+  refreshToken:
+    'AMf-vBwlr6MR9fxgESv4tjGL7WZ7q-awaXLBNW77pgLdARtjnnA9GkHhFFYk7lBpavJ3ckWkkh43QoL84RpcAB7elLiBZ5dzx9hosXwwyFF1IvA0hI7zSY6kPkkjmarqtuSyts-4_479I1DqlV5-wk0z8EnbywL-aNEzUF5zNnfK31RJ7o7hKDvOsBClInNuobbqoKRbED93F7dqwkR7HcVY_ppVvU00bYQKEL8cP-i8NwquAa3CL0A',
+  expiresIn: '3600',
+};
+
+export const signUpSuccess = http.post(
+  'https://identitytoolkit.googleapis.com/v1/accounts:signUp',
+  () => {
+    return HttpResponse.json({ data });
+  }
+);
