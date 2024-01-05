@@ -45,6 +45,7 @@ const HeaderButtons: FC = () => {
         <ButtonHeader
           className="hidden lg:inline-block text-base"
           onClick={onLogout}
+          data-testid="button-logout"
         >
           <span>{`${spellingList.headerButton.logOut} `}</span>
         </ButtonHeader>
@@ -56,19 +57,21 @@ const HeaderButtons: FC = () => {
         <ButtonHeader
           className="hidden lg:inline-block text-base"
           onClick={onSignIn}
+          data-testid="button-signin"
         >
           <span>{`${spellingList.headerButton.signIn} `}</span>
         </ButtonHeader>
         <ButtonHeader
           className="hidden lg:inline-block text-base"
           onClick={onSignUp}
+          data-testid="button-signup"
         >
           <span>{`${spellingList.headerButton.signUp} `}</span>
         </ButtonHeader>
       </>
     );
   }
-  return <>{buttons}</>;
+  return <nav data-testid="header-buttons">{buttons}</nav>;
 };
 
 export default HeaderButtons;
