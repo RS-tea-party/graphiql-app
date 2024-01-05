@@ -6,7 +6,6 @@ interface ButtonThemedProps extends PropsWithChildren {
   disabled?: boolean;
   variant?: 'filled' | 'outlined' | 'gradient' | 'text';
   onClick?: MouseEventHandler;
-  testid?: string;
   tooltip?: {
     text: string;
     position: 'top' | 'bottom' | 'left' | 'right';
@@ -24,8 +23,8 @@ const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
     >
       <Button
         {...props}
+        placeholder=""
         size="sm"
-        data-testid={props.testid || ''}
         variant={props.variant || 'outlined'}
         className={`${
           props.className && props.className
@@ -35,18 +34,6 @@ const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
       </Button>
     </Tooltip>
   );
-  // return (
-  //   <Button
-  //     {...props}
-  //     size="sm"
-  //     variant={props.variant || 'outlined'}
-  //     className={`${
-  //       props.className && props.className
-  //     } border-peachFuzz bg-peachFuzz disabled:bg-peachGray disabled:border-peachGray-100 disabled:text-peachGray-100`}
-  //   >
-  //     {children}
-  //   </Button>
-  // );
 };
 
 export default ButtonThemed;

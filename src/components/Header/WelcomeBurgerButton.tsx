@@ -8,7 +8,10 @@ const WelcomeBurgerButton: FC = () => {
   const { spellingList } = useContext(LocaleContext);
   const navigate = useNavigate();
   return (
-    <ButtonHeaderBurger onClick={() => navigate(Paths.WELCOME)}>
+    <ButtonHeaderBurger
+      onClick={() => navigate(Paths.WELCOME)}
+      data-testid="welcome-burger-button"
+    >
       <span>{`${spellingList.welcome.greeting} `}</span>
     </ButtonHeaderBurger>
   );

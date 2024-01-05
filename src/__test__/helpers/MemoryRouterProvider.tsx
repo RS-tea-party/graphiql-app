@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import App from '../../components/App/App';
 import { Paths } from '../../dto/constants';
@@ -13,46 +13,53 @@ interface MemoryRouterProviderProps {
   initialEntries: string[];
 }
 
-const MemoryRouterProvider: FC<MemoryRouterProviderProps> = ({
-  initialEntries,
-}) => {
+const MemoryRouterProvider: FC<
+  PropsWithChildren<MemoryRouterProviderProps>
+> = ({ children, initialEntries }) => {
   const memoryRouter = createMemoryRouter(
-    [
-      {
-        path: Paths.WELCOME,
-        element: <App />,
-        children: [
+    children
+      ? [
+          {
+            path: '/',
+            element: children,
+          },
+        ]
+      : [
           {
             path: Paths.WELCOME,
-            element: <Layout />,
+            element: <App />,
             children: [
               {
-                index: true,
-                element: <Welcome />,
-              },
-              {
-                path: Paths.AUTH,
-                element: <Auth />,
-              },
-              {
-                path: Paths.MAIN,
-                element: <PrivateRoute redirectPath={Paths.WELCOME} />,
+                path: Paths.WELCOME,
+                element: <Layout />,
                 children: [
                   {
                     index: true,
-                    element: <GraphiQL />,
+                    element: <Welcome />,
+                  },
+                  {
+                    path: Paths.AUTH,
+                    element: <Auth />,
+                  },
+                  {
+                    path: Paths.MAIN,
+                    element: <PrivateRoute redirectPath={Paths.WELCOME} />,
+                    children: [
+                      {
+                        index: true,
+                        element: <GraphiQL />,
+                      },
+                    ],
                   },
                 ],
               },
+              {
+                path: '*',
+                element: <NotFound />,
+              },
             ],
           },
-          {
-            path: '*',
-            element: <NotFound />,
-          },
         ],
-      },
-    ],
     { initialEntries }
   );
 

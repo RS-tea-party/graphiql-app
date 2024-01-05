@@ -1,6 +1,6 @@
 import SecondaryEditor from './SecondaryEditor';
 import CodeEditor from './CodeEditor';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
 import { isValidSelector, urlSelector } from '../../store/slices/endpointSlice';
@@ -8,8 +8,10 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { changeResult } from '../../store/slices/resultSlice';
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import { prepareToPrettify, prettify } from '../../helpers/prettify';
 
 const EditorsSection = () => {
+  const [editorQuery, setEditorQuery] = useState(`{\n\n}\n`);
   const { spellingList } = useContext(LocaleContext);
   const isValid = useAppSelector(isValidSelector);
 
@@ -18,20 +20,47 @@ const EditorsSection = () => {
   const url = useAppSelector(urlSelector);
 
   const editorRef = useRef<ReactCodeMirrorRef>(null);
+  const variablesRef = useRef<ReactCodeMirrorRef>(null);
+  const headersRef = useRef<ReactCodeMirrorRef>(null);
 
   const sendHandler = () => {
     const query = editorRef.current?.editor?.textContent?.split('›')[1] || '';
+    let variables = {};
+    let headers = {};
+    try {
+      variables = JSON.parse(
+        variablesRef.current?.editor?.textContent?.split('›')[1] || ''
+      );
+    } catch (error) {}
+    try {
+      headers = JSON.parse(
+        headersRef.current?.editor?.textContent?.split('›')[1] || ''
+      );
+    } catch (error) {}
+
     if (url) {
-      dispatch(changeResult({ url, query }));
+      dispatch(
+        changeResult({
+          url,
+          query,
+          variables,
+          headers,
+        })
+      );
     }
+  };
+
+  const prettifyQuerry = () => {
+    setEditorQuery(prettify(prepareToPrettify(editorQuery)));
   };
 
   return (
     <section className="flex flex-col w-full md:max-h-full md:w-1/2 md:h-full px-[20px] my-2 md:my-0 border-2 md:mr-[5px]">
       <CodeEditor
         mode="editor"
-        defaultValue={`{` + `\n`.repeat(2) + `}` + `\n`}
+        defaultValue={editorQuery}
         ref={editorRef}
+        onchange={setEditorQuery}
       >
         <ButtonThemed
           className="opacity-50 rounded-full p-2 border-peachFuzz hover:bg-peachFuzz"
@@ -39,7 +68,7 @@ const EditorsSection = () => {
           disabled={isValid ? false : true}
           tooltip={{ text: spellingList.graphiQL.send, position: 'left' }}
           onClick={sendHandler}
-          testid="btn-send"
+          data-testid="btn-send"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +89,8 @@ const EditorsSection = () => {
           className="opacity-50 rounded-full p-2 border-peachFuzz hover:bg-peachFuzz"
           variant="outlined"
           tooltip={{ text: spellingList.graphiQL.prettify, position: 'left' }}
-          testid="btn-prettify"
+          onClick={prettifyQuerry}
+          data-testid="btn-prettify"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -78,9 +108,9 @@ const EditorsSection = () => {
           </svg>
         </ButtonThemed>
       </CodeEditor>
-      <div className="flex w-full">
-        <SecondaryEditor />
-      </div>
+      <section className="flex w-full">
+        <SecondaryEditor variablesRef={variablesRef} headersRef={headersRef} />
+      </section>
     </section>
   );
 };

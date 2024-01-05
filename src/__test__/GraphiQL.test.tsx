@@ -6,7 +6,7 @@ import WrapperWithStore from './helpers/WrapperWithStore';
 import GraphiQL from '../pages/GraphiQL/GraphiQL';
 
 describe('GraphiQL component', () => {
-  it('renders correctly', () => {
+  it('renders correctly', async () => {
     render(
       <WrapperWithStore>
         <WrapperWithLocaleContext lang="ru">
@@ -14,14 +14,16 @@ describe('GraphiQL component', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    expect(
-      screen.getByRole('button', { name: 'Применить' })
-    ).toBeInTheDocument();
-    expect(
-      screen
-        .getByTestId('btn-send')
-        .classList.contains('disabled:pointer-events-none')
-    ).toBeTruthy;
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: 'Применить' })
+      ).toBeInTheDocument();
+      expect(
+        screen
+          .getByTestId('btn-send')
+          .classList.contains('disabled:pointer-events-none')
+      ).toBeTruthy;
+    });
   });
 
   it('Send button gets enabled/disabled correctly', async () => {
@@ -32,20 +34,22 @@ describe('GraphiQL component', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    fireEvent.click(screen.getByRole('button', { name: 'Применить' }));
     await waitFor(async () => {
-      expect(
-        screen
-          .getByTestId('btn-send')
-          .classList.contains('disabled:pointer-events-none')
-      ).toBeFalsy;
-      fireEvent.click(screen.getByRole('button', { name: 'Изменить' }));
+      fireEvent.click(screen.getByRole('button', { name: 'Применить' }));
       await waitFor(async () => {
         expect(
           screen
             .getByTestId('btn-send')
             .classList.contains('disabled:pointer-events-none')
-        ).toBeTruthy;
+        ).toBeFalsy;
+        fireEvent.click(screen.getByRole('button', { name: 'Изменить' }));
+        await waitFor(async () => {
+          expect(
+            screen
+              .getByTestId('btn-send')
+              .classList.contains('disabled:pointer-events-none')
+          ).toBeTruthy;
+        });
       });
     });
   });
@@ -58,10 +62,12 @@ describe('GraphiQL component', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    fireEvent.click(screen.getByRole('tab', { name: 'Переменные' }));
-    await waitFor(() => {
-      expect(screen.getByTestId('tabpanel-variables').style.opacity === '1')
-        .toBeTruthy;
+    await waitFor(async () => {
+      fireEvent.click(screen.getByRole('tab', { name: 'Переменные' }));
+      await waitFor(() => {
+        expect(screen.getByTestId('tabpanel-variables').style.opacity === '1')
+          .toBeTruthy;
+      });
     });
   });
   it('Secondary editor expands correct tab when clicking on header', async () => {
@@ -72,10 +78,12 @@ describe('GraphiQL component', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    fireEvent.click(screen.getByRole('tab', { name: 'Заголовки' }));
-    await waitFor(() => {
-      expect(screen.getByTestId('tabpanel-header').style.opacity === '1')
-        .toBeTruthy;
+    await waitFor(async () => {
+      fireEvent.click(screen.getByRole('tab', { name: 'Заголовки' }));
+      await waitFor(() => {
+        expect(screen.getByTestId('tabpanel-header').style.opacity === '1')
+          .toBeTruthy;
+      });
     });
   });
   it('Secondary editor collapses correctty when clicking on shevron button', async () => {
@@ -86,10 +94,13 @@ describe('GraphiQL component', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    fireEvent.click(screen.getByRole('tab', { name: 'Заголовки' }));
-    fireEvent.click(screen.getByTestId('tabs-shevron-btn'));
-    await waitFor(() => {
-      expect(screen.getByTestId('tabs-body').style.height === '0px').toBeTruthy;
+    await waitFor(async () => {
+      fireEvent.click(screen.getByRole('tab', { name: 'Заголовки' }));
+      fireEvent.click(screen.getByTestId('tabs-shevron-btn'));
+      await waitFor(() => {
+        expect(screen.getByTestId('tabs-body').style.height === '0px')
+          .toBeTruthy;
+      });
     });
   });
 });
