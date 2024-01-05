@@ -9,7 +9,6 @@ export const prettify = (string: string): string => {
         i += 2;
       } else {
         braces.push(true);
-        console.log(braces.length, string[i]);
         string =
           string.slice(0, i + 1) +
           `\n${'\t'.repeat(braces.length)}` +
