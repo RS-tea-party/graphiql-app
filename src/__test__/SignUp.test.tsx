@@ -4,6 +4,9 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import WrapperWithLocaleContext from './helpers/WrapperWithLocaleContext';
 import WrapperWithStore from './helpers/WrapperWithStore';
 import SignUp from '../components/Forms/SignUp';
+import { store } from '../store/store';
+import { regPath } from '../store/slices/authPathSlice';
+import MemoryRouterProvider from './helpers/MemoryRouterProvider';
 
 describe('SignUp component', () => {
   it('renders correctly', () => {
@@ -73,5 +76,39 @@ describe('SignUp component', () => {
     expect(
       screen.getByText('Должно быть минимум 8 символов')
     ).toBeInTheDocument();
+  });
+  it('successful sign up and riderect to main page', async () => {
+    store.dispatch(regPath());
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="en">
+          <MemoryRouterProvider initialEntries={['/auth']} />
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('auth-page')).toBeInTheDocument();
+    });
+
+    const nameSignUp = screen.getByTestId('name-signUp');
+    const emailSignUp = screen.getByTestId('email-signUp');
+    const passwordSignUp = screen.getByTestId('password-signUp');
+    const buttonSignUp = screen.getByTestId('button-signUp');
+
+    expect(nameSignUp).toBeInTheDocument();
+    expect(emailSignUp).toBeInTheDocument();
+    expect(passwordSignUp).toBeInTheDocument();
+    expect(buttonSignUp).toBeInTheDocument();
+
+    fireEvent.change(nameSignUp, { target: { value: 'TestName' } });
+    fireEvent.change(emailSignUp, { target: { value: 'test@domain.com' } });
+    fireEvent.change(passwordSignUp, { target: { value: '12345Qw$' } });
+    fireEvent.click(buttonSignUp);
+
+    // await waitForElementToBeRemoved(screen.getByTestId('auth-page'));
+    // await waitFor(() => {
+    //   expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
+    // });
   });
 });

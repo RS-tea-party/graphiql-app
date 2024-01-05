@@ -137,6 +137,7 @@ const SignUp: FC = () => {
             labelProps={{
               className: 'before:content-none after:content-none',
             }}
+            data-testid="name-signUp"
           />
           <span className="form__error text-red-500">
             {errors.name?.message ? errors.name?.message : ''}
@@ -153,6 +154,7 @@ const SignUp: FC = () => {
             labelProps={{
               className: 'before:content-none after:content-none',
             }}
+            data-testid="email-signUp"
           />
           <span className="form__error text-red-500">
             {errors.email?.message ? errors.email?.message : ''}
@@ -170,6 +172,7 @@ const SignUp: FC = () => {
             labelProps={{
               className: 'before:content-none after:content-none',
             }}
+            data-testid="password-signUp"
           />
           <span className="form__error text-red-500">
             {errors.password?.message ? errors.password?.message : ''}
