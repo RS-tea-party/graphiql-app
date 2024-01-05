@@ -20,11 +20,33 @@ const EditorsSection = () => {
   const url = useAppSelector(urlSelector);
 
   const editorRef = useRef<ReactCodeMirrorRef>(null);
+  const variablesRef = useRef<ReactCodeMirrorRef>(null);
+  const headersRef = useRef<ReactCodeMirrorRef>(null);
 
   const sendHandler = () => {
     const query = editorRef.current?.editor?.textContent?.split('›')[1] || '';
+    let variables = {};
+    let headers = {};
+    try {
+      variables = JSON.parse(
+        variablesRef.current?.editor?.textContent?.split('›')[1] || ''
+      );
+    } catch (error) {}
+    try {
+      headers = JSON.parse(
+        headersRef.current?.editor?.textContent?.split('›')[1] || ''
+      );
+    } catch (error) {}
+
     if (url) {
-      dispatch(changeResult({ url, query }));
+      dispatch(
+        changeResult({
+          url,
+          query,
+          variables,
+          headers,
+        })
+      );
     }
   };
 
@@ -84,9 +106,9 @@ const EditorsSection = () => {
           </svg>
         </ButtonThemed>
       </CodeEditor>
-      <div className="flex w-full">
-        <SecondaryEditor />
-      </div>
+      <section className="flex w-full">
+        <SecondaryEditor variablesRef={variablesRef} headersRef={headersRef} />
+      </section>
     </section>
   );
 };

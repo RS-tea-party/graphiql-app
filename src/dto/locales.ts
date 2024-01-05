@@ -65,6 +65,17 @@ export const localesObj: Locales = {
       headers: 'Заголовки',
       variables: 'Переменные',
     },
+    graphiQLApiStatus: {
+      SCHEMA_FETCH_ERROR: 'Ошибка запроса или неправильный адрес API',
+      SCHEMA_FETCH_SUCCESS: 'API найден',
+      API_FETCH_ERROR: 'Ошибка сети или неправильный API запрос',
+      API_FETCH_SUCCESS: 'Успешный API запрос',
+      BAD_REQUEST: 'Неправильный запрос, измените и попробуйте вновь',
+      TOO_MANY_REQUESTS: 'Слишком много запросов к API',
+      SERVER_ERROR: 'Внутренняя ошибка сервера',
+      BAD_METHOD: 'Неправильный HTTP метод запроса',
+      NOT_FOUND: 'Непредвиденный ответ сервера, попробуйте изменить запрос',
+    },
   },
   en: {
     notFound: {
@@ -127,6 +138,17 @@ export const localesObj: Locales = {
       prettify: 'Prettify',
       headers: 'Headers',
       variables: 'Variables',
+    },
+    graphiQLApiStatus: {
+      SCHEMA_FETCH_ERROR: 'Fetch Error or Invalid API',
+      SCHEMA_FETCH_SUCCESS: 'API Valid',
+      API_FETCH_ERROR: 'Fetch Error or Invalid API Request',
+      API_FETCH_SUCCESS: 'Successfull API Request',
+      BAD_REQUEST: 'Bad request, change it and try again',
+      TOO_MANY_REQUESTS: 'Too many requests to API',
+      SERVER_ERROR: 'Server internal error',
+      BAD_METHOD: 'Invalid HTTP request method',
+      NOT_FOUND: 'Unexpected server response, try to change request',
     },
   },
 };

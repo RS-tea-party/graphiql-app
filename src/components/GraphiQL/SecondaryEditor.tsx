@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, Ref, useContext } from 'react';
 import React from 'react';
 import {
   Tabs,
@@ -15,8 +15,17 @@ import {
 import ChevronDownIcon from '@heroicons/react/24/outline/ChevronDownIcon';
 import CodeEditor from './CodeEditor';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
+import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 
-const SecondaryEditor: FC = () => {
+interface SecondaryEditorProps {
+  variablesRef: Ref<ReactCodeMirrorRef>;
+  headersRef: Ref<ReactCodeMirrorRef>;
+}
+
+const SecondaryEditor: FC<SecondaryEditorProps> = ({
+  variablesRef,
+  headersRef,
+}) => {
   const [activeTab, setActiveTab] = React.useState('variables');
   const [open, setOpen] = React.useState(false);
   const { locales, lang } = useContext(LocaleContext);
@@ -82,13 +91,21 @@ const SecondaryEditor: FC = () => {
               className="p-0 h-full overflow-auto h-[150px]"
               value={'variables'}
             >
-              <CodeEditor mode="editor" />
+              <CodeEditor
+                mode="editor"
+                ref={variablesRef}
+                defaultValue={'{\n\n}\n'}
+              />
             </TabPanel>
             <TabPanel
               className="p-0 h-full overflow-auto h-[150px]"
               value={'header'}
             >
-              <CodeEditor mode="editor" />
+              <CodeEditor
+                mode="editor"
+                ref={headersRef}
+                defaultValue={'{\n\n}\n'}
+              />
             </TabPanel>
           </TabsBody>
         </AccordionBody>
