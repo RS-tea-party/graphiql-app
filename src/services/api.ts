@@ -3,7 +3,6 @@ import { setEndpointState } from '../store/slices/endpointSlice';
 import { CHECK_ENDPOINT_QUERY, DOCUMENTATION_QUERY } from '../dto/constants';
 import { resetResult } from '../store/slices/resultSlice';
 import { GetGraphQLDataQueryParams, GetSchemaQueryParams } from '../dto/types';
-import { setDocumentation } from '../store/slices/docsSlice';
 
 const api = createApi({
   reducerPath: 'api',
@@ -51,9 +50,6 @@ const api = createApi({
         try {
           await queryFulfilled;
           dispatch(setEndpointState({ isLoading: false, isValid: true }));
-          dispatch(
-            setDocumentation(JSON.stringify((await queryFulfilled).data))
-          );
           dispatch(resetResult());
         } catch (err) {
           dispatch(setEndpointState({ isLoading: false, isValid: false }));
