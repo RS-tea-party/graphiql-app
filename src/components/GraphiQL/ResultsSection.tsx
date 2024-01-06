@@ -1,14 +1,18 @@
 import CodeEditor from './CodeEditor';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { isValidSelector } from '../../store/slices/endpointSlice';
 import {
+  resultHeadersSelector,
   resultQuerySelector,
   resultUrlSelector,
+  resultVariablesSelector,
 } from '../../store/slices/resultSlice';
 import { useGetGraphQLDataQuery } from '../../services/api';
+import { toast } from 'react-toastify';
+import { getGraphQLApiErrorMessage } from '../../helpers/getGraphQLApiErrorMessage';
 import { openDocs } from '../../store/slices/docsSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 
@@ -19,16 +23,48 @@ const ResultsSection = () => {
   const isValid = useAppSelector(isValidSelector);
   const url = useAppSelector(resultUrlSelector);
   const query = useAppSelector(resultQuerySelector);
-  const resultUrl = useAppSelector(resultUrlSelector);
+  const variables = useAppSelector(resultVariablesSelector);
+  const headers = useAppSelector(resultHeadersSelector);
 
-  const { data, error } = useGetGraphQLDataQuery({
-    url,
-    query,
-    operationName: null,
-    variables: {},
-  });
+  const { data, error, isError, isFetching, isLoading, isSuccess, requestId } =
+    useGetGraphQLDataQuery(
+      {
+        operationName: null,
+        url,
+        query,
+        variables,
+        headers,
+      },
+      { skip: !isValid || !url }
+    );
 
   const result = error && 'data' in error ? error.data : data ? data : null;
+
+  const [currentRequestId, setCurrentRequestId] = useState<string>('');
+
+  useEffect(() => {
+    if (!isLoading && requestId && requestId !== currentRequestId) {
+      if (isSuccess)
+        toast.success(spellingList.graphiQLApiStatus.API_FETCH_SUCCESS, {
+          draggable: true,
+        });
+      if (isError) {
+        toast.error(getGraphQLApiErrorMessage(spellingList, error), {
+          draggable: false,
+        });
+      }
+      setCurrentRequestId(`${requestId}`);
+    }
+  }, [
+    currentRequestId,
+    error,
+    isError,
+    isFetching,
+    isLoading,
+    isSuccess,
+    requestId,
+    spellingList,
+  ]);
 
   const handleOpenDocs = () => {
     dispatch(openDocs());
@@ -39,7 +75,7 @@ const ResultsSection = () => {
       <CodeEditor
         mode="viewer"
         defaultValue={
-          isValid && resultUrl && result ? JSON.stringify(result, null, 2) : ''
+          isValid && url && result ? JSON.stringify(result, null, 2) : ''
         }
       >
         <ButtonThemed

@@ -17,6 +17,22 @@ module.exports = withMT({
           DEFAULT: '#d8cfc9',
         },
       },
+      spacing: {
+        896: '56rem',
+        640: '40rem',
+        600: '37.5rem',
+        260: '16.25rem',
+      },
+      padding: {
+        '350px': '350px',
+        '260px': '260px',
+      },
+      translate: {
+        '200%': '200%',
+      },
+      screens: {
+        maxmd: { max: '960px' },
+      },
     },
   },
   future: {

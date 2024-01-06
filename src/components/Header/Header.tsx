@@ -30,7 +30,10 @@ const Header: FC = () => {
   }, []);
 
   return (
-    <div className="h-22 w-full flex dark:bg-blue-gray-900">
+    <div
+      className="h-22 w-full flex dark:bg-blue-gray-900"
+      data-testid="header"
+    >
       <Navbar
         className={
           sticky

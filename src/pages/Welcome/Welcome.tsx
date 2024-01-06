@@ -1,10 +1,16 @@
-import { FC, useContext } from 'react';
-import { LocaleContext } from '../../components/LocaleContext/LocaleContext';
+import { FC, Suspense, lazy } from 'react';
+import Loader from '../../components/Loader/Loader';
 
 const Welcome: FC = () => {
-  const { locales, lang } = useContext(LocaleContext);
+  const LazyAbout = lazy(() => import('../../components/About/About'));
 
-  return <>{locales[lang].welcome.greeting}</>;
+  return (
+    <Suspense fallback={<Loader />}>
+      <section data-testid="welcome-page">
+        <LazyAbout />
+      </section>
+    </Suspense>
+  );
 };
 
 export default Welcome;

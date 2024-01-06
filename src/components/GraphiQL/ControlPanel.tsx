@@ -1,15 +1,15 @@
 import { Input } from '@material-tailwind/react';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import {
   isValidSelector,
   setEndpointUrl,
-  urlSelector,
 } from '../../store/slices/endpointSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useGetSchemaQuery } from '../../services/api';
+import { useLazyGetSchemaQuery } from '../../services/api';
+import { toast } from 'react-toastify';
 
 const ControlPanel = () => {
   const { spellingList } = useContext(LocaleContext);
@@ -19,9 +19,14 @@ const ControlPanel = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [editMode, setEditMode] = useState<boolean>(true);
+
+  const [trigger, result] = useLazyGetSchemaQuery();
+
   const applyHandler = () => {
     if (inputRef.current?.value) {
       dispatch(setEndpointUrl(inputRef.current.value));
+      trigger({ url: inputRef.current.value });
       setEditMode(false);
     }
   };
@@ -32,15 +37,30 @@ const ControlPanel = () => {
     }
   };
 
-  const endpointUrl = useAppSelector(urlSelector);
-  useGetSchemaQuery({ url: endpointUrl });
+  const [currentRequestId, setCurrentRequestId] = useState<string>('');
 
-  const [editMode, setEditMode] = useState<boolean>(true);
+  useEffect(() => {
+    const { isError, isSuccess, isFetching, requestId } = result;
+    if (!isFetching && requestId !== currentRequestId) {
+      if (isSuccess)
+        toast.success(spellingList.graphiQLApiStatus.SCHEMA_FETCH_SUCCESS, {
+          draggable: true,
+        });
+      if (isError)
+        toast.error(spellingList.graphiQLApiStatus.SCHEMA_FETCH_ERROR, {
+          draggable: false,
+        });
+      setCurrentRequestId(`${requestId}`);
+    }
+  }, [currentRequestId, result, spellingList]);
 
   return (
-    <div className="flex flex-wrap sticky top-[78px] gap-1 w-full p-2.5 items-center z-20 bg-white gap-x-3">
+    <div
+      className="flex flex-wrap sticky top-[78px] w-full p-2.5 items-center z-20 bg-white gap-3"
+      data-testid="control-panel"
+    >
       {!isValid || editMode ? (
-        <ButtonThemed onClick={applyHandler}>
+        <ButtonThemed onClick={applyHandler} data-testid="apply-button">
           {spellingList.graphiQL.apply}
         </ButtonThemed>
       ) : (
@@ -51,7 +71,7 @@ const ControlPanel = () => {
       <div className="w-auto grow">
         <Input
           disabled={!editMode && isValid}
-          className="px-3"
+          className="px-3 disabled:rounded-lg"
           crossOrigin=""
           variant="standard"
           label="Endpoint"
