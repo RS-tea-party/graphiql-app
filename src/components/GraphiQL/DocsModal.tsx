@@ -13,23 +13,31 @@ import Loader from '../Loader/Loader';
 import { urlSelector } from '../../store/slices/endpointSlice';
 import { useLazyGetSchemaQuery } from '../../services/api';
 import { Typography } from '@material-tailwind/react';
+import { toast } from 'react-toastify';
 
 const DocsModal: FC = () => {
   const docsShown = useAppSelector(docsShownSelector);
   const url = useAppSelector(urlSelector);
   const [trigger, result] = useLazyGetSchemaQuery();
   const { data, isSuccess, isError } = result;
-
   const dispatch = useAppDispatch();
   const { spellingList } = useContext(LocaleContext);
   const genericHamburgerLine = `h-0.5 w-5 my-1 rounded-full bg-blue-gray-900 transition ease transform duration-300`;
+
   const handleCloseDocs = () => {
     dispatch(closeDocs());
   };
-
   useEffect(() => {
-    if (docsShown) trigger({ url });
-  }, [docsShown, trigger, url]);
+    if (!isSuccess && !isError) trigger({ url });
+    if (isSuccess)
+      toast.success(spellingList.graphiQLApiStatus.API_FETCH_SUCCESS, {
+        draggable: true,
+      });
+    if (isError)
+      toast.error(spellingList.graphiQLApiStatus.API_FETCH_ERROR, {
+        draggable: false,
+      });
+  }, [result, spellingList, docsShown, trigger, url, isError, isSuccess]);
 
   return (
     <section className="flex border-4 border-white rounded-lg absolute z-20 w-[85%] max-h-[calc(100vh-169.6px)] min-h-[50px] bg-white">
