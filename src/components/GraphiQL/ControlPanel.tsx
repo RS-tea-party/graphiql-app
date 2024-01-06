@@ -8,7 +8,7 @@ import {
   setEndpointUrl,
 } from '../../store/slices/endpointSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useLazyGetSchemaQuery } from '../../services/api';
+import { useLazyCheckEndpointQuery } from '../../services/api';
 import { toast } from 'react-toastify';
 
 const ControlPanel = () => {
@@ -21,7 +21,7 @@ const ControlPanel = () => {
 
   const [editMode, setEditMode] = useState<boolean>(true);
 
-  const [trigger, result] = useLazyGetSchemaQuery();
+  const [trigger, result] = useLazyCheckEndpointQuery();
 
   const applyHandler = () => {
     if (inputRef.current?.value) {
@@ -43,11 +43,11 @@ const ControlPanel = () => {
     const { isError, isSuccess, isFetching, requestId } = result;
     if (!isFetching && requestId !== currentRequestId) {
       if (isSuccess)
-        toast.success(spellingList.graphiQLApiStatus.SCHEMA_FETCH_SUCCESS, {
+        toast.success(spellingList.graphiQLApiStatus.API_FETCH_SUCCESS, {
           draggable: true,
         });
       if (isError)
-        toast.error(spellingList.graphiQLApiStatus.SCHEMA_FETCH_ERROR, {
+        toast.error(spellingList.graphiQLApiStatus.API_FETCH_ERROR, {
           draggable: false,
         });
       setCurrentRequestId(`${requestId}`);
