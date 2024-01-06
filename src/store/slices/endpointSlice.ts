@@ -5,14 +5,12 @@ interface EndpointState {
   url: string;
   isValid: boolean;
   isLoading: boolean;
-  documentation: string;
 }
 
 const initialState: EndpointState = {
   url: '',
   isValid: false,
   isLoading: false,
-  documentation: '',
 };
 
 const formSlice = createSlice({
