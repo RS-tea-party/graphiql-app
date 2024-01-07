@@ -2,16 +2,11 @@ import { FC, Suspense, lazy } from 'react';
 import Loader from '../../components/Loader/Loader';
 import DocsModal from '../../components/GraphiQL/DocsModal';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { closeDocs, docsShown } from '../../store/slices/docsSlice';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { docsShown } from '../../store/slices/docsSlice';
 
 const GraphiQL: FC = () => {
-  const dispatch = useAppDispatch();
   const isDocsShown = useAppSelector(docsShown);
 
-  const handleCloseDocs = () => {
-    dispatch(closeDocs());
-  };
   const LazyControlPanel = lazy(
     () => import('../../components/GraphiQL/ControlPanel')
   );
@@ -34,12 +29,6 @@ const GraphiQL: FC = () => {
           <LazyResultsSection />
         </div>
       </section>
-      {isDocsShown && (
-        <div
-          className="absolute bg-black opacity-20 cursor-pointer w-full h-full max-h-full md:max-h-[calc(100vh-117.6px)] lg:max-h-[calc(100vh-149.6px)] z-20"
-          onClick={handleCloseDocs}
-        />
-      )}
       {isDocsShown && <DocsModal />}
     </Suspense>
   );
