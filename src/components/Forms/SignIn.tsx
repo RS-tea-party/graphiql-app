@@ -127,6 +127,7 @@ const SignIn: FC = () => {
               labelProps={{
                 className: 'before:content-none after:content-none',
               }}
+              data-testid="email-signIn"
             />
             <span className="form__error text-red-500">
               {errors.email?.message ? errors.email?.message : ''}
@@ -144,6 +145,7 @@ const SignIn: FC = () => {
               labelProps={{
                 className: 'before:content-none after:content-none',
               }}
+              data-testid="password-signIn"
             />
             <span className="form__error text-red-500">
               {errors.password?.message ? errors.password?.message : ''}
@@ -154,6 +156,7 @@ const SignIn: FC = () => {
             variant="filled"
             fullWidth
             type="submit"
+            data-testid="button-signIn"
           >
             {`${spellingList.headerButton.signIn}`}
           </Button>

@@ -9,7 +9,20 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./setupTests.ts'],
     css: true,
+    setupFiles: ['./setupTests.ts'],
+    coverage: {
+      provider: 'v8',
+      exclude: [
+        'src/dto/types.ts',
+        'src/vite-env.d.ts',
+        'src/main.tsx',
+        '.eslintrc.cjs',
+        '.prettierrc.cjs',
+        'postcss.config.js',
+        'tailwind.config.js',
+        'src/components/ErrorBoundary/ErrorBoundary.tsx',
+      ],
+    },
   },
 });

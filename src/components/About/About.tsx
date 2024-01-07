@@ -32,15 +32,15 @@ const About: FC = () => {
     <div className="flex flex-col w-full">
       <section className="flex w-full justify-end end gap-2 p-6">
         {isAuth ? (
-          <ButtonThemed onClick={onMainPage}>
+          <ButtonThemed onClick={onMainPage} data-testid="about-main-btn">
             {spellingList.headerButton.mainPage}
           </ButtonThemed>
         ) : (
           <>
-            <ButtonThemed onClick={onSignIn}>
+            <ButtonThemed onClick={onSignIn} data-testid="about-sign-in-btn">
               {spellingList.headerButton.signIn}
             </ButtonThemed>
-            <ButtonThemed onClick={onSignUp}>
+            <ButtonThemed onClick={onSignUp} data-testid="about-sign-up-btn">
               {spellingList.headerButton.signUp}
             </ButtonThemed>
           </>
