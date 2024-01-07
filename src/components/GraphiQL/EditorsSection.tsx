@@ -68,6 +68,7 @@ const EditorsSection = () => {
           disabled={isValid ? false : true}
           tooltip={{ text: spellingList.graphiQL.send, position: 'left' }}
           onClick={sendHandler}
+          data-testid="btn-send"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -89,6 +90,7 @@ const EditorsSection = () => {
           variant="outlined"
           tooltip={{ text: spellingList.graphiQL.prettify, position: 'left' }}
           onClick={prettifyQuerry}
+          data-testid="btn-prettify"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
