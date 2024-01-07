@@ -34,22 +34,22 @@ describe('GraphiQL component', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
+
     await waitFor(async () => {
       fireEvent.click(screen.getByRole('button', { name: 'Применить' }));
-      await waitFor(async () => {
+      expect(
+        screen
+          .getByTestId('btn-send')
+          .classList.contains('disabled:pointer-events-none')
+      ).toBeFalsy;
+
+      await waitFor(() => {
+        fireEvent.click(screen.getByRole('button', { name: 'Изменить' }));
         expect(
           screen
             .getByTestId('btn-send')
             .classList.contains('disabled:pointer-events-none')
-        ).toBeFalsy;
-        fireEvent.click(screen.getByRole('button', { name: 'Изменить' }));
-        await waitFor(async () => {
-          expect(
-            screen
-              .getByTestId('btn-send')
-              .classList.contains('disabled:pointer-events-none')
-          ).toBeTruthy;
-        });
+        ).toBeTruthy;
       });
     });
   });
