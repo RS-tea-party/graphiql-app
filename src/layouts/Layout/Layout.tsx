@@ -9,7 +9,7 @@ const Layout: FC = () => {
       <header className="sticky top-0 z-50">
         <Header />
       </header>
-      <main className="flex flex-grow items-center justify-center">
+      <main className="relative flex flex-grow items-center justify-center">
         <Outlet />
       </main>
       <footer>

@@ -5,7 +5,7 @@ import { server } from './src/__test__/mocks/server';
 import { store } from './src/store/store';
 import api from './src/services/api';
 
-beforeAll(() => server.listen());
+beforeAll(async () => server.listen(), 20000);
 
 afterEach(() => {
   server.resetHandlers();

@@ -18,6 +18,7 @@
     "@material-tailwind/react": "^2.1.5",
     "@reduxjs/toolkit": "^2.0.1",
     "@types/css-mediaquery": "^0.1.4",
+    "@uiw/codemirror-extensions-langs": "^4.21.21",
     "@uiw/codemirror-themes": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "css-mediaquery": "^0.1.2",
