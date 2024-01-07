@@ -234,4 +234,59 @@ describe('WelcomeButton', () => {
       });
     });
   });
+  it('clicking sign-up changes auth path', async () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="en">
+          <MemoryRouterProvider initialEntries={['/']} />
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    await waitFor(() => {
+      fireEvent.click(screen.getByTestId('button-signup'));
+      expect(store.getState().authPath.isLoginPath).toBe(false);
+    });
+  });
+
+  it('clicking sign-in changes login path', async () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="en">
+          <MemoryRouterProvider initialEntries={['/']} />
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    await waitFor(() => {
+      fireEvent.click(screen.getByTestId('button-signin'));
+      expect(store.getState().authPath.isLoginPath).toBe(true);
+    });
+  });
+
+  it('clicking sign-up changes auth path', async () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="en">
+          <MemoryRouterProvider initialEntries={['/']} />
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    await waitFor(() => {
+      fireEvent.click(screen.getByTestId('button-burger-signup'));
+      expect(store.getState().authPath.isLoginPath).toBe(false);
+    });
+  });
+
+  it('clicking sign-in changes login path', async () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="en">
+          <MemoryRouterProvider initialEntries={['/']} />
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    await waitFor(() => {
+      fireEvent.click(screen.getByTestId('button-burger-signin'));
+      expect(store.getState().authPath.isLoginPath).toBe(true);
+    });
+  });
 });

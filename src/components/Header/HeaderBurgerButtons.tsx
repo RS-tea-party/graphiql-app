@@ -47,10 +47,16 @@ const HeaderBurgerButtons: FC = () => {
   } else {
     buttons = (
       <>
-        <ButtonHeaderBurger onClick={onSignIn}>
+        <ButtonHeaderBurger
+          onClick={onSignIn}
+          data-testid="button-burger-signin"
+        >
           {`${spellingList.headerButton.signIn} `}
         </ButtonHeaderBurger>
-        <ButtonHeaderBurger onClick={onSignUp}>
+        <ButtonHeaderBurger
+          onClick={onSignUp}
+          data-testid="button-burger-signup"
+        >
           {`${spellingList.headerButton.signUp} `}
         </ButtonHeaderBurger>
       </>
