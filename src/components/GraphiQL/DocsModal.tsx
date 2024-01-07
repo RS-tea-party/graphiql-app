@@ -1,9 +1,6 @@
-import { FC, Suspense, useContext, useEffect } from 'react';
+import { FC, Suspense, useContext, useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import {
-  closeDocs,
-  docsShown as docsShownSelector,
-} from '../../store/slices/docsSlice';
+import { closeDocs } from '../../store/slices/docsSlice';
 import { prettify } from '../../helpers/prettify';
 import CodeEditor from './CodeEditor';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
@@ -16,28 +13,34 @@ import { Typography } from '@material-tailwind/react';
 import { toast } from 'react-toastify';
 
 const DocsModal: FC = () => {
-  const docsShown = useAppSelector(docsShownSelector);
   const url = useAppSelector(urlSelector);
   const [trigger, result] = useLazyGetSchemaQuery();
   const { data, isSuccess, isError } = result;
   const dispatch = useAppDispatch();
   const { spellingList } = useContext(LocaleContext);
+  const [currentRequestId, setCurrentRequestId] = useState<string>('');
   const genericHamburgerLine = `h-0.5 w-5 my-1 rounded-full bg-blue-gray-900 transition ease transform duration-300`;
 
   const handleCloseDocs = () => {
     dispatch(closeDocs());
   };
   useEffect(() => {
-    if (!isSuccess && !isError) trigger({ url });
-    if (isSuccess)
-      toast.success(spellingList.graphiQLApiStatus.API_FETCH_SUCCESS, {
-        draggable: true,
-      });
-    if (isError)
-      toast.error(spellingList.graphiQLApiStatus.API_FETCH_ERROR, {
-        draggable: false,
-      });
-  }, [result, spellingList, docsShown, trigger, url, isError, isSuccess]);
+    const { isError, isSuccess, requestId, isFetching } = result;
+    if (!isFetching && requestId !== currentRequestId) {
+      if (!isSuccess && !isError) trigger({ url });
+      if (isSuccess) {
+        toast.success(spellingList.graphiQLApiStatus.API_FETCH_SUCCESS, {
+          draggable: true,
+        });
+        console.log('sucess');
+      }
+      if (isError)
+        toast.error(spellingList.graphiQLApiStatus.API_FETCH_ERROR, {
+          draggable: false,
+        });
+      setCurrentRequestId(`${requestId}`);
+    }
+  }, [result, spellingList, trigger, url, currentRequestId]);
 
   return (
     <section className="flex border-4 border-white rounded-lg absolute z-20 w-[85%] max-h-[calc(100vh-169.6px)] min-h-[50px] bg-white">
