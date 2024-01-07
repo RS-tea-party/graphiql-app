@@ -1,41 +1,34 @@
 import SecondaryEditor from './SecondaryEditor';
 import CodeEditor from './CodeEditor';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { LocaleContext } from '../LocaleContext/LocaleContext';
 import ButtonThemed from '../_ui/ButtonThemed/ButtonThemed';
 import { isValidSelector, urlSelector } from '../../store/slices/endpointSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { changeResult } from '../../store/slices/resultSlice';
-import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { prepareToPrettify, prettify } from '../../helpers/prettify';
 
 const EditorsSection = () => {
   const [editorQuery, setEditorQuery] = useState(`{\n\n}\n`);
+  const [headersString, setHeaders] = useState(`{\n\n}\n`);
+  const [variablesString, setVariables] = useState(`{\n\n}\n`);
   const { spellingList } = useContext(LocaleContext);
   const isValid = useAppSelector(isValidSelector);
 
   const dispatch = useAppDispatch();
-
   const url = useAppSelector(urlSelector);
 
-  const editorRef = useRef<ReactCodeMirrorRef>(null);
-  const variablesRef = useRef<ReactCodeMirrorRef>(null);
-  const headersRef = useRef<ReactCodeMirrorRef>(null);
-
   const sendHandler = () => {
-    const query = editorRef.current?.editor?.textContent?.split('›')[1] || '';
+    const query = editorQuery;
+    console.log(query);
     let variables = {};
     let headers = {};
     try {
-      variables = JSON.parse(
-        variablesRef.current?.editor?.textContent?.split('›')[1] || ''
-      );
+      variables = JSON.parse(variablesString);
     } catch (error) {}
     try {
-      headers = JSON.parse(
-        headersRef.current?.editor?.textContent?.split('›')[1] || ''
-      );
+      headers = JSON.parse(headersString);
     } catch (error) {}
 
     if (url) {
@@ -59,7 +52,6 @@ const EditorsSection = () => {
       <CodeEditor
         mode="editor"
         defaultValue={editorQuery}
-        ref={editorRef}
         onchange={setEditorQuery}
       >
         <ButtonThemed
@@ -109,7 +101,10 @@ const EditorsSection = () => {
         </ButtonThemed>
       </CodeEditor>
       <section className="flex w-full">
-        <SecondaryEditor variablesRef={variablesRef} headersRef={headersRef} />
+        <SecondaryEditor
+          changeHeaders={setHeaders}
+          changeVariables={setVariables}
+        />
       </section>
     </section>
   );
