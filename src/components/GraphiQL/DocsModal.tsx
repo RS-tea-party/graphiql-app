@@ -49,7 +49,10 @@ const DocsModal: FC = () => {
             className="absolute bg-black opacity-20 cursor-pointer w-full h-full max-h-full md:max-h-[calc(100vh-117.6px)] lg:max-h-[calc(100vh-149.6px)] z-20"
             onClick={handleCloseDocs}
           />
-          <section className="flex border-4 border-white rounded-lg absolute z-30 w-[85%] max-h-[calc(100vh-169.6px)] min-h-[50px] bg-white">
+          <section
+            className="flex border-4 border-white rounded-lg absolute z-30 w-[85%] max-h-[calc(100vh-169.6px)] min-h-[50px] bg-white"
+            data-testid="docs-section"
+          >
             <CodeEditor
               mode="docs"
               defaultValue={prettify(JSON.stringify(data))}
@@ -61,6 +64,7 @@ const DocsModal: FC = () => {
                   text: spellingList.graphiQL.close,
                   position: 'left',
                 }}
+                data-testid="docs-close-btn"
                 onClick={handleCloseDocs}
                 zindex="z-20"
               >
