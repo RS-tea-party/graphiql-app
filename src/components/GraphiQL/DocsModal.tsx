@@ -28,12 +28,10 @@ const DocsModal: FC = () => {
     const { isError, isSuccess, requestId, isFetching } = result;
     if (!isFetching && requestId !== currentRequestId) {
       if (!isSuccess && !isError) trigger({ url });
-      if (isSuccess) {
+      if (isSuccess)
         toast.success(spellingList.graphiQLApiStatus.API_FETCH_SUCCESS, {
           draggable: true,
         });
-        console.log('sucess');
-      }
       if (isError)
         toast.error(spellingList.graphiQLApiStatus.API_FETCH_ERROR, {
           draggable: false,
