@@ -1,5 +1,7 @@
-import { Button, Tooltip } from '@material-tailwind/react';
+import { Button, ThemeProvider, Tooltip } from '@material-tailwind/react';
 import { FC, MouseEventHandler, PropsWithChildren } from 'react';
+import { tooltipTheme } from '../../../themes/tooltip';
+import { zIndexes } from '../../../dto/types';
 
 interface ButtonThemedProps extends PropsWithChildren {
   className?: string;
@@ -10,29 +12,28 @@ interface ButtonThemedProps extends PropsWithChildren {
     text: string;
     position: 'top' | 'bottom' | 'left' | 'right';
   };
+  zindex?: zIndexes;
 }
 
 const ButtonThemed: FC<ButtonThemedProps> = ({ children, ...props }) => {
   return (
-    <Tooltip
-      content={props.tooltip?.text}
-      placement={props.tooltip?.position}
-      className={`border-peachFuzz bg-peachFuzz text-black ${
-        props.tooltip || 'hidden'
-      }`}
-    >
-      <Button
-        {...props}
-        placeholder=""
-        size="sm"
-        variant={props.variant || 'outlined'}
-        className={`${
-          props.className && props.className
-        } border-peachFuzz bg-peachFuzz disabled:bg-peachGray disabled:border-peachGray-100 disabled:text-peachGray-100`}
+    <ThemeProvider value={tooltipTheme(props.zindex)}>
+      <Tooltip
+        content={props.tooltip?.text}
+        className={`${props.tooltip || 'hidden'}`}
       >
-        {children}
-      </Button>
-    </Tooltip>
+        <Button
+          {...props}
+          size="sm"
+          variant={props.variant || 'outlined'}
+          className={`${
+            props.className && props.className
+          } border-peachFuzz bg-peachFuzz disabled:bg-peachGray disabled:border-peachGray-100 disabled:text-peachGray-100`}
+        >
+          {children}
+        </Button>
+      </Tooltip>
+    </ThemeProvider>
   );
 };
 

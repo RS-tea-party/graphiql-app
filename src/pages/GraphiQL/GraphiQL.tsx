@@ -1,7 +1,12 @@
 import { FC, Suspense, lazy } from 'react';
 import Loader from '../../components/Loader/Loader';
+import DocsModal from '../../components/GraphiQL/DocsModal';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { docsShown } from '../../store/slices/docsSlice';
 
 const GraphiQL: FC = () => {
+  const isDocsShown = useAppSelector(docsShown);
+
   const LazyControlPanel = lazy(
     () => import('../../components/GraphiQL/ControlPanel')
   );
@@ -24,6 +29,7 @@ const GraphiQL: FC = () => {
           <LazyResultsSection />
         </div>
       </section>
+      {isDocsShown && <DocsModal />}
     </Suspense>
   );
 };
