@@ -34,24 +34,44 @@ describe('GraphiQL component', () => {
         </WrapperWithLocaleContext>
       </WrapperWithStore>
     );
-    await waitFor(async () => {
-      fireEvent.click(screen.getByRole('button', { name: 'Применить' }));
-      await waitFor(async () => {
+
+    await waitFor(() => {
+      expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
+    });
+
+    await waitFor(
+      () => {
+        const applyButton = screen.getByRole('button', { name: 'Применить' });
+        expect(applyButton).toBeInTheDocument();
+        fireEvent.click(applyButton);
         expect(
           screen
             .getByTestId('btn-send')
             .classList.contains('disabled:pointer-events-none')
         ).toBeFalsy;
-        fireEvent.click(screen.getByRole('button', { name: 'Изменить' }));
-        await waitFor(async () => {
-          expect(
-            screen
-              .getByTestId('btn-send')
-              .classList.contains('disabled:pointer-events-none')
-          ).toBeTruthy;
-        });
-      });
-    });
+      },
+      {
+        timeout: 5000,
+        interval: 100,
+      }
+    );
+
+    await waitFor(
+      () => {
+        const changeButton = screen.getByRole('button', { name: 'Изменить' });
+        expect(changeButton).toBeInTheDocument();
+        fireEvent.click(changeButton);
+        expect(
+          screen
+            .getByTestId('btn-send')
+            .classList.contains('disabled:pointer-events-none')
+        ).toBeTruthy;
+      },
+      {
+        timeout: 5000,
+        interval: 100,
+      }
+    );
   });
 
   it('Secondary editor expands correct tab when clicking on variables', async () => {
