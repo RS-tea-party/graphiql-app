@@ -1,16 +1,14 @@
 import { FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/useAppSelector';
 import { PrivateRouteProps } from '../../dto/types';
-import { authSelector } from '../../store/slices/userSlice';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../services/firebase';
 
 const PrivateRoute: FC<PrivateRouteProps> = ({ redirectPath }) => {
-  const isAuth = useAppSelector(authSelector);
-
-  if (!isAuth) {
+  const [user] = useAuthState(auth);
+  if (!user) {
     return <Navigate to={redirectPath} replace />;
   }
-
   return <Outlet />;
 };
 
