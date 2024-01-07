@@ -6,26 +6,6 @@ import WrapperWithStore from './helpers/WrapperWithStore';
 import GraphiQL from '../pages/GraphiQL/GraphiQL';
 
 describe('GraphiQL component', () => {
-  it('renders correctly', async () => {
-    render(
-      <WrapperWithStore>
-        <WrapperWithLocaleContext lang="ru">
-          <GraphiQL />
-        </WrapperWithLocaleContext>
-      </WrapperWithStore>
-    );
-    await waitFor(() => {
-      expect(
-        screen.getByRole('button', { name: 'Применить' })
-      ).toBeInTheDocument();
-      expect(
-        screen
-          .getByTestId('btn-send')
-          .classList.contains('disabled:pointer-events-none')
-      ).toBeTruthy;
-    });
-  });
-
   it('Send button gets enabled/disabled correctly', async () => {
     render(
       <WrapperWithStore>

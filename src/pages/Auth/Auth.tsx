@@ -16,10 +16,12 @@ const Auth: FC = () => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <section className="flex flex-grow items-center justify-center truncate">
+      <section className="flex flex-grow items-center justify-center truncate"
+        data-testid="auth-page">
         <LazySignIn />
       </section>
     </Suspense>
+
   );
 };
 

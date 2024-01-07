@@ -31,7 +31,7 @@ module.exports = withMT({
         '200%': '200%',
       },
       screens: {
-        maxmd: { max: '960px' },
+        maxmd: { max: '959px' },
       },
     },
   },
