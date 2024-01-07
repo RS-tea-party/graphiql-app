@@ -36,11 +36,11 @@ const HeaderBurgerButtons: FC = () => {
       <>
         {isWelcomePage && (
           <ButtonHeaderBurger onClick={() => navigate(Paths.MAIN)}>
-            <span>{`${spellingList.headerButton.mainPage} `}</span>
+            {`${spellingList.headerButton.mainPage} `}
           </ButtonHeaderBurger>
         )}
         <ButtonHeaderBurger onClick={onLogout}>
-          <span>{`${spellingList.headerButton.logOut} `}</span>
+          {`${spellingList.headerButton.logOut} `}
         </ButtonHeaderBurger>
       </>
     );
@@ -48,16 +48,23 @@ const HeaderBurgerButtons: FC = () => {
     buttons = (
       <>
         <ButtonHeaderBurger onClick={onSignIn}>
-          <span>{`${spellingList.headerButton.signIn} `}</span>
+          {`${spellingList.headerButton.signIn} `}
         </ButtonHeaderBurger>
         <ButtonHeaderBurger onClick={onSignUp}>
-          <span>{`${spellingList.headerButton.signUp} `}</span>
+          {`${spellingList.headerButton.signUp} `}
         </ButtonHeaderBurger>
       </>
     );
   }
 
-  return <nav data-testid="header-burger-buttons">{buttons}</nav>;
+  return (
+    <nav
+      data-testid="header-burger-buttons"
+      className="flex flex-col items-center gap-1"
+    >
+      {buttons}
+    </nav>
+  );
 };
 
 export default HeaderBurgerButtons;

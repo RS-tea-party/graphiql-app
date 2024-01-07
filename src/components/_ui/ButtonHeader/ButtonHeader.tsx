@@ -14,7 +14,9 @@ const ButtonHeader: FC<ButtonHeaderProps> = ({ children, ...props }) => {
       {...props}
       size={props.size || 'md'}
       variant={props.variant || 'text'}
-      className={props.className || 'hidden lg:inline-block text-base'}
+      className={`${
+        props.className || 'hidden lg:inline-block text-base'
+      } text-sm`}
     >
       {children}
     </Button>
