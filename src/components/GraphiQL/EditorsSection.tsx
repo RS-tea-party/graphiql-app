@@ -21,7 +21,6 @@ const EditorsSection = () => {
 
   const sendHandler = () => {
     const query = editorQuery;
-    console.log(query);
     let variables = {};
     let headers = {};
     try {
