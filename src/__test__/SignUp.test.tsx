@@ -77,7 +77,7 @@ describe('SignUp component', () => {
       screen.getByText('Должно быть минимум 8 символов')
     ).toBeInTheDocument();
   });
-  it('successful sign up and riderect to main page', async () => {
+  it('successful sign up ui communication', async () => {
     store.dispatch(regPath());
     render(
       <WrapperWithStore>
@@ -105,10 +105,5 @@ describe('SignUp component', () => {
     fireEvent.change(emailSignUp, { target: { value: 'test@domain.com' } });
     fireEvent.change(passwordSignUp, { target: { value: '12345Qw$' } });
     fireEvent.click(buttonSignUp);
-
-    // await waitForElementToBeRemoved(screen.getByTestId('auth-page'));
-    // await waitFor(() => {
-    //   expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
-    // });
   });
 });

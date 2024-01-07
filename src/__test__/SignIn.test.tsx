@@ -6,7 +6,7 @@ import {
   render,
   screen,
   waitFor,
-  //waitForElementToBeRemoved,
+  waitForElementToBeRemoved,
 } from '@testing-library/react';
 import WrapperWithLocaleContext from './helpers/WrapperWithLocaleContext';
 import WrapperWithStore from './helpers/WrapperWithStore';
@@ -37,9 +37,9 @@ describe('SignIn component', () => {
     fireEvent.change(passwordSignIn, { target: { value: '12345Qw$' } });
     fireEvent.click(buttonSignIn);
 
-    // await waitForElementToBeRemoved(screen.getByTestId('auth-page'));
-    // await waitFor(() => {
-    //   expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
-    // });
+    await waitForElementToBeRemoved(screen.getByTestId('auth-page'));
+    await waitFor(() => {
+      expect(screen.getByTestId('graphql-page')).toBeInTheDocument();
+    });
   });
 });
