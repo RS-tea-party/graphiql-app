@@ -14,7 +14,9 @@ const ButtonHeaderBurger: FC<ButtonHeaderProps> = ({ children, ...props }) => {
       {...props}
       size={props.size || 'sm'}
       variant={props.variant || 'outlined'}
-      className={props.className || 'min-w-[50%] focus:ring-peachFuzz-200'}
+      className={`${
+        props.className || 'min-w-[50%] focus:ring-peachFuzz-200'
+      } text-sm`}
     >
       {children}
     </Button>

@@ -26,6 +26,11 @@ import endpointSlice, {
   urlSelector,
 } from '../store/slices/endpointSlice';
 import { store } from '../store/store';
+import docsSlice, {
+  closeDocs,
+  docsShown,
+  openDocs,
+} from '../store/slices/docsSlice';
 
 describe('Actions creators', () => {
   it('authPathSlice action creator returns valid action object', () => {
@@ -177,6 +182,15 @@ describe('Reducers', () => {
       endpointSlice.reducer(initialState, setEndpointState(payload))
     ).toMatchObject(payload);
   });
+
+  it('docshSlice reducer returns new state', () => {
+    expect(docsSlice.reducer({ open: false }, openDocs())).toMatchObject({
+      open: true,
+    });
+    expect(docsSlice.reducer({ open: true }, closeDocs())).toMatchObject({
+      open: false,
+    });
+  });
 });
 
 describe('Selectors', () => {
@@ -201,5 +215,9 @@ describe('Selectors', () => {
     expect(urlSelector(state)).toBe('');
     expect(isValidSelector(state)).toBe(false);
     expect(isLoadingSelector(state)).toBe(false);
+  });
+
+  it('docsSlice returns correct selectors', () => {
+    expect(docsShown(state)).toBe(false);
   });
 });

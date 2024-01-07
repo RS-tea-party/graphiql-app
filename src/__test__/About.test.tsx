@@ -58,7 +58,7 @@ describe('Welcome Page', () => {
     });
   });
 
-  it('renders sign-in, sign-up without auth', async () => {
+  it('clicking sign-in changes auth path', async () => {
     render(
       <WrapperWithStore>
         <WrapperWithLocaleContext lang="en">
@@ -72,6 +72,23 @@ describe('Welcome Page', () => {
     await waitFor(() => {
       fireEvent.click(screen.getByTestId('about-sign-in-btn'));
       expect(store.getState().authPath.isLoginPath).toBe(true);
+    });
+  });
+
+  it('clicking sign-up changes auth path', async () => {
+    render(
+      <WrapperWithStore>
+        <WrapperWithLocaleContext lang="en">
+          <MemoryRouterProvider initialEntries={['/']}>
+            <About />
+          </MemoryRouterProvider>
+        </WrapperWithLocaleContext>
+      </WrapperWithStore>
+    );
+    store.dispatch(logout());
+    await waitFor(() => {
+      fireEvent.click(screen.getByTestId('about-sign-up-btn'));
+      expect(store.getState().authPath.isLoginPath).toBe(false);
     });
   });
 });
