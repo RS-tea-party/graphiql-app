@@ -6,7 +6,6 @@ interface EndpointState {
   isValid: boolean;
   isLoading: boolean;
   documentation: string;
-  query: string;
 }
 
 const initialState: EndpointState = {
@@ -14,7 +13,6 @@ const initialState: EndpointState = {
   isValid: false,
   isLoading: false,
   documentation: '',
-  query: '',
 };
 
 const formSlice = createSlice({
@@ -23,9 +21,6 @@ const formSlice = createSlice({
   reducers: {
     setEndpointUrl: (state, { payload }: PayloadAction<string>) => {
       state.url = payload;
-    },
-    setQuery: (state, { payload }: PayloadAction<string>) => {
-      state.query = payload;
     },
     setIsLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isLoading = payload;
@@ -37,23 +32,13 @@ const formSlice = createSlice({
       state,
       { payload }: PayloadAction<Partial<EndpointState>>
     ) => Object.assign(state, payload),
-    action: (state, payload: PayloadAction) => {
-      Object.assign(state, payload);
-    },
   },
 });
 
-export const {
-  setEndpointUrl,
-  setIsLoading,
-  setIsValid,
-  setEndpointState,
-  setQuery,
-  action,
-} = formSlice.actions;
+export const { setEndpointUrl, setIsLoading, setIsValid, setEndpointState } =
+  formSlice.actions;
 export default formSlice;
 
 export const urlSelector = (state: RootState) => state.endpoint.url;
-export const querySelector = (state: RootState) => state.endpoint.query;
 export const isValidSelector = (state: RootState) => state.endpoint.isValid;
 export const isLoadingSelector = (state: RootState) => state.endpoint.isLoading;

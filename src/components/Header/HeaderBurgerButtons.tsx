@@ -57,7 +57,7 @@ const HeaderBurgerButtons: FC = () => {
     );
   }
 
-  return <>{buttons}</>;
+  return <nav data-testid="header-burger-buttons">{buttons}</nav>;
 };
 
 export default HeaderBurgerButtons;
